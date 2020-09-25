@@ -1,0 +1,9 @@
+[{
+    "ID_RULE": "CIS-ID",
+    "CIS_VERSION": "x.x",
+    "AUDIT_EXPRESSION": [""],
+    "OVERRIDE": [{
+        "ID_RULE": "CIS-ID",
+        "CIS_VERSION": "x.x"
+    }]
+}]
