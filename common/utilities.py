@@ -1,4 +1,4 @@
-class utilities:
+class Utilities:
     """Provides utilities methods used accross the project."""
 
     @staticmethod
