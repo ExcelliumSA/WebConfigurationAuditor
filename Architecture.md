@@ -24,6 +24,7 @@ The tools has for objective to perform a fully automated secure configuration re
 - Focus on code easy to read, understand and maintain.
 - Keep the content of each file coherent with the purpose of the file (ex: no analysis in the report module).
 - [Naming convention used](https://visualgit.readthedocs.io/en/latest/pages/naming_convention.html).
+- In case of no result for a list then return a empty list instead of `None`.
 
 # Rules configuration convention
 
@@ -91,7 +92,13 @@ AnalysisData:
 IssueData:
 - Details of issue (string).
 - ID of the rule.
-- Version of CIS
+- Version of CIS.
+
+AuditRule:
+- ID of the rule.
+- Version of the CIS.
+- The list of the regular expressions to test.
+- The list of rule that this rule override. 
 
 # Security note
 
