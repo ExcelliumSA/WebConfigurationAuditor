@@ -13,3 +13,11 @@ class AuditRule:
         self.CIS_version = CIS_version
         self.audit_expressions = audit_expressions
         self.override_rules = override_rules
+
+    @staticmethod
+    def unserializer(object):
+        """The static method used to unserialize data from JSON to a audit_rule object.
+
+        :param object: The object returned by the json.loads function.
+        """
+        return AuditRule(object["rule_id"], object["CIS_version"], object["audit_expressions"], object["override_rules"])
