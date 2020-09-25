@@ -35,7 +35,7 @@ Rules for each type of server are stored in JSON files which are named \*Name Of
     {   
         "ID_RULE": "CIS-ID" ,
         "CIS_VERSION": "x.x",
-        "AUDIT_EXPRESSION": ["", ...],
+        "AUDIT_EXPRESSION": [{"*RULE*": Bool}, ...],
         "OVERRIDE": [{
                 "ID_RULE": "CIS-ID",
                 "CIS_VERSION": "x.x"
