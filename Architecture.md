@@ -47,8 +47,6 @@ Rules for each type of server are stored in JSON files which are named \*Name Of
 # IDE
 
 - Visual Studio Code with Python extension provided by Microsoft.
-- [pylint](https://www.pylint.org/).
-- [bandit](https://pypi.org/project/bandit/).
 
 # Global overview
 
