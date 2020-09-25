@@ -1,9 +1,6 @@
 [{
-    "ID_RULE": "CIS-ID",
-    "CIS_VERSION": "x.x",
-    "AUDIT_EXPRESSION": [""],
-    "OVERRIDE": [{
-        "ID_RULE": "CIS-ID",
-        "CIS_VERSION": "x.x"
-    }]
+    "ID_RULE": "CIS-2.1",
+    "CIS_VERSION": "APACHE-2.4-1.5.0",
+    "AUDIT_EXPRESSION": ["(mod_auth_basic|mod_authn_file|mod_authz_dbd|mod_authz_owner|mod_authz_user)\\.[a-z]{2,3}"],
+    "OVERRIDE": []
 }]
