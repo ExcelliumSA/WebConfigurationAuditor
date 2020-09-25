@@ -1,4 +1,7 @@
-class config_data:
+from common.server_type import ServerType
+
+
+class ConfigData:
     """Represent the information of a configuration to analyze."""
 
     def __init__(self, server_type, config_content, config_file_name, audit_rules):
@@ -13,3 +16,5 @@ class config_data:
         self.config_content = config_content
         self.config_file_name = config_file_name
         self.audit_rules = audit_rules
+        if not isinstance(server_type, ServerType):
+            raise Exception("The server type must be a item of the ServerType enumeration!")
