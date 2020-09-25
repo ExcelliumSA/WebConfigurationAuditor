@@ -16,18 +16,37 @@ The tools has for objective to perform a fully automated secure configuration re
     - Add a mention on this in the README (if you want to modify it, fork it).
 - Configuration will be private to Excellium for IP reason.
 
-# Convention
+# Global convention
 
 - Usage of `requirements.txt` for dependencies.
 - No oneliner.
 - Snake case.
-- Focus on code reasy to read, understand and maintain.
-- Keep the content of each file coherent with the purpose of the file (ex: no analysis in the report module)
+- Focus on code easy to read, understand and maintain.
+- Keep the content of each file coherent with the purpose of the file (ex: no analysis in the report module).
+
+# Rules configuration convention
+
+Rules for each type of server are stored in JSON files which are named \*Name Of the Technology\*.json:
+
+```json 
+[
+    {   
+        "ID_RULE": "CIS-ID" ,
+        "CIS_VERSION": "x.x",
+        "AUDIT_EXPRESSION": ["", ...],
+        "OVERRIDE": [{
+                "ID_RULE": "CIS-ID",
+                "CIS_VERSION": "x.x"
+                },
+                ...
+            ]
+    }
+]
+```
 
 # IDE
 
 - Visual Studio Code with Python extension provided by Microsoft.
-- 
 
 # Global overview
 
@@ -50,27 +69,26 @@ Use the collection of the `ConfigData` object instances received to apply **anal
 
 ### Reporting
 
-Use the collection of the `AnalysisData` object instances received to genertae a report in the wanted format.
+Use the collection of the `AnalysisData` object instances received to generate a report in the wanted format.
 
 # Transfer objects structure
 
-ID of the analysis rule is the CIS rule ID.
+> ID of the analysis rule is the CIS rule ID.
 
 ConfigData:
 - Type of web/application server.
-- A string with the configuration elements to analyse.
-- Source file containing the configuration elements.
+- A string with the configuration elements to analyse (content of the config file).
+- Source file name containing the configuration elements.
+- List of validation rules to apply.
 
-ResultData:
+AnalysisData:
 - Type of web/application server.
 - List of `IssueData` object instances.
-- Source file containing the configuration elements affected by the issues
+- Source file name containing the configuration elements affected by the issues.
 
 IssueData:
 - Details of issue (string).
 - ID of the rule.
-- Recommendations on how to fix the issue (config exemples).
-
 
 # Security note
 
@@ -78,5 +96,5 @@ IssueData:
 - Every analysis rule must be covered by a positive and negative unit test, however, the tests will be factored in order to tests au rules of type of server (made the maintenance more easier).
 - Keep the modules updated (usage of regexp can be dangerous if a vulnerability is present in the parser): 
     - Use [Dependabot](https://dependabot.com/).
-    - See to use [Snyk](https://snyk.io/) dependencies audit.
+    - Use [Snyk](https://snyk.io/) for dependencies audit.
     - Use [Bandit](https://pypi.org/project/bandit/).
