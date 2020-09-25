@@ -99,5 +99,5 @@ IssueData:
 - Every analysis rule must be covered by a positive and negative unit test, however, the tests will be factored in order to tests au rules of type of server (made the maintenance more easier).
 - Keep the modules updated (usage of regexp can be dangerous if a vulnerability is present in the parser): 
     - Use [Dependabot](https://dependabot.com/).
-    - Use [Snyk](https://snyk.io/) for dependencies audit.
+    - Use [Snyk](https://snyk.io/).
     - Use [Bandit](https://pypi.org/project/bandit/).
