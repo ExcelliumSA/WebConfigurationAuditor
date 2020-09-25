@@ -2,7 +2,7 @@ from common.server_type import ServerType
 
 
 class ConfigData:
-    """Represent the information of a configuration to analyze."""
+    """Represents the information of a configuration to analyze."""
 
     def __init__(self, server_type, config_content, config_file_name, audit_rules):
         """Constructor.

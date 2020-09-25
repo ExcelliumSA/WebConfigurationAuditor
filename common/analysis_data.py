@@ -2,7 +2,7 @@ from common.server_type import ServerType
 
 
 class AnalysisData:
-    """Represent the information resulting of the analysis."""
+    """Represents the information resulting of the analysis."""
 
     def __init__(self, server_type, issue_datas, config_file_name):
         """Constructor.
