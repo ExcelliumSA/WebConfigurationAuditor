@@ -32,7 +32,6 @@ def analyze(config_data_collection):
             for audit_rule in config_data.audit_rules:
                 current_rule_identifier = audit_rule.rule_id
                 for expression in audit_rule.audit_expressions:
-                    # Remove double back-slash need when using backslash in expression in string
                     current_regex = expression.expression
                     pattern = re.compile(current_regex, re.MULTILINE)
                     identified = pattern.findall(config_data.config_content)
