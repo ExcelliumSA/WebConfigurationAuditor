@@ -23,6 +23,7 @@ The tools has for objective to perform a fully automated secure configuration re
 - Snake case.
 - Focus on code easy to read, understand and maintain.
 - Keep the content of each file coherent with the purpose of the file (ex: no analysis in the report module).
+- [Naming convention used](https://visualgit.readthedocs.io/en/latest/pages/naming_convention.html).
 
 # Rules configuration convention
 
@@ -47,6 +48,7 @@ Rules for each type of server are stored in JSON files which are named \*Name Of
 # IDE
 
 - Visual Studio Code with Python extension provided by Microsoft.
+- Project workspace file has been configured to trigger the installation of required code analysis modules and analysis profile is defined in the workspace settings area.
 
 # Global overview
 
@@ -89,6 +91,7 @@ AnalysisData:
 IssueData:
 - Details of issue (string).
 - ID of the rule.
+- Version of CIS
 
 # Security note
 
