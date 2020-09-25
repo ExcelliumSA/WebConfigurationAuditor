@@ -47,6 +47,8 @@ Rules for each type of server are stored in JSON files which are named \*Name Of
 # IDE
 
 - Visual Studio Code with Python extension provided by Microsoft.
+- [pylint](https://www.pylint.org/).
+- [bandit](https://pypi.org/project/bandit/).
 
 # Global overview
 
@@ -92,6 +94,7 @@ IssueData:
 
 # Security note
 
+- [PyTest](https://www.guru99.com/pytest-tutorial.html) will be used for the unit testing.
 - Add a unit test to detect exposure to ReDOS.
 - Every analysis rule must be covered by a positive and negative unit test, however, the tests will be factored in order to tests au rules of type of server (made the maintenance more easier).
 - Keep the modules updated (usage of regexp can be dangerous if a vulnerability is present in the parser): 
