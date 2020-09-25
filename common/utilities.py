@@ -8,6 +8,6 @@ class utilities:
         :param severity: Importance of the message, must be one the following value ERROR, WARN, INFO or DEBUG.
         :param message: Message to display.
         """
-        if severity.upper() not in ["ERROR", "INFO", "WARN", "DEBUG"]:
+        if severity is None or severity.upper() not in ["ERROR", "INFO", "WARN", "DEBUG"]:
             raise Exception("Invalid severity!")
         print(f"{severity.upper()}: {message}")
