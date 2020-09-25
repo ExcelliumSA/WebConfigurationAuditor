@@ -1,4 +1,4 @@
-class issue_data:
+class issueData:
     """Represent the information of a found issue."""
 
     def __init__(self, details, rule_id, CIS_version):
