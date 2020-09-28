@@ -18,7 +18,9 @@ def analyze(config_data_collection):
 
     # Apply processing
     analysis_results = []
-    issue_msg_template = "Rule %s has matched the following data in the configuration provided: %s"
+    issue_msg_template_matched = "Rule '%s' has matched the following data in the configuration provided: %s"
+    issue_msg_template_not_matched = "Rule '%s' has not matched in the configuration provided but it was expected to match."
+    debug_msg_template = "Test rule '%s' with the regex '%s' has %s matched."
     current_rule_identifier = ""
     current_regex = ""
     for config_data in config_data_collection:
@@ -29,23 +31,30 @@ def analyze(config_data_collection):
             Utilities.print_message(Severity.INFO, f"Begin analysis of the file '{config_data.config_file_name}' using {len(config_data.audit_rules)} rules.")
             for audit_rule in config_data.audit_rules:
                 current_rule_identifier = audit_rule.rule_id
-                for regex in audit_rule.audit_expressions:
-                    current_regex = regex
+                for expression in audit_rule.audit_expressions:
+                    current_regex = expression.expression
                     pattern = re.compile(current_regex, re.MULTILINE)
-                    identified = pattern.match(config_data.config_content)
-                    if identified is not None:
-                        Utilities.print_message(Severity.DEBUG, f"Test rule '{current_rule_identifier}' with the regex '{current_regex}' has matched.")
-                        issue = IssueData(issue_msg_template % (current_rule_identifier, identified.groups()), current_rule_identifier, audit_rule.CIS_version)
+                    identified = pattern.findall(config_data.config_content)
+                    if len(identified) > 0 and not expression.presence_needed:
+                        Utilities.print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
+                        issue = IssueData(issue_msg_template_matched % (current_rule_identifier, identified), current_rule_identifier, audit_rule.CIS_version)
                         issues_identified.append(issue)
+                    elif len(identified) == 0 and expression.presence_needed:
+                        Utilities.print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
+                        issue = IssueData(issue_msg_template_not_matched % (current_rule_identifier), current_rule_identifier, audit_rule.CIS_version)
+                        issues_identified.append(issue)
+                    elif len(identified) == 0:
+                        Utilities.print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
                     else:
-                        Utilities.print_message(Severity.DEBUG, f"Test rule '{current_rule_identifier}' with the regex '{current_regex}' has not matched.")
+                        Utilities.print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
             Utilities.print_message(Severity.INFO, f"Analysis of the file '{config_data.config_file_name}' ended with {error_count} error(s).")
         except Exception as e:
             error_count += 1
             Utilities.print_message(Severity.ERROR, f"Error during analysis of the file '{config_data.config_file_name}' on rule '{current_rule_identifier}' on regex '{current_regex}': {str(e)}")
-        # Construct the result object
-        analysis_data = AnalysisData(config_data.server_type, issues_identified, config_data.config_file_name)
-        analysis_results.append(analysis_data)
+        # Construct the result object if issues were identified
+        if len(issues_identified) > 0:
+            analysis_data = AnalysisData(config_data.server_type, issues_identified, config_data.config_file_name)
+            analysis_results.append(analysis_data)
 
     # Return the results
     return analysis_results

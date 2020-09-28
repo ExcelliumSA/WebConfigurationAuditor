@@ -1,4 +1,7 @@
-# wscr
+# Objective
+
 Web server secure configuration review automation tool
 
-Je suis une licorne
+# Architecture and decision
+
+See [here](Architecture.md).

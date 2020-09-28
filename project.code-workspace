@@ -13,6 +13,7 @@
 		"python.linting.pydocstyleEnabled": true,
 		"python.linting.pydocstyleArgs": ["--ignore=D401,D100,D203,D213"],
 		"python.linting.banditEnabled": true,
-		"python.linting.banditArgs": []
+		"python.linting.banditArgs": ["--exclude tests/test_*.py"],
+		"python.testing.autoTestDiscoverOnSaveEnabled": true
 	}
 }
