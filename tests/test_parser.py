@@ -1,4 +1,5 @@
 from common.server_type import ServerType
+from parsing.parser import multi_file_reader
 from parsing.parser import parse_audit_rules
 from parsing.parser import parse_config_data_apache
 
@@ -10,6 +11,8 @@ MULTIPLE_EXPRESSIONS_FILE = "tests/data/test_parser_multiple_expressions_in_rule
 OVERRIDE_RULES_FILE = "tests/data/test_parser_override_rules.json"
 APACHE_TEST_CONFIG_FILE = "tests/data/apache_test_config_all_issues.conf"
 APACHE_TEST_CONFIG_REF = "tests/data/apache_test_config_no_comments.conf"
+TEST_DIR_PATH = "tests/"
+TEST_DIR_REF = "tests/data/list_files_from_dir_ref.txt"
 
 
 def test_parse_audit_rules_simple():
@@ -82,3 +85,11 @@ def test_parse_config():
     assert first_rule.audit_expressions[0].expression == "(mod_auth_basic|mod_authn_file|mod_authz_dbd|mod_authz_owner|mod_authz_user)\\.[a-z]{2,3}", "The first expression of audit expression doesn't correspond."
     assert first_rule.audit_expressions[0].presence_needed is False, "The presence_needed boolean doesn't correspond."
     assert len(first_rule.override_rules) == 0, "The override_rules shouldn't contain any values in this test."
+
+
+def test_list_files():
+    """Test the function which list all the files in a directory."""
+    files = multi_file_reader(TEST_DIR_PATH)
+    with open(TEST_DIR_REF, 'r') as reference_files:
+        references = reference_files.read()
+    assert references == '\n'.join(files), "The listing of the files doesn't match the listing of reference."
