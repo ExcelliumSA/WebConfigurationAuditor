@@ -1,6 +1,7 @@
 from common.audit_rule import AuditRule
 from common.config_data import ConfigData
 from common.expression import Expression
+from common.override_rule import OverrideRule
 from common.server_type import ServerType
 from pathlib import Path
 import json
@@ -22,6 +23,11 @@ def parse_audit_rules(rule_file_name):
             expression = Expression.unserializer(json_expression)
             tmp_expressions.append(expression)
         json_rule["audit_expressions"] = tmp_expressions
+        tmp_override = []
+        for json_override in json_rule["override_rules"]:
+            override = OverrideRule.unserializer(json_override)
+            tmp_override.append(override)
+        json_rule["override_rules"] = tmp_override
         rule = AuditRule.unserializer(json_rule)
         rules_list.append(rule)
     return rules_list
