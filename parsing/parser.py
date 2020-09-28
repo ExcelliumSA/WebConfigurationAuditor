@@ -1,6 +1,8 @@
 from common.audit_rule import AuditRule
+from common.config_data import ConfigData
 from common.expression import Expression
-# from common.config_data import ConfigData
+from common.server_type import ServerType
+from pathlib import Path
 import json
 
 
@@ -25,11 +27,12 @@ def parse_audit_rules(rule_file_name):
     return rules_list
 
 
-def parse_config_data_apache(config_file_name):
+def parse_config_data_apache(config_file_name, audit_rules):
     """Parse an Apache config file and return its content without the comments.
 
     :param config_file_name: The name of the config file to parse.
-    :return: A string only containing the active configuration of the Apache.
+    :param audit_rules: A list of AuditRule objects that can be obtained by calling the parse_audit_rules function.
+    :return: A ConfigData object containing the active configuration of the Apache.
     """
     with open(config_file_name) as config_file:
         lines = config_file.readlines()
@@ -38,4 +41,16 @@ def parse_config_data_apache(config_file_name):
         if line[:2] == "# ":
             continue
         content += line + '\n'
-    return content
+    config_data = ConfigData(ServerType.APACHE, content, config_file_name, audit_rules)
+    return config_data
+
+
+def multi_file_reader(folder_path):
+    """List all the files in a given folder and its subdirectories.
+
+    :param folder_path: the path to the folder to explore.
+    :return: A list of string representing the path to each file in the folder_path folder.
+    """
+    root = Path(folder_path)
+    files = [str(f) for f in root.resolve().glob("**/*") if f.is_file()]
+    return files
