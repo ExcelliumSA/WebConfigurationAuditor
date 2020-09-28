@@ -44,9 +44,9 @@ def parse_config_data_apache(config_file_name, audit_rules):
         lines = config_file.readlines()
     content = ""
     for line in lines:
-        if line[:2] == "# ":
+        if line[0] == "#":
             continue
-        content += line + '\n'
+        content += line
     config_data = ConfigData(ServerType.APACHE, content, config_file_name, audit_rules)
     return config_data
 
