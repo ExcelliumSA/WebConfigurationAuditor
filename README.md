@@ -1,6 +1,6 @@
 # Web Server Secure Configuration Review Automation Tool
 
-## Audit CI job
+## Audit CI
 
 ![audit](https://github.com/righettod/wscr/workflows/audit/badge.svg?branch=master)
 
