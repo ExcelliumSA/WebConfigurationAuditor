@@ -39,6 +39,20 @@ The tool entry point is the `main.py` file:
 python main.py --help
 ```
 
+# Debug mode
+
+By default the tool do not print the debug level message. 
+
+To enable the debug mode then set a environement variable named `DEBUG` to any value prior to call the tool:
+
+```powershell
+PS> $env:DEBUG=1
+``` 
+
+```bash
+$ export DEBUG=1
+``` 
+
 # Policy
 
 - Code will be public but no external contribution accepted.
