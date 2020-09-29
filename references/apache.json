@@ -116,5 +116,20 @@
             }
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-4.1",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "<Directory.*(\\s*)Require all denied.*</Directory>",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "<Directory.*(\\s*)(Allow|Deny).*</Directory>",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
     }
 ]

@@ -34,7 +34,7 @@ def analyze(config_data_collection):
                 current_rule_identifier = audit_rule.rule_id
                 for expression in audit_rule.audit_expressions:
                     current_regex = expression.expression
-                    pattern = re.compile(current_regex, re.MULTILINE)
+                    pattern = re.compile(current_regex, re.DOTALL | re.MULTILINE)
                     identified = pattern.findall(config_data.config_content)
                     if len(identified) > 0 and not expression.presence_needed:
                         print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
