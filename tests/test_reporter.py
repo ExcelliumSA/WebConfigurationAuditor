@@ -28,9 +28,12 @@ def test_report_generation():
     report_data = generate_test_data()
     # Generate the report
     content = generate_report(report_data, TEST_TEMPLATE_FILE)
+    with open("TEST.TXT", "w") as f:
+        f.write(content)
     # Verify result
     assert "'audit_rules_collection': [<common.audit_rule.AuditRule object at" in content, "List of AuditRule instance not present in the data object provided to the report!"
     assert "'analysis_data_collection': [<common.analysis_data.AnalysisData object at" in content, "List of AnalysisData instance not present in the data object provided to the report!"
+    assert "'audit_rules_passed':" in content, "List of validation points that has succeeded in validation not present in the data object provided to the report!"
 
 
 def test_exposure_to_ssti():

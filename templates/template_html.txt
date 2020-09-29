@@ -1,0 +1,69 @@
+{# Generate a HTML report #}
+{# See https://jinja.palletsprojects.com/en/2.11.x/templates/ #}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Report</title>
+<style>
+    table {
+        width: 100%;
+    }
+    th {
+        text-align: left;
+        vertical-align: middle;
+    }  
+    td {
+        text-align: left;
+        vertical-align: middle;
+    }
+    .failed{
+       color: red; 
+    }  
+    .passed{
+       color: green; 
+    }       
+</style
+</head>
+<body>
+<h1>Table of content</h1>
+{% for analysis_data in data.analysis_data_collection %}
+    <a href="#{{ util_file.basename(analysis_data.config_file_name) }}">{{ util_file.basename(analysis_data.config_file_name) }}</a><br>
+{% endfor %}
+
+<h1>Results</h1>
+{% for analysis_data in data.analysis_data_collection %}
+
+    <a id="{{ util_file.basename(analysis_data.config_file_name) }}"></a>
+    <h2>Configuration file: <strong>{{ util_file.basename(analysis_data.config_file_name) }}</strong></h2>
+    <h3>Server type: <i>{{ analysis_data.server_type.name }}</i></h3>
+    <table>
+        <tr>
+            <th style="width:5%;">Rule ID</th>
+            <th style="width:10%;">CIS version</th>
+            <th style="width:5%;">Check status</td>
+            <th>Check result</th>
+        </tr>
+        
+        {% for issue_data in analysis_data.issue_datas %}
+        <tr>
+            <td>{{ issue_data.rule_id }} </td>
+            <td>{{ issue_data.CIS_version }} </td>
+            <td class="failed">Failed</td>
+            <td>{{ issue_data.details }} </td>
+        </tr>
+        {% endfor %}
+
+        {% set success_validation_points = data.audit_rules_passed[analysis_data.config_file_name] %}
+        {% for point in success_validation_points %}
+        <tr>
+            <td>{{ point.rule_id }} </td>
+            <td>{{ point.CIS_version }} </td>
+            <td class="passed">Passed</td>
+            <td>-</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+{% endfor %}
+</body>
+</html> 

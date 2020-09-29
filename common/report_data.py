@@ -28,3 +28,19 @@ class ReportData:
             i += 1
         self.audit_rules_collection = audit_rules_collection
         self.analysis_data_collection = analysis_data_collection
+        # As the analysis data only contains points for which validation has failed
+        # then add a member to the class that contains the points for which the validation has succeed
+        audit_rules_passed = {}
+        for analysis_data in analysis_data_collection:
+            audit_rules_passed[analysis_data.config_file_name] = []
+            for audit_rule in audit_rules_collection:
+                # Search the current audit rule in the analysis data
+                audit_rule_found = False
+                for issue_data in analysis_data.issue_datas:
+                    if audit_rule.rule_id == issue_data.rule_id:
+                        audit_rule_found = True
+                        break
+                # If it is not present then add it the validation points collection
+                if not audit_rule_found:
+                    audit_rules_passed[analysis_data.config_file_name].append(audit_rule)
+        self.audit_rules_passed = audit_rules_passed

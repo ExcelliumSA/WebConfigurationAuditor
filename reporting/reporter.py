@@ -21,5 +21,5 @@ def generate_report(report_data, template_file):
     template_content = ""
     with open(template_file, "r") as t:
         template_content = t.read()
-    report_content = Template(template_content).render(data=report_data)
+    report_content = Template(template_content).render(data=report_data, util_file=os.path)
     return report_content
