@@ -25,7 +25,7 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
     """
     try:
         audit_rules_file = f"{REFERENCE_AUDIT_RULES_FOLDER}/{server_type.name}.json"
-        print_message(Severity.INFO, f"Load the audit rules from the reference file {audit_rules_file}...")
+        print_message(Severity.INFO, f"Load the audit rules from the reference file '{audit_rules_file}'...")
         audit_rules = parse_audit_rules(audit_rules_file)
         print_message(Severity.INFO, f"{len(audit_rules)} rules loaded.")
 
@@ -44,7 +44,7 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
         analysis_data_collection = analyze(config_data_collection)
         print_message(Severity.INFO, "Processing finished.")
 
-        print_message(Severity.INFO, f"Generate the report to the file {report_output_file}...")
+        print_message(Severity.INFO, f"Generate the report to the file '{report_output_file}'...")
         report_data = ReportData(audit_rules, analysis_data_collection)
         report_content = generate_report(report_data, report_template_file)
         with open(report_output_file, "w") as f:
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     # Get the available servder type
     server_type_names = [e.name for e in ServerType]
     # Define the call options and command line syntax
-    parser = argparse.ArgumentParser(description="Web Server Secure Configuration Review automation tool")
+    parser = argparse.ArgumentParser(description=".::Web Server Secure Configuration Review Automation Tool::.")
     parser.add_argument("-f", action="store", dest="folder_to_process", help="Path to folder containing the configuration to audit.", required=True)
     parser.add_argument("-s", action="store", dest="type_server", help="Type of server from which the provided configuration is issued.", choices=server_type_names, required=True)
     parser.add_argument("-t", action="store", dest="report_template", help="Report template to use.", choices=templates, required=True)
@@ -71,4 +71,9 @@ if __name__ == "__main__":
     DEBUG_MODE = args.debug
     # Call the application entry point with the provided context
     template_file = f"{REPORT_TEMPLATE_FOLDER}/{args.report_template}.txt"
-    main(args.folder_to_process, ServerType(args.type_server), template_file, args.report_output_file)
+    server_type = None
+    for e in ServerType:
+        if e.name == args.type_server:
+            server_type = e
+            break
+    main(args.folder_to_process, server_type, template_file, args.report_output_file)

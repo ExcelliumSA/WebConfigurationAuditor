@@ -1,4 +1,5 @@
 import re
+import os
 from common.analysis_data import AnalysisData
 from common.issue_data import IssueData
 from common.utilities import print_message
@@ -28,7 +29,7 @@ def analyze(config_data_collection):
         try:
             error_count = 0
             issues_identified = []
-            print_message(Severity.INFO, f"Begin analysis of the file '{config_data.config_file_name}' using {len(config_data.audit_rules)} rules.")
+            print_message(Severity.INFO, f"Begin analysis of the file '{os.path.basename(config_data.config_file_name)}' using {len(config_data.audit_rules)} rules.")
             for audit_rule in config_data.audit_rules:
                 current_rule_identifier = audit_rule.rule_id
                 for expression in audit_rule.audit_expressions:
@@ -47,7 +48,7 @@ def analyze(config_data_collection):
                         print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
                     else:
                         print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
-            print_message(Severity.INFO, f"Analysis of the file '{config_data.config_file_name}' ended with {error_count} error(s).")
+            print_message(Severity.INFO, f"Analysis of the file '{os.path.basename(config_data.config_file_name)}' ended with {error_count} error(s).")
         except Exception as e:
             error_count += 1
             print_message(Severity.ERROR, f"Error during analysis of the file '{config_data.config_file_name}' on rule '{current_rule_identifier}' on regex '{current_regex}': {str(e)}")
