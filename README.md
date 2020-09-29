@@ -1,9 +1,13 @@
-![audit](https://github.com/righettod/wscr/workflows/audit/badge.svg?branch=master)
+# Web Server Secure Configuration Review Automation Tool
 
-# Objective
+## Objective
 
 Web server secure configuration review automation tool
 
-# Architecture and decision
+## Audit CI job
+
+![audit](https://github.com/righettod/wscr/workflows/audit/badge.svg?branch=master)
+
+## Architecture and decision
 
 See [here](Architecture.md).
