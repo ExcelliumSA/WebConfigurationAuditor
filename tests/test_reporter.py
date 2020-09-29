@@ -15,10 +15,10 @@ def generate_test_data():
 
     :return: Return a ReportData object instance.
     """
-    audit_rules = parse_audit_rules(APACHE_RULE_FILE)
-    config_data = parse_config_data_apache(APACHE_TEST_CONFIG_FILE_FOR_REPORT_GENERATION, audit_rules)
-    analysis_data = analyze([config_data])
-    report_data = ReportData(config_data, analysis_data[0])
+    audit_rules_collection = parse_audit_rules(APACHE_RULE_FILE)
+    config_data = parse_config_data_apache(APACHE_TEST_CONFIG_FILE_FOR_REPORT_GENERATION, audit_rules_collection)
+    analysis_data_collection = analyze([config_data])
+    report_data = ReportData(audit_rules_collection, analysis_data_collection)
     return report_data
 
 
@@ -29,8 +29,8 @@ def test_report_generation():
     # Generate the report
     content = generate_report(report_data, TEST_TEMPLATE_FILE)
     # Verify result
-    assert "'config_data': <common.config_data.ConfigData object at" in content, "ConfigData instance not present in the data object provided to the report!"
-    assert "'analysis_data': <common.analysis_data.AnalysisData object at" in content, "AnalysisData instance not present in the data object provided to the report!"
+    assert "'audit_rules_collection': [<common.audit_rule.AuditRule object at" in content, "List of AuditRule instance not present in the data object provided to the report!"
+    assert "'analysis_data_collection': [<common.analysis_data.AnalysisData object at" in content, "List of AnalysisData instance not present in the data object provided to the report!"
 
 
 def test_exposure_to_ssti():
@@ -39,7 +39,7 @@ def test_exposure_to_ssti():
     report_data = generate_test_data()
     payloadExpression = "{{42*42}}"
     payloadResolved = str(42 * 42)
-    report_data.config_data.config_file_name = payloadExpression
+    report_data.analysis_data_collection[0].config_file_name = payloadExpression
     # Generate the report
     content = generate_report(report_data, TEST_TEMPLATE_FILE_SSTI)
     # Verify result
