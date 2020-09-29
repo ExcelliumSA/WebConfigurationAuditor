@@ -101,5 +101,20 @@
             }
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-3.1",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "^User (?!root).*$",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "^Group (?!root).*$",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
     }
 ]
