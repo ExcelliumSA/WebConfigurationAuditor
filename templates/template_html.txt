@@ -25,7 +25,7 @@
 </style
 </head>
 <body>
-<h1>Table of content</h1>
+<h1>Files reviewed</h1>
 {% for analysis_data in data.analysis_data_collection %}
     <a href="#{{ util_file.basename(analysis_data.config_file_name) }}">{{ util_file.basename(analysis_data.config_file_name) }}</a><br>
 {% endfor %}
