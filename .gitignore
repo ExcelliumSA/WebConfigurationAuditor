@@ -1,1 +1,5 @@
 *.pyc
+.pytest_cache/
+__pycache__/
+TEST.TXT
+*.rpt

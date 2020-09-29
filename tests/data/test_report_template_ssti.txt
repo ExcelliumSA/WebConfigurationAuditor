@@ -1,2 +1,2 @@
 {# TEST TEMPLATE #}
-{{ data.config_data.config_file_name }}
+{{ data.analysis_data_collection[0].config_file_name }}
