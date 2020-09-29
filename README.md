@@ -1,6 +1,6 @@
 # Objective
 
-Web server secure configuration review automation tool.
+Web server secure configuration review automation tool
 
 # Architecture and decision
 
