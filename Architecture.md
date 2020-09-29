@@ -24,8 +24,20 @@ WSCR
 ├───tests
 ```
 
-- **.vscode**: Internal file used by VSCode
-- **analysis**: Package containing all file 
+- **.vscode**: Folder containing the internal stuff used by VSCode to handle the project.
+- **analysis**: Package containing all Python code related to the analysis of the configuration file provided.
+- **common**: Package containing all Python code shared by all the project.
+- **parsing**: Package containing all Python code related to the parsing of the the references audit rules and the configuraiton file provided.
+- **references**: Folder containing the audit rules files for every technology supported.
+- **reporting**: Package containing all Python code related to the generation of the report.
+- **templates**: Report template file using the JINJA syntax to define the available reports.
+- **tests**: Package containing all Python code related to the unit testing of the project.
+
+The tool entry point is the `main.py` file:
+
+```bash
+python main.py --help
+```
 
 # Policy
 
