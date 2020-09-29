@@ -122,11 +122,34 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "<Directory.*(\\s*)Require(\\s+).*$.*</Directory>",
+                "expression": "<Directory>.*(\\s*)Require(\\s+)all denied$.*</Directory>",
                 "presence_needed": "True"
             },
             {
-                "expression": "<Directory.*(\\s*)(Allow|Deny)(\\s+).*</Directory>",
+                "expression": "<Directory>.*(\\s*)(Allow|Deny)(\\s+).*</Directory>",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-4.2",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "<Directory(\\s*).*>.*(\\s*)Require(\\s+).*$.*</Directory>",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "<Directory(\\s*).*>.*(\\s*)(Allow|Deny)(\\s+).*</Directory>",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "<Location(\\s*).*>.*(\\s*)Require(\\s+).*$.*</Location>",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "<Location(\\s*).*>.*(\\s*)(Allow|Deny)(\\s+).*</Location>",
                 "presence_needed": "False"
             }
         ],
@@ -137,15 +160,34 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "<Directory.*(\\s*)AllowOverride(\\s+)None.*</Directory>",
+                "expression": "<Directory(\\s*)/>.*(\\s*)AllowOverride(\\s+)None.*</Directory>",
                 "presence_needed": "True"
             },
             {
-                "expression": "<Directory.*(\\s*)AllowOverride(\\s+)(?!None).*</Directory>",
+                "expression": "<Directory(\\s*)/>.*(\\s*)AllowOverride(\\s+)(?!None).*</Directory>",
                 "presence_needed": "False"
             },
             {
-                "expression": "<Directory.*(\\s*)AllowOverrideList.*</Directory>",
+                "expression": "<Directory(\\s*)/>.*(\\s*)AllowOverrideList.*</Directory>",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-4.4",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "AllowOverride(\\s+)None",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "AllowOverride(\\s+)(?!None)",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "AllowOverrideList",
                 "presence_needed": "False"
             }
         ],
