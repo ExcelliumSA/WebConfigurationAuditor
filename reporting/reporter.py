@@ -1,6 +1,6 @@
+import os.path
 from jinja2 import Template
 from common.report_data import ReportData
-from pathlib import Path
 
 
 def generate_report(report_data, template_file):
@@ -14,7 +14,7 @@ def generate_report(report_data, template_file):
     # Apply integrity validation against parameter received
     if report_data is None or not isinstance(report_data, ReportData):
         raise Exception("The 'report_data' parameter must be an instance of the 'ReportData' class!")
-    if template_file is None or not Path(template_file).is_file():
+    if template_file is None or not os.path.isfile(template_file):
         raise Exception("The 'template_file' must be a valid file path!")
 
     # Load the template, generate the report and return it
