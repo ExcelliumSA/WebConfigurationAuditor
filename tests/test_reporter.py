@@ -42,8 +42,6 @@ def test_exposure_to_ssti():
     report_data.config_data.config_file_name = payloadExpression
     # Generate the report
     content = generate_report(report_data, TEST_TEMPLATE_FILE_SSTI)
-    with open("TEST.TXT", "w") as f:
-        f.write(content)
     # Verify result
     assert payloadResolved not in content, f"Payload {payloadResolved} found in template so the feature is exposed to SSTI!"
     assert payloadExpression in content, f"Payload {payloadExpression} not found in template so the feature is potentially exposed to SSTI!"

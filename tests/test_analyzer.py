@@ -31,7 +31,7 @@ def test_apache_all_audit_rules_triggering():
         assert data.server_type == ServerType.APACHE, f"Wrong server type, expected: {ServerType.APACHE} - received: {data.server_type}"
         assert data.config_file_name == APACHE_TEST_CONFIG_FILE_TRIGGER_ALL_RULES, f"Wrong config file name, expected: {APACHE_TEST_CONFIG_FILE_TRIGGER_ALL_RULES} - received: {data.config_file_name}"
         issues_found_count += len(data.issue_datas)
-    assert issues_found_count == expression_count, f"Not all audit rules were triggered: {len(issues_found_count)} triggered on {expression_count} expected!"
+    assert issues_found_count == expression_count, f"Not all audit rules were triggered: {issues_found_count} triggered on {expression_count} expected!"
 
 
 def test_apache_no_audit_rules_triggering():
@@ -47,3 +47,14 @@ def test_apache_no_audit_rules_triggering():
     # Verify result
     assert analysis_data is not None, "Result is None"
     assert len(analysis_data) == 0, f"{len(analysis_data)} audit rule were triggered, it was expected that no one rule found something!"
+
+# Timeout feature of PyTest and its plugin "pytest-timeout" do not achieve to cancel the execution in a context of a ReDOS and the current runtime is vulnerable :(
+# @pytest.mark.timeout(20, method="thread")
+# def test_exposure_to_redos():
+#    """Test in charge of ensuring that the Regex engine of the current Python runtime is not exposed to ReDOS because the analyzer rely on the RegEx engine. If the test fall in timeout then the engine is vulnerable."""
+#    pattern = re.compile("^(a+)+$")
+#    input = ""
+#    for c in range(1, 10000):
+#        input = ("a" * c) + "!"
+#        pattern.match(input)
+#        pattern.findall(input)
