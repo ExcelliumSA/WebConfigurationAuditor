@@ -38,6 +38,8 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
         for configuration_file_to_review in configuration_files_to_review:
             if server_type == ServerType.APACHE:
                 config_data_collection.append(parse_config_data_apache(configuration_file_to_review, audit_rules))
+            else:
+                raise Exception(f"Server type {server_type.name} not still supported !")
         print_message(Severity.INFO, f"{len(config_data_collection)} configuration loaded.")
 
         print_message(Severity.INFO, "Process all configuration loaded...")
@@ -66,9 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("-s", action="store", dest="type_server", help="Type of server from which the provided configuration is issued.", choices=server_type_names, required=True)
     parser.add_argument("-t", action="store", dest="report_template", help="Report template to use.", choices=templates, required=True)
     parser.add_argument("-o", action="store", dest="report_output_file", help="Filename of the report (default to 'report.rpt').", default="report.rpt", required=False)
-    parser.add_argument("-d", action="store_true", dest="debug", default=False, help="Enable debug mode.", required=False)
     args = parser.parse_args()
-    DEBUG_MODE = args.debug
     # Call the application entry point with the provided context
     template_file = f"{REPORT_TEMPLATE_FOLDER}/{args.report_template}.txt"
     server_type = None
