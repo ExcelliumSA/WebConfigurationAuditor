@@ -2,6 +2,7 @@ from common.server_type import ServerType
 from parsing.parser import multi_file_reader
 from parsing.parser import parse_audit_rules
 from parsing.parser import parse_config_data_apache
+import os
 
 
 # Constants
@@ -12,7 +13,6 @@ OVERRIDE_RULES_FILE = "tests/data/test_parser_override_rules.json"
 APACHE_TEST_CONFIG_FILE = "tests/data/apache_test_config_all_issues.conf"
 APACHE_TEST_CONFIG_REF = "tests/data/apache_test_config_no_comments.conf"
 TEST_DIR_PATH = "tests/"
-TEST_DIR_REF = "tests/data/list_files_from_dir_ref.txt"
 
 
 def test_parse_audit_rules_simple():
@@ -89,7 +89,11 @@ def test_parse_config():
 
 def test_list_files():
     """Test the function which list all the files in a directory."""
-    files = multi_file_reader(TEST_DIR_PATH)
-    with open(TEST_DIR_REF, 'r') as reference_files:
-        references = reference_files.read()
-    assert references == '\n'.join(files), "The listing of the files doesn't match the listing of reference."
+    files_test = multi_file_reader(TEST_DIR_PATH)
+    reference = []
+    for subdir, dirs, files in os.walk(TEST_DIR_PATH):
+        for file in files:
+            reference.append(os.path.abspath(os.path.join(subdir, file)))
+    files_test.sort()
+    reference.sort()
+    assert '\n'.join(reference) == '\n'.join(files_test), "The listing of the files doesn't match the listing of reference."
