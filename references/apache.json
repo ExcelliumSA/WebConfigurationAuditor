@@ -57,5 +57,49 @@
             }
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.6",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "proxy_",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.7",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "userdir_",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.8",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "info_module",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.9",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "auth_basic_module|auth_digest_module",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
     }
 ]
