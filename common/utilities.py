@@ -1,4 +1,9 @@
 from common.severity import Severity
+from termcolor import colored
+import os
+
+# Color affected to the message level
+PRINT_COLORS = {"DEBUG": "magenta", "INFO": "white", "WARN": "yellow", "ERROR": "red"}
 
 
 def print_message(severity, message):
@@ -9,4 +14,7 @@ def print_message(severity, message):
     """
     if not isinstance(severity, Severity):
         raise Exception("Invalid severity, it must be a item of the Severity enumeration!")
-    print(f"{severity.name}: {message}")
+    debug = os.getenv("DEBUG")
+    if severity != Severity.DEBUG or (severity == Severity.DEBUG and debug is not None):
+        prefix = colored(f"{severity.name.ljust(5)}", PRINT_COLORS[severity.name])
+        print(f"[{prefix}] {message}")
