@@ -1,5 +1,6 @@
 import argparse
 import os
+import time
 from pathlib import Path
 from common.server_type import ServerType
 from common.severity import Severity
@@ -12,7 +13,6 @@ from reporting.reporter import generate_report
 # Global configuration
 REPORT_TEMPLATE_FOLDER = "templates"
 REFERENCE_AUDIT_RULES_FOLDER = "references"
-DEBUG_MODE = False
 
 
 def main(folder_to_process, server_type, report_template_file, report_output_file):
@@ -24,6 +24,7 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
     :param report_output_file: Location and name of the file in which the report content will be written.
     """
     try:
+        start_time = time.time()
         audit_rules_file = f"{REFERENCE_AUDIT_RULES_FOLDER}/{server_type.name}.json"
         print_message(Severity.INFO, f"Load the audit rules from the reference file '{audit_rules_file}'...")
         audit_rules = parse_audit_rules(audit_rules_file)
@@ -52,15 +53,17 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
         with open(report_output_file, "w") as f:
             f.write(report_content)
         print_message(Severity.INFO, "Report created.")
+        delay = round(time.time() - start_time, 2)
+        print_message(Severity.INFO, f"Review performed in {delay} seconds.")
     except Exception as e:
         print_message(Severity.ERROR, f"Error during the processing: {str(e)}")
 
 
 if __name__ == "__main__":
-    # Gather the available report template
+    # Gather the available report templates
     template_folder = Path(REPORT_TEMPLATE_FOLDER)
     templates = [os.path.splitext(f.name)[0] for f in template_folder.resolve().glob("*.txt") if f.is_file()]
-    # Get the available servder type
+    # Get the available server type
     server_type_names = [e.name for e in ServerType]
     # Define the call options and command line syntax
     parser = argparse.ArgumentParser(description=".::Web Server Secure Configuration Review Automation Tool::.")

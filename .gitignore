@@ -1,6 +1,7 @@
+# Ignore compiled and cached elements
 *.pyc
 .pytest_cache/
 __pycache__/
+# Ignore one shot elements used for debugging purpose
 TEST.TXT
-*.rpt
-report.html
+report.*

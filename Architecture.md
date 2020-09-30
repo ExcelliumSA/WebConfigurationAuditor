@@ -1,3 +1,16 @@
+- [Objective](#objective)
+- [Design overview](#design-overview)
+- [Requirement](#requirement)
+- [Folder layout](#folder-layout)
+- [Debug mode](#debug-mode)
+- [Release policy](#release-policy)
+- [Global convention](#global-convention)
+- [Rules configuration convention](#rules-configuration-convention)
+- [IDE](#ide)
+- [Communication betwen modules](#communication-betwen-modules)
+- [Transfer objects structure](#transfer-objects-structure)
+- [Security note](#security-note)
+
 # Objective
 
 The tools has for objective to perform a fully automated secure configuration review using the [CIS](https://www.cisecurity.org/cis-benchmarks/) referential for the following **type** of web/application server:
@@ -5,15 +18,22 @@ The tools has for objective to perform a fully automated secure configuration re
 - Apache Tomcat.
 - Microsoft IIS.
 
+# Design overview
+
+> Made with [Draw.io](https://app.diagrams.net/). Source file is [here](DesignOverview.drawio).
+
+![DesignOverview](DesignOverview.png)
+
+
 # Requirement
 
 - Python 3.7+.
-- Configuation files of the target to analyse.
+- Configuration files of the target to analyse.
 
 # Folder layout
 
 ```text
-WSCR
+PROJECT_ROOT
 ├───.vscode
 ├───analysis
 ├───common
@@ -27,7 +47,7 @@ WSCR
 - **.vscode**: Folder containing the internal stuff used by VSCode to handle the project.
 - **analysis**: Package containing all Python code related to the analysis of the configuration file provided.
 - **common**: Package containing all Python code shared by all the project.
-- **parsing**: Package containing all Python code related to the parsing of the the references audit rules and the configuraiton file provided.
+- **parsing**: Package containing all Python code related to the parsing of the the references audit rules and the configuration file provided.
 - **references**: Folder containing the audit rules files for every technology supported.
 - **reporting**: Package containing all Python code related to the generation of the report.
 - **templates**: Report template file using the JINJA syntax to define the available reports.
@@ -53,11 +73,12 @@ PS> $env:DEBUG=1
 $ export DEBUG=1
 ``` 
 
-# Policy
+# Release policy
 
-- Code will be public but no external contribution accepted.
-    - Add a mention on this in the README (if you want to modify it, fork it).
-- Configuration will be private to Excellium for IP reason.
+:triangular_flag_on_post: Need to be validated by our TL and the top management.
+
+- Project and content related will not be published and will stay a full IP of Excellium Luxembourg SA due to the time/money invested by XLM on this project.
+- The reason is that we have not found any free or open source tool doing this job and the commercial tool from the CIS do not support the elements covered by the tool, therefore, it will allow us to deliver the associated WP more faster and then obtain an advantage against our competitor.
 
 # Global convention
 
@@ -71,22 +92,22 @@ $ export DEBUG=1
 
 # Rules configuration convention
 
-Rules for each type of server are stored in JSON files which are named \*Name Of the Technology\*.json:
+Rules for each type of server are stored in JSON files which are named `nameOfTheTechnology.json` (all lowercase):
 
 ```json 
 [
     {   
-        "ID_RULE": "CIS-ID" ,
-        "CIS_VERSION": "x.x",
-        "AUDIT_EXPRESSION": [{
-                        "EXPRESSION":"*RULE*",
-                        "MUST_BE_PRESENT":Bool
+        "rule_id": "CIS-ID" ,
+        "CIS_version": "x.x",
+        "audit_expressions": [{
+                        "expression":"*RULE_REGEX*",
+                        "presence_needed": "True|False"
                         },
                         ...
                     ],
-        "OVERRIDE": [{
-                "ID_RULE": "CIS-ID",
-                "CIS_VERSION": "x.x"
+        "override_rules": [{
+                "rule_id": "CIS-ID",
+                "CIS_version": "x.x"
                 },
                 ...
             ]
@@ -94,9 +115,24 @@ Rules for each type of server are stored in JSON files which are named \*Name Of
 ]
 ```
 
+The member **rule_id** have the following value `CIS-PointIdentifierInReferential`.
+
+*Example:* For the point 2.4 of the CIS then the member **rule_id** will be `CIS-2.4`.
+
+The member **CIS_Version** have the following value `uppercase(TechnologyName)-TechnologyVersion-CISDocumentVersion`.
+
+*Example:* The document of the CIS is named `CIS_Apache_HTTP_Server_2.4_Benchmark_v1.5.0.pdf` so the member **CIS_Version** will be `APACHE-2.4-1.5.0`.
+
+The member **presence_needed** is used to specify if the audit expression (regex) is expected to find something or not:
+- If *True* then the validation is considered failed if the audit expression find something.
+- If *False* then the validation is considered failed if the audit expression find nothing.
+
+The member **override_rules** is used to indicate that the current rule override, in terms of validation, the list of rules specified. This information is used during the reporting phase.
+
+
 # IDE
 
-- Visual Studio Code with Python extension provided by Microsoft.
+- [Visual Studio Code](https://code.visualstudio.com/) with [Python extension provided by Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-python.python).
 - Project workspace file has been configured to trigger the installation of required code analysis modules and analysis profile is defined in the workspace settings area.
 - Define the folliwng Pre-Commit hook in the file `[PROJECT_HOME]/.git/hooks/pre-commit`:
 
@@ -114,28 +150,19 @@ fi
 exit $rc
 ```
 
-# Global overview
+# Communication betwen modules
 
-```text
-(TYPE, FOLDER, REPORT FORMAT) 
-=> PARSING MODULE 
-=[CONFIG_DATA_OBJECT]=> ANALYSIS MODULE 
-=[ANALYSIS_DATA_OBJECT]=> REPORTING MODULE
-```
+## Module Parsing
 
-## Modules
+Read the configuration files provided via a folder and create a collection of `ConfigData` object instances.
 
-### Parsing
+## Module Analysis
 
-Read the configuration files provided via a folder and create `ConfigData` object instances.
+Use the collection of the `ConfigData` object instances received to apply **analysis rules** (based on Regex) against them in order to identify issues and create a collection of `AnalysisData` object instances.
 
-### Analysis
+## Module Reporting
 
-Use the collection of the `ConfigData` object instances received to apply **analysis rules** (based on Regex) against them in order to identify issues and create `AnalysisData` object instances.
-
-### Reporting
-
-Use the collection of `ReportData` object instance (one`ReportData` object instance is associated to one configuration file analysed) to generate a report  in the wanted format.
+Aggregate the parsing and analysis information in a `ReportData` object instance and use this object to generate a report in the wanted format.
 
 # Transfer objects structure
 
@@ -173,7 +200,7 @@ ReportData:
 
 # Security note
 
-- [PyTest](https://www.guru99.com/pytest-tutorial.html) will be used for the unit testing.
+- [PyTest](https://www.guru99.com/pytest-tutorial.html) will be used for the unit testing and all main processing **must** be covered by a UT suite!
 - Add a unit test to detect exposure to ReDOS.
 - Every analysis rule must be covered by a positive and negative unit test, however, the tests will be factored in order to tests au rules of type of server (made the maintenance more easier).
 - Keep the modules updated (usage of regexp can be dangerous if a vulnerability is present in the parser): 

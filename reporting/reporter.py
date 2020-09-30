@@ -1,4 +1,5 @@
 import os.path
+import datetime
 from jinja2 import Template
 from common.report_data import ReportData
 
@@ -21,5 +22,5 @@ def generate_report(report_data, template_file):
     template_content = ""
     with open(template_file, "r") as t:
         template_content = t.read()
-    report_content = Template(template_content).render(data=report_data, util_file=os.path)
+    report_content = Template(template_content).render(data=report_data, util_file=os.path, util_date=datetime.datetime.now())
     return report_content

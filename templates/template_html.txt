@@ -5,6 +5,9 @@
 <head>
 <title>Report</title>
 <style>
+    body {
+        font: normal 12px Consolas, Arial, sans-serif;
+    }
     table {
         width: 100%;
     }
@@ -17,30 +20,39 @@
         vertical-align: middle;
     }
     .failed{
-       color: red; 
+       color: red;
+       font: bold 14px Consolas, Arial, sans-serif;
     }  
     .passed{
-       color: green; 
+       color: green;
+       font: normal 14px Consolas, Arial, sans-serif;
     }       
 </style
 </head>
 <body>
+<i>Report generated on {{ util_date.strftime("%Y-%m-%d") }}.</i>
 <h1>Files reviewed</h1>
+<ul>
 {% for analysis_data in data.analysis_data_collection %}
-    <a href="#{{ util_file.basename(analysis_data.config_file_name) }}">{{ util_file.basename(analysis_data.config_file_name) }}</a><br>
+    <li><a href="#{{ util_file.basename(analysis_data.config_file_name) }}">{{ util_file.basename(analysis_data.config_file_name) }}</a></li>
 {% endfor %}
+</ul>
 
 <h1>Results</h1>
 {% for analysis_data in data.analysis_data_collection %}
 
-    <a id="{{ util_file.basename(analysis_data.config_file_name) }}"></a>
-    <h2>Configuration file: <strong>{{ util_file.basename(analysis_data.config_file_name) }}</strong></h2>
-    <h3>Server type: <i>{{ analysis_data.server_type.name }}</i></h3>
+    {% set success_validation_points = data.audit_rules_passed[analysis_data.config_file_name] %}
+    {% set check_total_count = success_validation_points|length + analysis_data.issue_datas|length %}
+
+    <a id="{{ util_file.basename(analysis_data.config_file_name) }}"><h2>Configuration file: {{ util_file.basename(analysis_data.config_file_name) }}</h2></a>
+    <h3>Server type was {{ analysis_data.server_type.name }}.</h3>
+    <h3>{{ analysis_data.issue_datas|length }} issues found on {{ check_total_count }} points validated.</h3>
+
     <table>
         <tr>
             <th style="width:5%;">Rule ID</th>
             <th style="width:10%;">CIS version</th>
-            <th style="width:5%;">Check status</td>
+            <th style="width:7%;">Pass/Fail</td>
             <th>Check result</th>
         </tr>
         
@@ -48,17 +60,16 @@
         <tr>
             <td>{{ issue_data.rule_id }} </td>
             <td>{{ issue_data.CIS_version }} </td>
-            <td class="failed">Failed</td>
+            <td class="failed">&#10006;</td>
             <td>{{ issue_data.details }} </td>
         </tr>
         {% endfor %}
 
-        {% set success_validation_points = data.audit_rules_passed[analysis_data.config_file_name] %}
         {% for point in success_validation_points %}
         <tr>
             <td>{{ point.rule_id }} </td>
             <td>{{ point.CIS_version }} </td>
-            <td class="passed">Passed</td>
+            <td class="passed">&#10004;</td>
             <td>-</td>
         </tr>
         {% endfor %}
