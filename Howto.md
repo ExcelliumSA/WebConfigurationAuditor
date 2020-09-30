@@ -38,11 +38,19 @@ Add a new condition to this block of the [main](main.py#L36) for the new technol
 
 ### Tomcat
 
-TODO
+TODO 
+
+- **Reference audit rules**: xxx.
+- **Triggering test config**: xxx.
+- **No triggering test config**: xxx.
 
 ### IIS
 
-TODO
+TODO 
+
+- **Reference audit rules**: xxx.
+- **Triggering test config**: xxx.
+- **No triggering test config**: xxx.
 
 ## Procedure
 
