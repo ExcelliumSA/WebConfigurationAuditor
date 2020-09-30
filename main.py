@@ -60,10 +60,10 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
 
 
 if __name__ == "__main__":
-    # Gather the available report template
+    # Gather the available report templates
     template_folder = Path(REPORT_TEMPLATE_FOLDER)
     templates = [os.path.splitext(f.name)[0] for f in template_folder.resolve().glob("*.txt") if f.is_file()]
-    # Get the available servder type
+    # Get the available server type
     server_type_names = [e.name for e in ServerType]
     # Define the call options and command line syntax
     parser = argparse.ArgumentParser(description=".::Web Server Secure Configuration Review Automation Tool::.")
