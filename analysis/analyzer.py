@@ -36,6 +36,8 @@ def analyze(config_data_collection):
                     current_regex = expression.expression
                     pattern = re.compile(current_regex, re.DOTALL | re.MULTILINE)
                     identified = pattern.findall(config_data.config_content)
+                    identified = list(dict.fromkeys(identified))  # Remove duplicate elements found
+                    identified.sort()  # Sort elements found to enhance the output details
                     if len(identified) > 0 and not expression.presence_needed:
                         print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
                         issue = IssueData(issue_msg_template_matched % (current_rule_identifier, identified), current_rule_identifier, audit_rule.CIS_version)
