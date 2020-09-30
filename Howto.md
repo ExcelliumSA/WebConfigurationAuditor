@@ -72,7 +72,7 @@ Add a configuraton snippet in the **no triggering test config** that **will NOT 
 
 Run the following command line to ensure that your configuration is valid:
 
-```bash
+```shell
 $ pytest
 ```
 
