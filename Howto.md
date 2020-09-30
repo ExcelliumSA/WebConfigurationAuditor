@@ -20,7 +20,7 @@ Add new dedicated parsing function in [this](parsing/parser.py) module using thi
 
 Ex: `parse_config_data_apache(config_file_name, audit_rules)`
 
-:warning: This parsing function must return a `ConfigData` object.
+:warning: This parsing function must return a **[ConfigData](common/config_data.py)** object.
 
 **Step 4:**
 
