@@ -86,6 +86,26 @@ $ pytest
 
 :information_source: If all unit tests pass then your new rule is correctly added.
 
+# How to add a new report template?
+
+> Template use the JINJA template engine, the syntax is available [here](https://jinja.palletsprojects.com/en/2.11.x/templates/).
+
+> Each template receive an instance of the object [ReportData](common/report_data.py) in its context at runtime under the variable named `data` in order to give it data to render. A reference to the package `os.path` under the variable named `util_file` is also passed in order to allow the report to work with filename in case of need.
+
+:warning: All templates must have the extension `.txt`
+
+:warning: A template must not depend on any external resources (like online one in case of HTML report for example) because it must allow the client to open it from a network isolated from Internet. Due to this, all needed resource must be embedded in the template itself.
+
+:information_source: Report [example](templates/template_html.txt).
+
+Add a new text file in the folder [templates](templates) with this naming convention `template_[identifier].txt` where `identifier` is a word that indicate the format and a qualifier for the type of report.
+
+Syntax expected for the `identifier` is `[a-z0-9_]{1,20}`.
+
+
+
+
+
 
 
 
