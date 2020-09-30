@@ -1,3 +1,15 @@
+- [Objective](#objective)
+- [Requirement](#requirement)
+- [Folder layout](#folder-layout)
+- [Debug mode](#debug-mode)
+- [Policy](#policy)
+- [Global convention](#global-convention)
+- [Rules configuration convention](#rules-configuration-convention)
+- [IDE](#ide)
+- [Global overview](#global-overview)
+- [Transfer objects structure](#transfer-objects-structure)
+- [Security note](#security-note)
+
 # Objective
 
 The tools has for objective to perform a fully automated secure configuration review using the [CIS](https://www.cisecurity.org/cis-benchmarks/) referential for the following **type** of web/application server:
@@ -13,7 +25,7 @@ The tools has for objective to perform a fully automated secure configuration re
 # Folder layout
 
 ```text
-WSCR
+PROJECT_ROOT
 ├───.vscode
 ├───analysis
 ├───common
@@ -54,6 +66,8 @@ $ export DEBUG=1
 ``` 
 
 # Policy
+
+:warning: Need to be discussed with our TL and the management due to the time invested by XLM on this project.
 
 - Code will be public but no external contribution accepted.
     - Add a mention on this in the README (if you want to modify it, fork it).

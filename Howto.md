@@ -1,4 +1,8 @@
-# How to add support for a new app server?
+- [Add support for a new app server](#Add-support-for-a-new-app-server)
+- [Add a new audit rule](#add-a-new-audit-rule)
+- [Add a new report template](#add-a-new-report-template)
+
+# Add support for a new app server
 
 Follow these steps.
 
@@ -26,7 +30,7 @@ Ex: `parse_config_data_apache(config_file_name, audit_rules)`
 
 Add a new condition to this block of the [main](main.py#L36) for the new technology added. 
 
-# How to add a new audit rule?
+# Add a new audit rule
 
 ## File information for the different supported technology
 
@@ -86,11 +90,15 @@ $ pytest
 
 :information_source: If all unit tests pass then your new rule is correctly added.
 
-# How to add a new report template?
+# Add a new report template
 
 > Template use the JINJA template engine, the syntax is available [here](https://jinja.palletsprojects.com/en/2.11.x/templates/).
 
-> Each template receive an instance of the object [ReportData](common/report_data.py) in its context at runtime under the variable named `data` in order to give it data to render. A reference to the package `os.path` under the variable named `util_file` is also passed in order to allow the report to work with filename in case of need.
+> Each template receive an instance of the object [ReportData](common/report_data.py) in its context at runtime under the variable named `data` in order to give it data to render. 
+ 
+> A reference to the package `os.path` under the variable named `util_file` is passed in order to allow the report to work with filename in case of need.
+
+> A reference to the function `datetime.datetime.now()` under the variable named `util_date` is passed in order to allow the report to work with current date/time in case of need.
 
 :warning: All templates must have the extension `.txt`
 
