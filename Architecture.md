@@ -1,8 +1,9 @@
 - [Objective](#objective)
+- [Design overview](#design-overview)
 - [Requirement](#requirement)
 - [Folder layout](#folder-layout)
 - [Debug mode](#debug-mode)
-- [Policy](#policy)
+- [Release policy](#release-policy)
 - [Global convention](#global-convention)
 - [Rules configuration convention](#rules-configuration-convention)
 - [IDE](#ide)
@@ -18,6 +19,8 @@ The tools has for objective to perform a fully automated secure configuration re
 - Microsoft IIS.
 
 # Design overview
+
+> Made with [Draw.io](https://app.diagrams.net/). Source file is [here](DesignOverview.drawio).
 
 ![DesignOverview](DesignOverview.png)
 
@@ -70,13 +73,12 @@ PS> $env:DEBUG=1
 $ export DEBUG=1
 ``` 
 
-# Policy
+# Release policy
 
 :warning: Need to be discussed with our TL and the management due to the time invested by XLM on this project.
 
-- Code will be public but no external contribution accepted.
-    - Add a mention on this in the README (if you want to modify it, fork it).
-- Configuration will be private to Excellium for IP reason.
+- Project and content related will not be published and will stay a full IP of Excellium Luxembourg SA due to the time/money invested by XLM on this project.
+- The reason is that we have not found any free or open source tool doing this job and the commercial tool from the CIS do not support the elements covered by the tool, therefore, it will allow us to deliver the associated WP more faster and then obtain an advantage against our competitor.
 
 # Global convention
 
