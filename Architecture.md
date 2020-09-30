@@ -17,6 +17,11 @@ The tools has for objective to perform a fully automated secure configuration re
 - Apache Tomcat.
 - Microsoft IIS.
 
+# Design overview
+
+![DesignOverview](DesignOverview.png)
+
+
 # Requirement
 
 - Python 3.7+.
