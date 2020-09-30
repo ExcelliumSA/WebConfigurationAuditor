@@ -94,7 +94,11 @@ $ pytest
 
 > Template use the JINJA template engine, the syntax is available [here](https://jinja.palletsprojects.com/en/2.11.x/templates/).
 
-> Each template receive an instance of the object [ReportData](common/report_data.py) in its context at runtime under the variable named `data` in order to give it data to render. A reference to the package `os.path` under the variable named `util_file` is also passed in order to allow the report to work with filename in case of need.
+> Each template receive an instance of the object [ReportData](common/report_data.py) in its context at runtime under the variable named `data` in order to give it data to render. 
+ 
+> A reference to the package `os.path` under the variable named `util_file` is passed in order to allow the report to work with filename in case of need.
+
+> A reference to the function `datetime.datetime.now()` under the variable named `util_date` is passed in order to allow the report to work with current date/time in case of need.
 
 :warning: All templates must have the extension `.txt`
 
