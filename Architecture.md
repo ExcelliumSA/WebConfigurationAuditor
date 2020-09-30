@@ -28,7 +28,7 @@ The tools has for objective to perform a fully automated secure configuration re
 # Requirement
 
 - Python 3.7+.
-- Configuation files of the target to analyse.
+- Configuration files of the target to analyse.
 
 # Folder layout
 
@@ -47,7 +47,7 @@ PROJECT_ROOT
 - **.vscode**: Folder containing the internal stuff used by VSCode to handle the project.
 - **analysis**: Package containing all Python code related to the analysis of the configuration file provided.
 - **common**: Package containing all Python code shared by all the project.
-- **parsing**: Package containing all Python code related to the parsing of the the references audit rules and the configuraiton file provided.
+- **parsing**: Package containing all Python code related to the parsing of the the references audit rules and the configuration file provided.
 - **references**: Folder containing the audit rules files for every technology supported.
 - **reporting**: Package containing all Python code related to the generation of the report.
 - **templates**: Report template file using the JINJA syntax to define the available reports.
@@ -75,7 +75,7 @@ $ export DEBUG=1
 
 # Release policy
 
-:warning: Need to be discussed with our TL and the management due to the time invested by XLM on this project.
+:triangular_flag_on_post: Need to be validated by our TL and the top management.
 
 - Project and content related will not be published and will stay a full IP of Excellium Luxembourg SA due to the time/money invested by XLM on this project.
 - The reason is that we have not found any free or open source tool doing this job and the commercial tool from the CIS do not support the elements covered by the tool, therefore, it will allow us to deliver the associated WP more faster and then obtain an advantage against our competitor.
@@ -132,7 +132,7 @@ The member **override_rules** is used to indicate that the current rule override
 
 # IDE
 
-- Visual Studio Code with Python extension provided by Microsoft.
+- [Visual Studio Code](https://code.visualstudio.com/) with [Python extension provided by Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-python.python).
 - Project workspace file has been configured to trigger the installation of required code analysis modules and analysis profile is defined in the workspace settings area.
 - Define the folliwng Pre-Commit hook in the file `[PROJECT_HOME]/.git/hooks/pre-commit`:
 
