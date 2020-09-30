@@ -13,7 +13,7 @@ The tools has for objective to perform a fully automated secure configuration re
 # Folder layout
 
 ```text
-WSCR
+PROJECT_ROOT
 ├───.vscode
 ├───analysis
 ├───common
