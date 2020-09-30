@@ -21,8 +21,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Run unit tests suites
+    - name: Run audit test suites with Python ${{ matrix.python-version }}
       run: |
-        pytest
+        chmod +x audit.sh
+        bash audit.sh
