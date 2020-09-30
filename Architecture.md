@@ -7,7 +7,7 @@
 - [Global convention](#global-convention)
 - [Rules configuration convention](#rules-configuration-convention)
 - [IDE](#ide)
-- [Global overview](#global-overview)
+- [Communication betwen modules](#communication-betwen-modules)
 - [Transfer objects structure](#transfer-objects-structure)
 - [Security note](#security-note)
 
@@ -150,28 +150,19 @@ fi
 exit $rc
 ```
 
-# Global overview
+# Communication betwen modules
 
-```text
-(TYPE, FOLDER, REPORT FORMAT) 
-=> PARSING MODULE 
-=[CONFIG_DATA_OBJECT]=> ANALYSIS MODULE 
-=[ANALYSIS_DATA_OBJECT]=> REPORTING MODULE
-```
+## Module Parsing
 
-## Modules
+Read the configuration files provided via a folder and create a collection of `ConfigData` object instances.
 
-### Parsing
+## Module Analysis
 
-Read the configuration files provided via a folder and create `ConfigData` object instances.
+Use the collection of the `ConfigData` object instances received to apply **analysis rules** (based on Regex) against them in order to identify issues and create a collection of `AnalysisData` object instances.
 
-### Analysis
+## Module Reporting
 
-Use the collection of the `ConfigData` object instances received to apply **analysis rules** (based on Regex) against them in order to identify issues and create `AnalysisData` object instances.
-
-### Reporting
-
-Use the collection of `ReportData` object instance (one`ReportData` object instance is associated to one configuration file analysed) to generate a report  in the wanted format.
+Aggregate the parsing and analysis information in a `ReportData` object instance and use this object to generate a report in the wanted format.
 
 # Transfer objects structure
 
