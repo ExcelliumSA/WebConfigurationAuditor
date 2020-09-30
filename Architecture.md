@@ -71,28 +71,43 @@ $ export DEBUG=1
 
 # Rules configuration convention
 
-Rules for each type of server are stored in JSON files which are named \*Name Of the Technology\*.json:
+Rules for each type of server are stored in JSON files which are named \*nameOfTheTechnology\*.json (all lowercase):
 
 ```json 
 [
     {   
-        "ID_RULE": "CIS-ID" ,
-        "CIS_VERSION": "x.x",
-        "AUDIT_EXPRESSION": [{
-                        "EXPRESSION":"*RULE*",
-                        "MUST_BE_PRESENT":Bool
+        "rule_id": "CIS-ID" ,
+        "CIS_version": "x.x",
+        "audit_expressions": [{
+                        "expression":"*RULE_REGEX*",
+                        "presence_needed": "True|False"
                         },
                         ...
                     ],
-        "OVERRIDE": [{
-                "ID_RULE": "CIS-ID",
-                "CIS_VERSION": "x.x"
+        "override_rules": [{
+                "rule_id": "CIS-ID",
+                "CIS_version": "x.x"
                 },
                 ...
             ]
     }
 ]
 ```
+
+The member **rule_id** have the following value `CIS-PointIdentifierInReferential`.
+
+*Example:* For the point 2.4 of the CIS then the member **rule_id** will be `CIS-2.4`.
+
+The member **CIS_Version** have the following value `uppercase(TechnologyName)-TechnologyVersion-CISDocumentVersion`.
+
+*Example:* The document of the CIS is named `CIS_Apache_HTTP_Server_2.4_Benchmark_v1.5.0.pdf` so the member **CIS_Version** will be `APACHE-2.4-1.5.0`.
+
+The member **presence_needed** is used to specify if the audit expression (regex) is expected to find something or not:
+- If *True* then the validation is considered failed if the audit expression find something.
+- If *False* then the validation is considered failed if the audit expression find nothing.
+
+The member **override_rules** is used to indicate that the current rule override, in terms of validation, the list of rules specified. This information is used during the reporting phase.
+
 
 # IDE
 
