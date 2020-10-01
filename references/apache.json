@@ -259,5 +259,61 @@
             }
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-5.11",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "<FilesMatch \"\\^\\.\\*\\$\">(\\s*)\n(\\s*)(Require(\\s+)all(\\s+)denied|Deny(\\s+)from(\\s+)All)(\\s*)\n</FilesMatch>",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-5.12",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "LoadModule(\\s+)rewrite_module(\\s+)modules/mod_rewrite.so",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "RewriteCond(\\s+)%{HTTP_HOST}(\\s+)!\\^[A-Za-z0-9.\\\\]+(\\s+)\\[NC\\](\\s*)\nRewriteCond(\\s+)%{REQUEST_URI}(\\s+)!\\^/error(\\s+)\\[NC\\](\\s*)\nRewriteRule(\\s+)\\^\\.\\(\\.\\*\\)(\\s+)-(\\s+)\\[L,F\\]",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-5.13",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "Listen(\\s+)0.0.0.0",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "Listen(\\s+)\\[::ffff:0.0.0.0\\]",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "Listen(\\s+)[0-9]+$",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-5.14",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "Header(\\s+)always(\\s+)append(\\s+)X-Frame-Options(\\s+)(SAMEORIGIN|DENY)",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
     }
 ]
