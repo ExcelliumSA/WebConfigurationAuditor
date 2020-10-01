@@ -46,7 +46,8 @@ def test_apache_no_audit_rules_triggering():
     analysis_data = analyze(config_data_collection)
     # Verify result
     assert analysis_data is not None, "Result is None"
-    assert len(analysis_data) == 0, f"{len(analysis_data)} audit rule were triggered, it was expected that no one rule found something!"
+    assert len(analysis_data) == 1, "The result was expected to contain a single instance of AnalysisData object !"
+    assert len(analysis_data[0].issue_datas) == 0, f"{len(analysis_data[0].issue_datas)} audit rule were triggered, it was expected that no one rule found something!"
 
 # Timeout feature of PyTest and its plugin "pytest-timeout" do not achieve to cancel the execution in a context of a ReDOS and the current runtime is vulnerable :(
 # @pytest.mark.timeout(20, method="thread")

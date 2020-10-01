@@ -57,10 +57,9 @@ def analyze(config_data_collection):
         except Exception as e:
             error_count += 1
             print_message(Severity.WARN, f"Error during analysis of the file '{config_data.config_file_name}' on rule '{current_rule_identifier}' on regex '{current_regex}': {str(e)}")
-        # Construct the result object if issues were identified
-        if len(issues_identified) > 0:
-            analysis_data = AnalysisData(config_data.server_type, issues_identified, config_data.config_file_name)
-            analysis_results.append(analysis_data)
+        # Construct the result object
+        analysis_data = AnalysisData(config_data.server_type, issues_identified, config_data.config_file_name)
+        analysis_results.append(analysis_data)
 
     # Return the results
     return analysis_results
