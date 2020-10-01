@@ -16,6 +16,18 @@ REPORT_TEMPLATE_FOLDER = "templates"
 REFERENCE_AUDIT_RULES_FOLDER = "references"
 
 
+def compute_file_content_hash(file_path):
+    """Function in charge of computing the SHA256 of the content of a file.
+
+    :param file_path: Path to the file to use a source.
+
+    :return: The hash HEX encoded.
+    """
+    with open(file_path, "r") as f:
+        content_hash = hashlib.sha256(f.read().encode("utf-8")).hexdigest()
+    return content_hash
+
+
 def main(folder_to_process, server_type, report_template_file, report_output_file):
     """Function in charge of managing the processinf workflow.
 
@@ -33,6 +45,9 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
 
         print_message(Severity.INFO, "Gather the list of configuration files to review...")
         configuration_files_to_review = multi_file_reader(folder_to_process)
+        for configuration_file_to_review in configuration_files_to_review:
+            content_hash = compute_file_content_hash(configuration_file_to_review)
+            print_message(Severity.DEBUG, f"SHA256 hash of the content of the config file identified '{configuration_file_to_review}': {content_hash}")
         print_message(Severity.INFO, f"{len(configuration_files_to_review)} files identified.")
 
         print_message(Severity.INFO, "Load the configuration content for each configuration files to review...")
@@ -41,7 +56,7 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
             if server_type == ServerType.APACHE:
                 config_data = parse_config_data_apache(configuration_file_to_review, audit_rules)
                 content_hash = hashlib.sha256(config_data.config_content.encode("utf-8")).hexdigest()
-                print_message(Severity.DEBUG, f"SHA256 hash of the content of the config loaded: {content_hash}")
+                print_message(Severity.DEBUG, f"SHA256 hash of the content of the config loaded '{configuration_file_to_review}': {content_hash}")
                 config_data_collection.append(config_data)
             else:
                 raise Exception(f"Server type {server_type.name} not still supported !")
@@ -58,7 +73,7 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
             f.write(report_content)
         print_message(Severity.INFO, "Report created.")
         delay = round(time.time() - start_time, 2)
-        print_message(Severity.INFO, f"Review performed in {delay} seconds.")
+        print_message(Severity.DEBUG, f"Review performed in {delay} seconds.")
     except Exception as e:
         print_message(Severity.ERROR, f"Error during the processing: {str(e)}")
 
