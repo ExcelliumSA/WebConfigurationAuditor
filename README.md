@@ -2,7 +2,7 @@
 
 ## Audit CI
 
-![audit](https://github.com/righettod/wscr/workflows/audit/badge.svg?branch=master)
+![audit](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/workflows/audit/badge.svg?branch=master)
 
 ## Objective, architecture and decision
 
