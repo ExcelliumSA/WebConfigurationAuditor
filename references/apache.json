@@ -352,5 +352,112 @@
             }
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-6.6",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "LoadModule security2_module modules/mod_security2.so",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-7.1",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "ssl_module|nss_module",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-7.4",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "SSLProtocol(\\s+)TLSv?1\\.[2-3]$",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-7.5",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "SSLHonorCipherOrder(\\s+)On",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "SSLCipherSuite(\\s+)EECDH:EDH:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-7.6",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "SSLInsecureRenegotiation(\\s+)on",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-7.7",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "SSLCompression(\\s+)on",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-7.11",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "SSLUseStapling(\\s+)On",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "SSLStaplingCache(\\s+)(\"shmcb:logs/ssl_staple_cache\\(512000\\)\"|\"dbm:logs/ssl_staple_cache\\.db\"|dc:UNIX:logs/ssl_staple_socket)",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-7.12",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "Header always set Strict-Transport-Security \"max-age=[0-9]{3,}\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-7.13",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "SSLCipherSuite(\\s+)ECDHE:DHE:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA", 
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
     }
 ]
