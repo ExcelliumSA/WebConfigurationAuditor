@@ -2,11 +2,11 @@
 
 **W**eb **S**erver **S**ecure **C**onfiguration **R**eview **A**utomation **T**ool.
 
-## Audit CI 
+## Audit via Continuous Integration
 
-> via [GitHub actions](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions?query=workflow%3Aaudit).
+> via [GitHub Actions](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions?query=workflow%3Aaudit) and [GitHub Dependabot](https://dependabot.com/)
 
-![audit](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/workflows/audit/badge.svg?branch=master)
+![audit](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/workflows/audit/badge.svg?branch=master)  [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 
 ## Objective, architecture and decision
 
