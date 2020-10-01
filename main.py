@@ -1,6 +1,7 @@
 import argparse
 import os
 import time
+import hashlib
 from pathlib import Path
 from common.server_type import ServerType
 from common.severity import Severity
@@ -38,7 +39,10 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
         config_data_collection = []
         for configuration_file_to_review in configuration_files_to_review:
             if server_type == ServerType.APACHE:
-                config_data_collection.append(parse_config_data_apache(configuration_file_to_review, audit_rules))
+                config_data = parse_config_data_apache(configuration_file_to_review, audit_rules)
+                content_hash = hashlib.sha256(config_data.config_content.encode("utf-8")).hexdigest()
+                print_message(Severity.DEBUG, f"SHA256 hash of the content of the config loaded: {content_hash}")
+                config_data_collection.append(config_data)
             else:
                 raise Exception(f"Server type {server_type.name} not still supported !")
         print_message(Severity.INFO, f"{len(config_data_collection)} configuration loaded.")

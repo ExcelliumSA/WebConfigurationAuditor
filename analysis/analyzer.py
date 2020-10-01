@@ -1,5 +1,6 @@
 import re
 import os
+import hashlib
 from common.analysis_data import AnalysisData
 from common.issue_data import IssueData
 from common.utilities import print_message
@@ -30,6 +31,8 @@ def analyze(config_data_collection):
             error_count = 0
             issues_identified = []
             print_message(Severity.INFO, f"Begin analysis of the file '{os.path.basename(config_data.config_file_name)}' using {len(config_data.audit_rules)} rules.")
+            content_hash = hashlib.sha256(config_data.config_content.encode("utf-8")).hexdigest()
+            print_message(Severity.DEBUG, f"SHA256 hash of the content of the config analyzed: {content_hash}")
             for audit_rule in config_data.audit_rules:
                 current_rule_identifier = audit_rule.rule_id
                 for expression in audit_rule.audit_expressions:
