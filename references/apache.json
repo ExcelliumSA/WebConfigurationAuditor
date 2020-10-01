@@ -459,5 +459,38 @@
             }
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-8.1",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "ServerTokens(\\s+)(Prod|ProductOnly)", 
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-8.2",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "ServerSignature(\\s+)On", 
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-8.4",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "FileETag.*", 
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
     }
 ]
