@@ -10,6 +10,7 @@
 <title>Report</title>
 <!-- 
 Import statically the ChartJS library from a release:
+https://www.chartjs.org/
 https://github.com/chartjs/Chart.js/releases/download/v3.0.0-beta/chart.min.js 
 -->
 <script type="text/javascript">
@@ -39,25 +40,50 @@ Chart generation functions
         return `rgb(${r()}, ${r()}, ${r()})`;
     }
 
-    function getGlobalOverviewChart1Config(datas, datasLabels){
-        var dataBackgroundColor = new Array();
-        datas.forEach(element => dataBackgroundColor.push(random_color()));
+    function getGlobalOverviewChart1Config(datas, datasLabels, barColor){
 		var config = {
-			type: 'pie',
+			type: "bar",
 			data: {
 				datasets: [{
 					data: datas,
-					backgroundColor: dataBackgroundColor,
-					label: 'Dataset'
+                    backgroundColor: barColor,
+                    borderColor: barColor,
+                    borderWidth: 0,
+					label: "Failed validation count"
 				}],
 				labels: datasLabels
 			},
 			options: {
-				responsive: true
+				responsive: true,
+                legend:{
+                    position: "top"
+                }
 			}
 		};
         return config;        
     }
+
+    function getGlobalOverviewChart2Config(datas, datasLabels, datasBackgroundColor){
+        var dataBackgroundColor = new Array();
+		var config = {
+			type: "doughnut",
+			data: {
+				datasets: [{
+					data: datas,
+                    backgroundColor: datasBackgroundColor,
+					label: "DataSet"
+				}],
+				labels: datasLabels
+			},
+			options: {
+				responsive: true,
+                legend:{
+                    position: "top"
+                }
+			}
+		};
+        return config;        
+    }    
 
     window.onload = function() {
         //Render the global_overview_chart_1
@@ -69,13 +95,34 @@ Chart generation functions
         datasGlobalOverviewChart1.push({{ analysis_data.issue_datas|length }});
         datasLabelsGlobalOverviewChart1.push("{{ util_file.basename(analysis_data.config_file_name) }}");
         {%- endfor -%}
-        var configGlobalOverviewChart1 = getGlobalOverviewChart1Config(datasGlobalOverviewChart1, datasLabelsGlobalOverviewChart1);
+        var configGlobalOverviewChart1 = getGlobalOverviewChart1Config(datasGlobalOverviewChart1, datasLabelsGlobalOverviewChart1, "rgb(30,144,255)");
         new Chart(ctxGlobalOverviewChart1, configGlobalOverviewChart1);
-        //Render the global_overview_chart_x
-        //...
+
+        //Render the global_overview_chart_2
+        var ctxGlobalOverviewChart2 = document.getElementById("global_overview_chart_2").getContext("2d");
+        var datasGlobalOverviewChart2 = new Array();
+        var datasLabelsGlobalOverviewChart2 = new Array();
+        var datasBackgroundColor = ["rgb(34,139,34)", "rgb(255,0,0)"];
+        {#- Generate the data structures needed by the chart -#}
+        {#- See https://stackoverflow.com/a/7537466/451455 -#}
+        {%- set total_failed_validation = namespace(value=0) -%}
+        {%- set total_passed_validation = namespace(value=0) -%}
+        {%- for analysis_data in data.analysis_data_collection -%}
+        {%- set total_failed_validation.value = total_failed_validation.value + analysis_data.issue_datas|length -%}
+        {%- set total_passed_validation.value = total_passed_validation.value + data.audit_rules_passed[analysis_data.config_file_name]|length -%}
+        {%- endfor -%}
+        datasGlobalOverviewChart2.push({{ total_passed_validation.value }});
+        datasLabelsGlobalOverviewChart2.push("Passed validation total count");
+        datasGlobalOverviewChart2.push({{ total_failed_validation.value }});
+        datasLabelsGlobalOverviewChart2.push("Failed validation total count");
+        var configGlobalOverviewChart2 = getGlobalOverviewChart2Config(datasGlobalOverviewChart2, datasLabelsGlobalOverviewChart2, datasBackgroundColor);
+        new Chart(ctxGlobalOverviewChart2, configGlobalOverviewChart2);
     };
 </script>
 <style>
+    h1, h2{
+        color: rgb(114, 59, 142);
+    }
     body {
         font: normal 12px Consolas, Arial, sans-serif;
     }
@@ -98,12 +145,18 @@ Chart generation functions
        color: green;
        font: normal 14px Consolas, Arial, sans-serif;
     }
-    .chart{
+    .globalOverviewChart1{
+        width: 80%;
+        height: 80%;
+    }
+    .globalOverviewChart2{
         width: 40%;
-    }      
+        height: 40%;
+    }   
 </style
 </head>
 <body>
+<img src="data:image/png;base64,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"><br>
 <i>Report generated on {{ util_date.strftime("%Y-%m-%d") }}.</i>
 <h1>Files reviewed</h1>
 <ul>
@@ -113,11 +166,14 @@ Chart generation functions
 </ul>
 
 <h1>Results overview</h1>
+<h2>Global compliance level</h2>
+<div class="globalOverviewChart2">
+    <canvas id="global_overview_chart_2"></canvas>
+</div>
 <h2>Failed validation distribution by configuration files</h2>
-<div class="chart">
+<div class="globalOverviewChart1">
     <canvas id="global_overview_chart_1"></canvas>
 </div>
-
 <h1>Results details</h1>
 {% for analysis_data in data.analysis_data_collection %}
 
