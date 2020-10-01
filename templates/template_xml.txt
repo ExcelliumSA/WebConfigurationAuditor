@@ -1,6 +1,7 @@
+{#- Generate a XML report -#}
+{#- See https://jinja.palletsprojects.com/en/2.11.x/templates/ -#}
+{#- See https://jinja.palletsprojects.com/en/2.11.x/templates/#whitespace-control -#}
 <?xml version="1.0" encoding="UTF-8"?>
-{# Generate a XML report #}
-{# See https://jinja.palletsprojects.com/en/2.11.x/templates/ #}
 <results>
     <generation_date>{{ util_date.strftime("%Y-%m-%d") }}</generation_date>
     <configuration_files>
