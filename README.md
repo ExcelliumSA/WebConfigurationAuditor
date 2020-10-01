@@ -1,6 +1,10 @@
-# Web Server Secure Configuration Review Automation Tool
+# WSSCRAT
 
-## Audit CI
+**W**eb **S**erver **S**ecure **C**onfiguration **R**eview **A**utomation **T**ool.
+
+## Audit CI 
+
+> via [GitHub actions](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions?query=workflow%3Aaudit).
 
 ![audit](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/workflows/audit/badge.svg?branch=master)
 
