@@ -25,10 +25,11 @@ The tools has for objective to perform a fully automated secure configuration re
 ![DesignOverview](DesignOverview.png)
 
 
-# Requirement
+# Requirements
 
 - Python 3.7+.
 - Configuration files of the target to analyse.
+- Windows, Linux or MAC machine: Compatibility tested via the [audit CI job](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions?query=workflow%3Aaudit).
 
 # Folder layout
 
