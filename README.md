@@ -2,7 +2,7 @@
 
 **W**eb **S**erver **S**ecure **C**onfiguration **R**eview **A**utomation **T**ool.
 
-## Audit via Continuous Integration
+## Code base analysis via Continuous Integration
 
 > via [GitHub Actions](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions) and [GitHub Dependabot](https://dependabot.com/)
 
