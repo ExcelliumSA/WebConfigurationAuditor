@@ -86,9 +86,10 @@ if __name__ == "__main__":
     server_type_names = [e.name for e in ServerType]
     # Define the call options and command line syntax
     parser = argparse.ArgumentParser(description=".::Web Server Secure Configuration Review Automation Tool::.")
-    parser.add_argument("-f", action="store", dest="folder_to_process", help="Path to folder containing the configuration to audit.", required=True)
-    parser.add_argument("-s", action="store", dest="type_server", help="Type of server from which the provided configuration is issued.", choices=server_type_names, required=True)
-    parser.add_argument("-t", action="store", dest="report_template", help="Report template to use.", choices=templates, required=True)
+    required_params = parser.add_argument_group("required named arguments")
+    required_params.add_argument("-f", action="store", dest="folder_to_process", help="Path to folder containing the configuration to audit.", required=True)
+    required_params.add_argument("-s", action="store", dest="type_server", help="Type of server from which the provided configuration is issued.", choices=server_type_names, required=True)
+    required_params.add_argument("-t", action="store", dest="report_template", help="Report template to use.", choices=templates, required=True)
     parser.add_argument("-o", action="store", dest="report_output_file", help="Filename of the report (default to 'report.rpt').", default="report.rpt", required=False)
     args = parser.parse_args()
     # Call the application entry point with the provided context
