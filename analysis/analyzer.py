@@ -20,8 +20,8 @@ def analyze(config_data_collection):
 
     # Apply processing
     analysis_results = []
-    issue_msg_template_matched = "Rule '%s' has matched the following data in the configuration provided: %s"
-    issue_msg_template_not_matched = "Rule '%s' has not matched in the configuration provided but it was expected to match."
+    issue_msg_template_matched = "Rule '%s' has found the following insecure configuration: %s."
+    issue_msg_template_not_matched = "Rule '%s' has not found the expected recommended secure confguration."
     debug_msg_template = "Test rule '%s' with the regex '%s' has %s matched."
     current_rule_identifier = ""
     current_regex = ""
