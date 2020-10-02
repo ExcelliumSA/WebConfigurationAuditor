@@ -30,8 +30,8 @@ jobs:
     - name: Run complete audit suites with Python ${{ matrix.python-version }} on ${{ matrix.os }} (Linux OS only)
       if: ${{ matrix.os == 'ubuntu-latest' }}
       run: |
-        chmod +x audit.sh
-        bash audit.sh
+        chmod +x code_static_analysis.sh
+        bash code_static_analysis.sh
     - name: Run unit tests suites with Python ${{ matrix.python-version }} on ${{ matrix.os }} (All OS except Linux)
       if: ${{ matrix.os != 'ubuntu-latest' }}
       run: |
