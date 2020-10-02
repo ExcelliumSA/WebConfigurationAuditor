@@ -4,11 +4,11 @@
 {
     "generation_date": "{{ util_date.strftime("%Y-%m-%d") }}",
     "results": [
-        {% for analysis_data in data.analysis_data_collection %}
-            {% set success_validation_points = data.audit_rules_passed[analysis_data.config_file_name] %}
-            {% set failed_validation_points_count = analysis_data.issue_datas|length %}
-            {% set success_validation_points_count = success_validation_points|length %}
-            {% set check_total_count = failed_validation_points_count + success_validation_points_count %}
+        {%- for analysis_data in data.analysis_data_collection -%}
+            {%- set success_validation_points = data.audit_rules_passed[analysis_data.config_file_name] -%}
+            {%- set failed_validation_points_count = analysis_data.issue_datas|length -%}
+            {%- set success_validation_points_count = success_validation_points|length -%}
+            {%- set check_total_count = failed_validation_points_count + success_validation_points_count -%}
 
             {
                 "configuration_file name": "{{ util_file.basename(analysis_data.config_file_name) }}",
@@ -16,25 +16,25 @@
                 "failed_rule_count": {{ failed_validation_points_count }},
                 "total_rule_count": {{ check_total_count }},
                 "rules": [
-                    {% for issue_data in analysis_data.issue_datas %}
+                    {%- for issue_data in analysis_data.issue_datas -%}
                         {
                             "rule_id": "{{ issue_data.rule_id }}",
                             "CIS_version": "{{ issue_data.CIS_version }}",
                             "status": "failed",
                             "details": "{{ issue_data.details.replace("\"","'") }}"
                         }{% if not loop.last %},{% endif %}
-                    {% endfor %}
-                    {% if failed_validation_points_count > 0 and success_validation_points_count > 0 %},{% endif %}
-                    {% for point in success_validation_points %}
+                    {%- endfor -%}
+                    {%- if failed_validation_points_count > 0 and success_validation_points_count > 0 -%},{%- endif -%}
+                    {%- for point in success_validation_points -%}
                         {
                             "rule_id": "{{ point.rule_id }}",
                             "CIS_version": "{{ point.CIS_version }}",
                             "status": "passed",
                             "details": ""
-                        }{% if not loop.last %},{% endif %}
-                    {% endfor %}
+                        }{%- if not loop.last -%},{%- endif -%}
+                    {%- endfor -%}
                 ]
-            }{% if not loop.last %},{% endif %}
-        {% endfor %}     
+            }{%- if not loop.last -%},{%- endif -%}
+        {%- endfor -%}     
     ]
 }
