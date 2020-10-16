@@ -5,6 +5,7 @@ from common.override_rule import OverrideRule
 from common.server_type import ServerType
 from pathlib import Path
 import json
+import re
 
 
 def parse_audit_rules(rule_file_name):
@@ -50,6 +51,25 @@ def parse_config_data_apache(config_file_name, audit_rules):
     config_data = ConfigData(ServerType.APACHE, content, config_file_name, audit_rules)
     return config_data
 
+def parse_config_data_tomcat(config_file_name, audit_rules):
+    """Parse a Tomcat config file and return its content without the comments.
+
+    :param config_file_name: The name of the config file to parse.
+    :param audit_rules: A list of AuditRule objects that can be obtained by calling the parse_audit_rules function.
+    :return: A ConfigData object containing the active configuration of the Apache.
+    """
+    end_comment = re.compile("-->")
+    with open(config_file_name) as config_file:
+        tmp_content = config_file.read()
+    split_content = tmp_content.split("<!--")
+    content = ""
+    for element in split_content:
+        if end_comment.search(element):
+            content += element.split("-->")[1]
+        else:
+            content += element
+    config_data = ConfigData(ServerType.TOMCAT, content, config_file_name, audit_rules)
+    return config_data
 
 def multi_file_reader(folder_path):
     """List all the files in a given folder and its subdirectories.
