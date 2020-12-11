@@ -86,7 +86,7 @@ Chart generation functions
     }    
 
     window.onload = function() {
-        //Render the global_overview_chart_1
+        //Render the global_overview_chart_1 - BAR
         var ctxGlobalOverviewChart1 = document.getElementById("global_overview_chart_1").getContext("2d");
         var datasGlobalOverviewChart1 = new Array();
         var datasLabelsGlobalOverviewChart1 = new Array();
@@ -98,7 +98,7 @@ Chart generation functions
         var configGlobalOverviewChart1 = getGlobalOverviewChart1Config(datasGlobalOverviewChart1, datasLabelsGlobalOverviewChart1, "rgb(30,144,255)");
         new Chart(ctxGlobalOverviewChart1, configGlobalOverviewChart1);
 
-        //Render the global_overview_chart_2
+        //Render the global_overview_chart_2 - DOUGHNUT
         var ctxGlobalOverviewChart2 = document.getElementById("global_overview_chart_2").getContext("2d");
         var datasGlobalOverviewChart2 = new Array();
         var datasLabelsGlobalOverviewChart2 = new Array();
@@ -112,9 +112,9 @@ Chart generation functions
         {%- set total_passed_validation.value = total_passed_validation.value + data.audit_rules_passed[analysis_data.config_file_name]|length -%}
         {%- endfor -%}
         datasGlobalOverviewChart2.push({{ total_passed_validation.value }});
-        datasLabelsGlobalOverviewChart2.push("Passed validation total count");
+        datasLabelsGlobalOverviewChart2.push("Passed validation total count ({{ total_passed_validation.value }})");
         datasGlobalOverviewChart2.push({{ total_failed_validation.value }});
-        datasLabelsGlobalOverviewChart2.push("Failed validation total count");
+        datasLabelsGlobalOverviewChart2.push("Failed validation total count ({{ total_failed_validation.value }})");
         var configGlobalOverviewChart2 = getGlobalOverviewChart2Config(datasGlobalOverviewChart2, datasLabelsGlobalOverviewChart2, datasBackgroundColor);
         new Chart(ctxGlobalOverviewChart2, configGlobalOverviewChart2);
     };
