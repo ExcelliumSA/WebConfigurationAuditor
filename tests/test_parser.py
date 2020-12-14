@@ -97,6 +97,7 @@ def test_parse_config_tomcat():
     assert ''.join(''.join(config.config_content.split('\n')).split(' ')) == ''.join(''.join(ref_config.split('\n')).split(' ')), "The configuration file content doesn't match."
     assert config.config_file_name == TOMCAT_TEST_COMMENTS, "The type of server doesn't match."
 
+
 def test_list_files():
     """Test the function which list all the files in a directory."""
     files_test = multi_file_reader(TEST_DIR_PATH)
