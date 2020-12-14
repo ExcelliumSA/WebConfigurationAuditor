@@ -51,6 +51,7 @@ def parse_config_data_apache(config_file_name, audit_rules):
     config_data = ConfigData(ServerType.APACHE, content, config_file_name, audit_rules)
     return config_data
 
+
 def parse_config_data_tomcat(config_file_name, audit_rules):
     """Parse a Tomcat config file and return its content without the comments.
 
@@ -70,6 +71,7 @@ def parse_config_data_tomcat(config_file_name, audit_rules):
             content += element
     config_data = ConfigData(ServerType.TOMCAT, content, config_file_name, audit_rules)
     return config_data
+
 
 def multi_file_reader(folder_path):
     """List all the files in a given folder and its subdirectories.
