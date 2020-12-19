@@ -1,0 +1,279 @@
+[
+    {
+        "rule_id": "CIS-2.4",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "<(\\s*)Connector(\\s*).*?xpoweredBy(\\s*)=(\\s*)\"true\".*?>",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "<(\\s*)Connector(\\s*).*?server(\\s*)=(\\s*)\".*?(?!Apache).*?\".*?>",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.5",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "<error-page>.*?<exception-type>(\\s*)java.lang.Throwable(\\s*)</exception-type>.*?<location>.*?</location>.*?</error-page>",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.6",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "<(\\s*)Connector(\\s*).*?allowTrace(\\s*)=(\\s*)\"false\".*?>",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-3.1",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "shutdown(\\s*)=(\\s*)\"SHUTDOWN\"",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-3.2",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "<Server(\\s+)[^>]*port(\\s*)=(\\s*)\"-1\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-5.1",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "MemoryRealm",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "JDBCRealm",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "UserDatabaseRealm",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "JAASRealm",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-5.2",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "LockOutRealm",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-6.1",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "clientAuth(\\s*)=(\\s*)\"true\"",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "certificateVerification(\\s*)=(\\s*)\"required\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-6.2",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "SSLEnabled(\\s*)=(\\s*)\"true\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-6.3",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "scheme(\\s*)=(\\s*)\"https\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-6.4",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "secure(\\s*)=(\\s*)\"true\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-6.5",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "sslProtocol(\\s*)=(\\s*)\"TLS\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-7.3",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "org.apache.catalina.valves.AccessLogValve",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-9.2",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "autoDeploy(\\s*)=(\\s*)\"false\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-9.3",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "deployOnStartup(\\s*)=(\\s*)\"false\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-10.2",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "RemoteAddrValve",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-10.4",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "<transport-guarantee>(\\s*)CONFIDENTIAL(\\s*)</transport-guarantee>",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-10.10",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "maxHttpHeaderSize(\\s*)=(\\s*)\"8192\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-10.12",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "<Resources.*?allowLinking(\\s*)=(\\s*)\"false\".*?>",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-10.14",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "crossContext(\\s*)=(\\s*)\"true\"",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-10.15",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "enableLookups(\\s*)=(\\s*)\"true\"",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-10.16",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "<Listener.*?className(\\s*)=(\\s*)\"org.apache.catalina.core.JreMemoryLeakPreventionListener\".*?/>",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-10.18",
+        "CIS_version": "TOMCAT-9-1.0.0",
+        "audit_expressions": [
+            {
+                "expression": "metadata-complete(\\s*)=(\\s*)\"true\"",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "logEffectiveWebXml(\\s*)=(\\s*)\"true\"",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    }
+]

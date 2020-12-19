@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Point 3.1, 3.2-->
+<Server port="-1" shutdown="RANDOMSTUFF">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+<!--Point 10.16-->
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+
+  <GlobalNamingResources>
+    <Resource name="UserDatabase" auth="Container"
+              type="org.apache.catalina.UserDatabase"
+              description="User database that can be updated and saved"
+              factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+              pathname="conf/tomcat-users.xml" />
+  </GlobalNamingResources>
+
+  <Service name="Catalina">
+
+
+<!--Point 2.4, 2.6, 6.1, 6.2, 6.3, 6.4, 6.5-->
+    <Connector port="8080" protocol="HTTP/1.1" clientAuth="true" sslProtocol="TLS" 
+               connectionTimeout="20000" SSLEnabled="true" scheme="https" secure="true"
+               redirectPort="8443" server="test" allowTrace="false">
+               <SSLHostConfig certificateVerification="required" />
+    </Connector>
+    <Engine name="Catalina" defaultHost="localhost">
+
+    <!--Point 5.2-->
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+      </Realm>
+
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+
+<!--Point 7.3-->
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+<!--Point 10.2-->
+        <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+            allow="127\.0\.0\.1"/> 
+
+      </Host>
+    </Engine>
+  </Service>
+</Server>
+
+<!--Point 2.5-->
+<error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/error.jsp</location>
+</error-page>
+
+<!--Point 10.4-->
+<security-constraint>
+ <user-data-constraint>
+ <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+ <user-data-constraint>
+</security-constraint> 
+
+<!--Point 10.12, 10.18-->
+<Context logEffectiveWebXml="true">
+<Resources allowLinking="false" />
+</Context>
+
+<!--Point 10.18-->
+<web-app metadata-complete="true">
+
+<!--Point 9.2-->
+autoDeploy="false"
+<!--Point 9.3-->
+deployOnStartup="false"  
+<!--Point 10.10-->
+maxHttpHeaderSize="8192"
