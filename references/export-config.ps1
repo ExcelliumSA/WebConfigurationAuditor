@@ -25,6 +25,7 @@
 # Every time it was possible PowerShell command was used otherwise the shell command was used for portability between IIS8 and IIS10.
 # Script was developed on WIN2012 with IIS8.5 .
 # When a custom lopp is used on a result object, it's because the "ConvertTo-Json" applied on the result object do not return the expected data.
+# All internal functions are independant and it is wanted (it explains why code is duplicated) in order to allow to add special processing for a point in case of need.
 
 #############
 # SECTION 1 #
@@ -504,9 +505,64 @@ function Export-DataPoint411{
 # Internal function for the validation point 5.1
 # CIS title "Ensure Default IIS web log location is moved"
 function Export-DataPoint51{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.applicationHost/sites/siteDefaults/logFile' -name 'directory'
+      $results.Add(@{SiteName=$_.Name;Property='directory';Value=$cfg.Value})
+   } | Out-Null
+   return $results    
+}
+
+# Internal function for the validation point 5.2
+# CIS title "Ensure Advanced IIS logging is enabled"
+# See https://gallery.technet.microsoft.com/office/Set-IIS-Log-Fields-via-ee9c19b3
+function Export-DataPoint52{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.applicationHost/sites/siteDefaults/logFile' -name '.'
+      # Get log properties
+      $properties = @{SiteName=$_.Name;Property='Log';Fields=$cfg.logExtFileFlags;Format=$cfg.logFormat;Target=$cfg.logTargetW3C;Enabled=$cfg.enabled;MaxLogLineLength=$cfg.maxLogLineLength;RotationPeriod=$cfg.period;TruncateSize=$cfg.truncateSize}
+      # Get sample lines of the mot recent log to really see the fields used, only extract lines starting with "#Fields:"
+      [System.Collections.ArrayList]$lines = @()
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.applicationHost/sites/siteDefaults/logFile' -name 'directory'
+      Get-ChildItem -Path $cfg.Value -Include *.log -Recurse -File | sort LastWriteTime | select -last 1 | Get-Content | Select-String -Pattern '#Fields:' -AllMatches | ForEach-Object -Process {
+         $lines.Add($_.Line)
+      }
+      $properties["LogFieldsSamples"] = $lines
+      $results.Add($properties)
+   } | Out-Null
+   return $results 
+}
+
+# Internal function for the validation point 5.3
+# CIS title "Ensure 'ETW Logging' is enabled"
+function Export-DataPoint53{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.applicationHost/sites/siteDefaults/logFile' -name '.'
+      # Get log properties
+      $properties = @{SiteName=$_.Name;Property='Log';Format=$cfg.logFormat;Target=$cfg.logTargetW3C;Enabled=$cfg.enabled;}
+      $results.Add($properties)
+   } | Out-Null
+   return $results    
+}
+
+#############
+# SECTION 6 #
+#############
+
+# Internal function for the validation point 6.1
+# CIS title "Ensure FTP requests are encrypted"
+function Export-DataPoint61{
 }
 
 ##########################
 ## MAIN FUNCTIONS BLOCK ##
 ##########################
-Export-DataPoint411 | ConvertTo-Json 
+Export-DataPoint61 | ConvertTo-Json 
