@@ -309,7 +309,56 @@ function Export-DataPoint310{
    return $results    
 }
 
+# Internal function for the validation point 3.11
+# CIS title "Ensure X-Powered-By Header is removed"
+function Export-DataPoint311{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfgFile = Get-WebConfigFile $cfgPath
+      $xml = New-Object Xml 
+      $xml.Load($cfgFile)
+      $node = $xml.SelectSingleNode('/configuration/system.webServer/httpProtocol/customHeaders/add[@name="X-Powered-By"]/@value')
+      if($node.Value){
+         $results.Add(@{SiteName=$_.Name;Property='X-Powered-By';Action="Add";Value=$node.Value})
+      }
+      $node = $xml.SelectSingleNode('/configuration/system.webServer/httpProtocol/customHeaders/remove[@name="X-Powered-By"]')
+      if($node){
+         $results.Add(@{SiteName=$_.Name;Property='X-Powered-By';Action="Remove"})
+      }      
+   } | Out-Null
+   return $results   
+}
+
+# Internal function for the validation point 3.12
+# CIS title "Ensure Server Header is removed"
+# See https://developercommunity.visualstudio.com/solutions/637265/view.html
+function Export-DataPoint312{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfgFile = Get-WebConfigFile $cfgPath
+      $xml = New-Object Xml 
+      $xml.Load($cfgFile)
+      $node = $xml.SelectSingleNode('/configuration/system.webServer/security/requestFiltering/@removeServerHeader')
+      $results.Add(@{SiteName=$_.Name;Property='removeServerHeader';Value=($node.Value -eq "true")})
+   } | Out-Null
+   return $results  
+}
+
+#############
+# SECTION 4 #
+#############
+
+# Internal function for the validation point 4.1
+# CIS title "Ensure 'maxAllowedContentLength' is configured"
+function Export-DataPoint41{
+
+}
+
 #############################
 ## MAIN FUNCTIONS BLOCK   ##
 #############################
-Export-DataPoint310 | ConvertTo-Json 
+Export-DataPoint312 | ConvertTo-Json 
