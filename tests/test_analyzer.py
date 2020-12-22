@@ -63,6 +63,7 @@ def test_apache_no_audit_rules_triggering():
 #        pattern.match(input)
 #        pattern.findall(input)
 
+
 def test_tomcat_all_audit_rules_triggering():
     """Test case in charge of ensuring that all audit rules configured in reference file for Tomcat are correctly defined by applying them against a configuration that trigger all of them ."""
     # Load the reference file with all the audit rule for Apache
