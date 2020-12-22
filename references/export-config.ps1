@@ -339,13 +339,10 @@ function Export-DataPoint312{
    [System.Collections.ArrayList]$results = @()
    Get-Website | ForEach-Object -Process {
       $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
-      $cfgFile = Get-WebConfigFile $cfgPath
-      $xml = New-Object Xml 
-      $xml.Load($cfgFile)
-      $node = $xml.SelectSingleNode('/configuration/system.webServer/security/requestFiltering/@removeServerHeader')
-      $results.Add(@{SiteName=$_.Name;Property='removeServerHeader';Value=($node.Value -eq "true")})
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/requestFiltering' -name 'removeServerHeader'
+      $results.Add(@{SiteName=$_.Name;Property='removeServerHeader';Value=($cfg -eq "true")})
    } | Out-Null
-   return $results  
+   return $results    
 }
 
 #############
@@ -353,12 +350,163 @@ function Export-DataPoint312{
 #############
 
 # Internal function for the validation point 4.1
-# CIS title "Ensure 'maxAllowedContentLength' is configured"
+# CIS title "Ensure "maxAllowedContentLength' is configured"
 function Export-DataPoint41{
-
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/requestFiltering/requestLimits' -name 'maxAllowedContentLength'
+      $results.Add(@{SiteName=$_.Name;Property='maxAllowedContentLength';Value=$cfg.Value})
+   } | Out-Null
+   return $results 
 }
 
-#############################
-## MAIN FUNCTIONS BLOCK   ##
-#############################
-Export-DataPoint312 | ConvertTo-Json 
+# Internal function for the validation point 4.2
+# CIS title "Ensure 'maxURL request filter' is configured"
+function Export-DataPoint42{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/requestFiltering/requestLimits' -name 'maxUrl'
+      $results.Add(@{SiteName=$_.Name;Property='maxUrl';Value=$cfg.Value})
+   } | Out-Null
+   return $results    
+}
+
+# Internal function for the validation point 4.3
+# CIS title "Ensure 'maxQueryString request filter' is configured"
+function Export-DataPoint43{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/requestFiltering/requestLimits' -name 'maxQueryString'
+      $results.Add(@{SiteName=$_.Name;Property='maxQueryString';Value=$cfg.Value})
+   } | Out-Null
+   return $results    
+}
+
+# Internal function for the validation point 4.4
+# CIS title "Ensure non-ASCII characters in URLs are not allowed"
+function Export-DataPoint44{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/requestFiltering' -name 'allowHighBitCharacters'
+      $results.Add(@{SiteName=$_.Name;Property='allowHighBitCharacters';Value=$cfg.Value})
+   } | Out-Null
+   return $results  
+}
+
+# Internal function for the validation point 4.5
+# CIS title "Ensure Double-Encoded requests will be rejected"
+function Export-DataPoint45{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/requestFiltering' -name 'allowDoubleEscaping'
+      $results.Add(@{SiteName=$_.Name;Property='allowDoubleEscaping';Value=$cfg.Value})
+   } | Out-Null
+   return $results  
+}
+
+# Internal function for the validation point 4.6
+# CIS title "Ensure 'HTTP Trace Method' is disabled"
+# See https://docs.microsoft.com/en-us/iis/configuration/system.webserver/security/requestfiltering/verbs/add
+function Export-DataPoint46{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfgFile = Get-WebConfigFile $cfgPath
+      $xml = New-Object Xml 
+      $xml.Load($cfgFile)
+      $node = $xml.SelectSingleNode('/configuration/system.webServer/security/requestFiltering/verbs/add[@verb="TRACE"]/@allowed')
+      $results.Add(@{SiteName=$_.Name;Property='HTTP-TRACE';Disabled=($node -eq "false")})    
+   } | Out-Null
+   return $results   
+}
+
+# Internal function for the validation point 4.7
+# CIS title "Ensure Unlisted File Extensions are not allowed"
+function Export-DataPoint47{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/requestFiltering/fileExtensions' -name 'allowUnlisted'
+      $results.Add(@{SiteName=$_.Name;Property='allowUnlisted';Value=$cfg.Value})
+   } | Out-Null
+   return $results    
+}
+
+# Internal function for the validation point 4.8
+# CIS title "Ensure Handler is not granted Write and Script/Execute"
+function Export-DataPoint48{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/handlers' -name 'accessPolicy'
+      $results.Add(@{SiteName=$_.Name;Property='accessPolicy';Value=$cfg.ToString()})
+   } | Out-Null
+   return $results      
+}
+
+# Internal function for the validation point 4.9
+# CIS title "Ensure 'notListedIsapisAllowed' is set to false"
+function Export-DataPoint49{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/isapiCgiRestriction' -name 'notListedIsapisAllowed'
+      $results.Add(@{SiteName=$_.Name;Property='notListedIsapisAllowed';Value=$cfg.Value})
+   } | Out-Null
+   return $results    
+}
+
+# Internal function for the validation point 4.10
+# CIS title "Ensure 'notListedCgisAllowed' is set to false"
+function Export-DataPoint410{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/isapiCgiRestriction' -name 'notListedCgisAllowed'
+      $results.Add(@{SiteName=$_.Name;Property='notListedCgisAllowed';Value=$cfg.Value})
+   } | Out-Null
+   return $results    
+}
+
+# Internal function for the validation point 4.11
+# CIS title "Ensure 'Dynamic IP Address Restrictions' is enabled"
+function Export-DataPoint411{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfgDenyByConcurrentRequestsEnabled = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/dynamicIpSecurity/denyByConcurrentRequests' -name 'enabled'
+      $cfgDenyByConcurrentRequestsMaxConcurrentRequests = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/dynamicIpSecurity/denyByConcurrentRequests' -name 'maxConcurrentRequests'
+      $results.Add(@{SiteName=$_.Name;Property='denyByConcurrentRequests';Enabled=$cfgDenyByConcurrentRequestsEnabled.Value;MaxConcurrentRequests=$cfgDenyByConcurrentRequestsMaxConcurrentRequests.Value})
+   } | Out-Null
+   return $results     
+}
+
+#############
+# SECTION 5 #
+#############
+
+# Internal function for the validation point 5.1
+# CIS title "Ensure Default IIS web log location is moved"
+function Export-DataPoint51{
+}
+
+##########################
+## MAIN FUNCTIONS BLOCK ##
+##########################
+Export-DataPoint411 | ConvertTo-Json 
