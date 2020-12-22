@@ -147,7 +147,25 @@ function Export-DataPoint25{
    return $results
 }
 
+# Internal function for the validation point 2.6
+# CIS title "Ensure transport layer security for 'basic authentication' is configured"
+function Export-DataPoint26{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfg = Get-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST' -location $_.Name -filter 'system.webServer/security/access' -name 'sslFlags'
+      $sslEnabled = ($cfg.ToString() -eq 'Ssl')
+      $results.Add(@{SiteName=$_.Name;Property='sslFlags';Value=$sslEnabled})
+   } | Out-Null
+   return $results
+}
+
+# Internal function for the validation point 2.7
+# CIS title "Ensure 'passwordFormat' is not set to clear"
+function Export-DataPoint27{
+}
+
 #############################
 ## MAIN FUNCTIONS BLOCK   ##
 #############################
-Export-DataPoint25 | ConvertTo-Json 
+Export-DataPoint26 | ConvertTo-Json 
