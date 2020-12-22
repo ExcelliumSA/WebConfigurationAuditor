@@ -22,16 +22,20 @@
 ## INTERNAL FUNCTIONS BLOCK ##
 ##############################
 # CIS document source: CIS_Microsoft_IIS_10_Benchmark_v1.1.1.pdf
-# Every time it was possible PowerShell command was used otherwise the shell command was used
-# for portability between IIS8 and IIS10
-# Script was developed on WIN12 with IIS8
+# Every time it was possible PowerShell command was used otherwise the shell command was used for portability between IIS8 and IIS10.
+# Script was developed on WIN2012 with IIS8.5 .
+# When a custom lopp is used on a result object, it's because the "ConvertTo-Json" applied on the result object do not return the expected data.
+
+#############
+# SECTION 1 #
+#############
 
 # Internal function for the validation point 1.1
 # CIS title "Ensure web content is on non-system partition"
 function Export-DataPoint11{
    # See https://www.jonathanmedd.net/2014/01/adding-and-removing-items-from-a-powershell-array.html
 	[System.Collections.ArrayList]$results = @()
-	Get-Website | ForEach-Object -Process { $results.Add(@{Name=$_.name; PhysicalPath=$_.physicalPath})} | Out-Null
+	Get-Website | ForEach-Object -Process {$results.Add(@{Name=$_.name; PhysicalPath=$_.physicalPath})} | Out-Null
 	return $results 
 }
 
@@ -39,33 +43,111 @@ function Export-DataPoint11{
 # CIS title "Ensure 'host headers' are on all sites"
 function Export-DataPoint12{
 	[System.Collections.ArrayList]$results = @()
-   Get-WebBinding -Port * | ForEach-Object -Process { $results.Add(@{Protocol=$_.protocol; BindingInformation=$_.bindingInformation; SSLFlags=$_.sslFlags})} | Out-Null
+   Get-WebBinding -Port * | ForEach-Object -Process {$results.Add(@{Protocol=$_.protocol; BindingInformation=$_.bindingInformation; SSLFlags=$_.sslFlags})} | Out-Null
    return $results 
 }
 
 # Internal function for the validation point 1.3
 # CIS title "Ensure 'directory browsing' is set to disabled"
 function Export-DataPoint13{
-   # Use the shell command here for portability between IIS8 and IIS10 (script was developed on WIN12 with IIS8)
-   $results=c:\windows\system32\inetsrv\appcmd list config /section:directoryBrowse 
+   # Use the shell command here for portability between IIS8.5 and IIS10
+   $results = c:\windows\system32\inetsrv\appcmd list config /section:directoryBrowse 
    return $results
 }
 
 # Internal function for the validation point 1.4
 # CIS title "Ensure 'application pool identity' is configured for all application pools"
 function Export-DataPoint14{
-   $results = Get-ChildItem -Path IIS:\AppPools\ | Select-Object name, state, <#@{e={$_.processModel.password};l="password"}, #> @{e={$_.processModel.identityType};l="identityType"}
+   $results = c:\windows\system32\inetsrv\appcmd list config /section:applicationPools
    return $results
 }
 
 # Internal function for the validation point 1.5
 # CIS title "Ensure 'unique application pools' is set for sites"
 function Export-DataPoint15{
-   $results = null #TODO
+   $results = Get-Website | Select-Object Name, applicationPool
+   return $results
+}
+
+# Internal function for the validation point 1.6
+# CIS title "Ensure 'application pool identity' is configured for anonymous user identity"
+function Export-DataPoint16{
+   [System.Collections.ArrayList]$results = @()
+   Get-WebConfiguration system.webServer/security/authentication/anonymousAuthentication -Recurse | where {$_.enabled -eq $true} | ForEach-Object -Process {$results.Add(@{SectionPath=$_.SectionPath;PSPath=$_.PSPath;Location=$_.Location})} | Out-Null
+   return $results
+}
+
+# Internal function for the validation point 1.7
+# CIS title "Ensure WebDav feature is disabled"
+function Export-DataPoint17{
+   # Install state flag values:
+   # 0 = Available
+   # 1 = Installed
+   [System.Collections.ArrayList]$results = @()
+   Get-WindowsFeature Web-DAV-Publishing | ForEach-Object -Process {$results.Add(@{Name=$_.Name;InstallState=$_.InstallState})} | Out-Null
+   return $results
+}
+
+#############
+# SECTION 2 #
+#############
+
+# Internal function for the validation point 2.1
+# CIS title "Ensure 'global authorization rule' is set to restrict access"
+function Export-DataPoint21{
+   [System.Collections.ArrayList]$results = @()
+   Get-WebConfiguration -pspath 'IIS:\' -filter 'system.webServer/security/authorization' | ForEach-Object -Process {$results.Add(@{SectionPath=$_.SectionPath;PSPath=$_.PSPath;Location=$_.Location})} | Out-Null
+   return $results
+}
+
+# Internal function for the validation point 2.2
+# CIS title "Ensure access to sensitive site features is restricted to authenticated principals only"
+function Export-DataPoint22{
+   [System.Collections.ArrayList]$results = @()
+   Get-WebConfiguration system.webServer/security/authentication/* -Recurse | Where-Object {$_.enabled -eq $true} | ForEach-Object -Process {$results.Add(@{SectionPath=$_.SectionPath;PSPath=$_.PSPath;Location=$_.Location})} | Out-Null
+   return $results
+}
+
+# Internal function for the validation point 2.3
+# CIS title "Ensure 'forms authentication' require SSL"
+function Export-DataPoint23{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/authentication/forms' -name 'requireSSL'
+      $results.Add(@{SiteName=$_.Name;Property=$cfg.Name;Value=$cfg.Value})
+   } | Out-Null
+   return $results
+}
+
+# Internal function for the validation point 2.4
+# CIS title "Ensure 'forms authentication' is set to use cookies"
+function Export-DataPoint24{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/authentication/forms' -name 'cookieless'
+      $results.Add(@{SiteName=$_.Name;Property='cookieless';Value=$cfg.ToString()})
+   } | Out-Null
+   return $results
+}
+
+# Internal function for the validation point 2.5
+# CIS title "Ensure 'cookie protection mode' is configured for forms authentication"
+function Export-DataPoint25{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/authentication/forms' -name 'protection'
+      $results.Add(@{SiteName=$_.Name;Property='protection';Value=$cfg.ToString()})
+   } | Out-Null
    return $results
 }
 
 #############################
 ## MAIN FUNCTIONS BLOCK   ##
 #############################
-Export-DataPoint14 | ConvertTo-Json
+Export-DataPoint25 | ConvertTo-Json 
