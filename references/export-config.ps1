@@ -163,9 +163,153 @@ function Export-DataPoint26{
 # Internal function for the validation point 2.7
 # CIS title "Ensure 'passwordFormat' is not set to clear"
 function Export-DataPoint27{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/authentication/forms/credentials' -name 'passwordFormat'
+      $results.Add(@{SiteName=$_.Name;Property='passwordFormat';Value=$cfg.ToString()})
+   } | Out-Null
+   return $results
+}
+
+# Internal function for the validation point 2.8
+# CIS title "Ensure 'credentials' are not stored in configuration files"
+function Export-DataPoint28{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/authentication/forms/credentials' -name 'passwordFormat'
+      $results.Add(@{SiteName=$_.Name;Property='passwordFormat';Value=$cfg.ToString()})
+   } | Out-Null
+   return $results
+}
+
+#############
+# SECTION 3 #
+#############
+
+# Internal function for the validation point 3.1
+# CIS title "Ensure 'deployment method retail' is set"
+function Export-DataPoint31{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/deployment' -name 'retail'
+      $results.Add(@{SiteName=$_.Name;Property='retail';Value=$cfg.Value})
+   } | Out-Null
+   return $results 
+}
+
+# Internal function for the validation point 3.2
+# CIS title "Ensure 'debug' is turned off"
+function Export-DataPoint32{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/compilation' -name 'debug'
+      $results.Add(@{SiteName=$_.Name;Property='debug';Value=$cfg.Value})
+   } | Out-Null
+   return $results 
+}
+
+# Internal function for the validation point 3.3
+# CIS title "Ensure custom error messages are not off"
+function Export-DataPoint33{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/customErrors' -name 'mode'
+      $results.Add(@{SiteName=$_.Name;Property='mode';Value=$cfg.ToString()})
+   } | Out-Null
+   return $results 
+}
+
+# Internal function for the validation point 3.4
+# CIS title "Ensure IIS HTTP detailed errors are hidden from displaying remotely"
+function Export-DataPoint34{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/httpErrors' -name 'errorMode'
+      $results.Add(@{SiteName=$_.Name;Property='errorMode';Value=$cfg.ToString()})
+   } | Out-Null
+   return $results 
+}
+
+# Internal function for the validation point 3.5
+# CIS title "Ensure ASP.NET stack tracing is not enabled"
+function Export-DataPoint35{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/trace' -name 'enabled'
+      $results.Add(@{SiteName=$_.Name;Property='enabled';Value=$cfg.Value})
+   } | Out-Null
+   return $results 
+}
+
+# Internal function for the validation point 3.6
+# CIS title "Ensure 'httpcookie' mode is configured for session state"
+function Export-DataPoint36{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/sessionState' -name 'mode'
+      $results.Add(@{SiteName=$_.Name;Property='mode';Value=$cfg.ToString()})
+   } | Out-Null
+   return $results 
+}
+
+# Internal function for the validation point 3.7
+# CIS title "Ensure 'cookies' are set with HttpOnly attribute"
+function Export-DataPoint37{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/httpCookies' -name 'httpOnlyCookies'
+      $results.Add(@{SiteName=$_.Name;Property='httpOnlyCookies';Value=$cfg.Value})
+   } | Out-Null
+   return $results 
+}
+
+# Internal function for the validation points 3.8 and 3.9
+# CIS title "Ensure 'MachineKey validation method - .Net 3.5' is configured" (3.8)
+#           "Ensure 'MachineKey validation method - .Net 4.5' is configured" (3.9)
+function Export-DataPoint3839{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfgValidation = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/machineKey' -name 'validation'
+      $cfgDecryption = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/machineKey' -name 'decryption'
+      $results.Add(@{SiteName=$_.Name;ValidationAlgorithm=$cfgValidation.ToString();DecryptionAlgorithm=$cfgDecryption.Value})
+   } | Out-Null
+   return $results 
+}
+
+# Internal function for the validation point 3.10
+# CIS title "Ensure global .NET trust level is configured"
+function Export-DataPoint310{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/trust' -name 'level'
+      $results.Add(@{SiteName=$_.Name;Property='level';Value=$cfg.Value})
+   } | Out-Null
+   return $results    
 }
 
 #############################
 ## MAIN FUNCTIONS BLOCK   ##
 #############################
-Export-DataPoint26 | ConvertTo-Json 
+Export-DataPoint310 | ConvertTo-Json 
