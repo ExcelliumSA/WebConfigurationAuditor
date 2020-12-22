@@ -42,15 +42,13 @@ Add a new condition to this block of the [main](main.py#L36) for the new technol
 
 ### Tomcat
 
-TODO 
-
-- **Reference audit rules**: xxx.
-- **Triggering test config**: xxx.
-- **No triggering test config**: xxx.
+- **Reference audit rules**: Audit rules are defined in this [file](references/tomcat.json).
+- **Triggering test config**: Test configuration snippet that **trigger all the rules** are defined in this [file](tests/data/tomcat_test_config_all_issues.xml).
+- **No triggering test config**: Test configuration snippet that **trigger NO rules** are defined in this [file](tests/data/tomcat_test_config_no_issue.xml).
 
 ### IIS
 
-TODO 
+> :construction_worker: **To implements!**
 
 - **Reference audit rules**: xxx.
 - **Triggering test config**: xxx.
