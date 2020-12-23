@@ -4,11 +4,11 @@
 .DESCRIPTION
    Execute different processing in order to extract and gather all the information required to perform a secure configuration review.
 .EXAMPLE
-   .\export-config.ps1
+   .\export-iis-config.ps1
 .INPUTS
    No input needed.
 .OUTPUTS
-   Generate a JSON file with this name "[HOSTNAME_UPPERCASE]-IIS.json".
+   Generate a JSON file with this name "[HOSTNAME]-IIS.json".
 .NOTES
    In order to increase the maintainability of the script, each extract is associated to a validation point of the CIS referential and 
    each validation point of the CIS referential is associated to a internal function dedicated to extract the data needed for this point.
@@ -26,6 +26,21 @@
 # Script was developed on WIN2012 with IIS8.5 .
 # When a custom lopp is used on a result object, it's because the "ConvertTo-Json" applied on the result object do not return the expected data.
 # All internal functions are independant and it is wanted (it explains why code is duplicated) in order to allow to add special processing for a point in case of need.
+
+###########
+# CONTEXT #
+###########
+
+# Internal function to extract some context data
+# No required by the CIS
+function Export-DataContext{
+   [System.Collections.ArrayList]$results = @()
+   $iisVersion = Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\InetStp\' | select setupstring
+   $psVersion = Get-Host | Select-Object Version
+   $dotNetVersion = [System.Runtime.InteropServices.RuntimeEnvironment]::GetSystemVersion()
+   $results.Add(@{IISVersion=$iisVersion;PowerShellVersion=$psVersion;DotNetCurrentVersion=$dotNetVersion}) | Out-Null
+   return $results
+}
 
 #############
 # SECTION 1 #
@@ -617,16 +632,16 @@ function Export-DataPoint71{
 #           "Ensure TLS 1.2 is Enabled"  (7.6)
 function Export-DataPoint7273747576{
    [System.Collections.ArrayList]$results = @()
-   $registryKeys = @('HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0','HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0', 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0','HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1','HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2')
+   $registryKey = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols'
+   $protocols = @('SSL 2.0','SSL 3.0','TLS 1.0','TLS 1.1','TLS 1.2')
    $sides = @('Server','Client')
    $properties = @('Enabled','DisabledByDefault')
-   foreach ($registryKey in $registryKeys) {
+   foreach ($protocol in $protocols) {
       foreach ($side in  $sides) {
-         $key = "$registryKey\$side"
-         $protocol = $registryKey.split('\')[-1]
+         $key = "$registryKey\$protocol\$side"
          foreach ($property in  $properties) {
             $value = Get-ItemProperty -path $key -name $property -ErrorAction silentlycontinue | Select-Object -ExpandProperty $property
-            if ($value){
+            if ($value -ge 0){
                $results.Add(@{Protocol=$protocol;Property=$property;RegistryKey=$key;Status='Present';Value=$value}) | Out-Null
             }else{
                $results.Add(@{Protocol=$protocol;Property=$property;RegistryKey=$key;Status='Missing';Value='NA'}) | Out-Null
@@ -637,19 +652,21 @@ function Export-DataPoint7273747576{
    return $results
 }
 
-# Internal function for the validation points 7.7 and 7.8 and 7.9
-# CIS title "Ensure NULL Cipher Suites is Disabled" (7.7)
-#           "Ensure DES Cipher Suites is Disabled"  (7.8)
-#           "Ensure RC4 Cipher Suites is Disabled"  (7.9)
-function Export-DataPoint777879{
+# Internal function for the validation points 7.7 and 7.8 and 7.9 and 7.10 and 7.11
+# CIS title "Ensure NULL Cipher Suites is Disabled"        (7.7)
+#           "Ensure DES Cipher Suites is Disabled"         (7.8)
+#           "Ensure RC4 Cipher Suites is Disabled"         (7.9)
+#           "Ensure AES 128/128 Cipher Suite is Disabled"  (7.10)
+#           "Ensure AES 256/256 Cipher Suite is Enabled"   (7.11)
+function Export-DataPoint777879710711{
    [System.Collections.ArrayList]$results = @()
-   $registryKey = 'HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers'
-   $ciphers = @('NULL', 'DES 56/56','RC4 40/128','RC4 56/128','RC4 64/128','RC4 128/128')
+   $registryKey = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers'
+   $ciphers = @('NULL', 'DES 56/56','RC4 40/128','RC4 56/128','RC4 64/128','RC4 128/128','AES 128/128','AES 256/256')
    $property = 'Enabled'
    foreach ($cipher in $ciphers) {
       $key = "$registryKey\$cipher" 
       $value = Get-ItemProperty -path $key -name $property -ErrorAction silentlycontinue | Select-Object -ExpandProperty $property
-      if ($value){
+      if ($value -ge 0){
          $results.Add(@{Cipher=$cipher;Property=$property;RegistryKey=$key;Status='Present';Value=$value}) | Out-Null
       }else{
          $results.Add(@{Cipher=$cipher;Property=$property;RegistryKey=$key;Status='Missing';Value='NA'}) | Out-Null
@@ -658,7 +675,38 @@ function Export-DataPoint777879{
    return $results  
 }
 
+# Internal function for the validation point 7.12
+# CIS title "Ensure NULL Cipher Suites is Disabled" (7.12)
+function Export-DataPoint712{
+   $registryKey = 'HKLM:\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002'
+   $property = 'Functions'
+   $value = Get-ItemProperty -path $registryKey -name $property -ErrorAction silentlycontinue | Select-Object -ExpandProperty $property
+   if ($value -ge 0){
+      $result = @{Property=$property;RegistryKey=$registryKey;Status='Present';Value=$value}
+   }else{
+      $result = @{Property=$property;RegistryKey=$registryKey;Status='Missing';Value='NA'}
+   }
+   return $result  
+}
+
 ##########################
 ## MAIN FUNCTIONS BLOCK ##
 ##########################
-Export-DataPoint777879 | ConvertTo-Json -Depth 100
+# Define the list extraction functions to call
+$internalFunctions = @('Export-DataContext','Export-DataPoint11','Export-DataPoint12','Export-DataPoint13','Export-DataPoint14','Export-DataPoint15','Export-DataPoint16','Export-DataPoint17','Export-DataPoint21','Export-DataPoint22','Export-DataPoint23','Export-DataPoint24','Export-DataPoint25','Export-DataPoint26','Export-DataPoint27','Export-DataPoint28','Export-DataPoint31','Export-DataPoint32','Export-DataPoint33','Export-DataPoint34','Export-DataPoint35','Export-DataPoint36','Export-DataPoint37','Export-DataPoint3839','Export-DataPoint310','Export-DataPoint311','Export-DataPoint312','Export-DataPoint41','Export-DataPoint42','Export-DataPoint43','Export-DataPoint44','Export-DataPoint45','Export-DataPoint46','Export-DataPoint47','Export-DataPoint48','Export-DataPoint49','Export-DataPoint410','Export-DataPoint411','Export-DataPoint51','Export-DataPoint52','Export-DataPoint53','Export-DataPoint61','Export-DataPoint62','Export-DataPoint71','Export-DataPoint7273747576','Export-DataPoint777879710711','Export-DataPoint712')
+# Gathering information
+$results = @{}
+$internalFunctionsCount = $internalFunctions.Count
+$i = 0;
+foreach ($internalFunction in $internalFunctions) {
+   $progress = ($i / $internalFunctionsCount) * 100 -as [int]
+   Write-Host -NoNewline "`r[+] Gathering information: $progress%"
+   $results[$internalFunction] = Invoke-Expression $internalFunction
+   $i++;
+}
+Write-Host "`r[+] Gathering information: Finished!"
+# Generate and save the JSON file
+Write-Host '[+] Generate and save the JSON file...'
+$filename = "$env:computername-IIS.json"
+ConvertTo-Json $results -Depth 100 -Compress | Out-File -FilePath .\$filename -Encoding utf8 
+Write-Host "[+] Content saved to file $filename."
