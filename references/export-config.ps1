@@ -592,9 +592,73 @@ function Export-DataPoint62{
 # Internal function for the validation point 7.1
 # CIS title "Ensure HSTS Header is set"
 function Export-DataPoint71{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfgFile = Get-WebConfigFile $cfgPath
+      $xml = New-Object Xml 
+      $xml.Load($cfgFile)
+      $node = $xml.SelectSingleNode('/configuration/system.webServer/httpProtocol/customHeaders/add[@name="Strict-Transport-Security"]/@value')
+      if($node.Value){
+         $results.Add(@{SiteName=$_.Name;Property='Strict-Transport-Security';Status='Present';Value=$node.Value})
+      }else{
+         $results.Add(@{SiteName=$_.Name;Property='Strict-Transport-Security';Status='Missing';Value='NA'})
+      }     
+   } | Out-Null
+   return $results     
+}
+
+# Internal function for the validation points 7.2 and 7.3 and 7.4 and 7.5 and 7.6
+# CIS title "Ensure SSLv2 is Disabled"   (7.2)
+#           "Ensure SSLv3 is Disabled"   (7.3)
+#           "Ensure TLS 1.0 is Disabled" (7.4)
+#           "Ensure TLS 1.1 is Disabled" (7.5)
+#           "Ensure TLS 1.2 is Enabled"  (7.6)
+function Export-DataPoint7273747576{
+   [System.Collections.ArrayList]$results = @()
+   $registryKeys = @('HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0','HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0', 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0','HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1','HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2')
+   $sides = @('Server','Client')
+   $properties = @('Enabled','DisabledByDefault')
+   foreach ($registryKey in $registryKeys) {
+      foreach ($side in  $sides) {
+         $key = "$registryKey\$side"
+         $protocol = $registryKey.split('\')[-1]
+         foreach ($property in  $properties) {
+            $value = Get-ItemProperty -path $key -name $property -ErrorAction silentlycontinue | Select-Object -ExpandProperty $property
+            if ($value){
+               $results.Add(@{Protocol=$protocol;Property=$property;RegistryKey=$key;Status='Present';Value=$value}) | Out-Null
+            }else{
+               $results.Add(@{Protocol=$protocol;Property=$property;RegistryKey=$key;Status='Missing';Value='NA'}) | Out-Null
+            }
+         }
+      }
+   }
+   return $results
+}
+
+# Internal function for the validation points 7.7 and 7.8 and 7.9
+# CIS title "Ensure NULL Cipher Suites is Disabled" (7.7)
+#           "Ensure DES Cipher Suites is Disabled"  (7.8)
+#           "Ensure RC4 Cipher Suites is Disabled"  (7.9)
+function Export-DataPoint777879{
+   [System.Collections.ArrayList]$results = @()
+   $registryKey = 'HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers'
+   $ciphers = @('NULL', 'DES 56/56','RC4 40/128','RC4 56/128','RC4 64/128','RC4 128/128')
+   $property = 'Enabled'
+   foreach ($cipher in $ciphers) {
+      $key = "$registryKey\$cipher" 
+      $value = Get-ItemProperty -path $key -name $property -ErrorAction silentlycontinue | Select-Object -ExpandProperty $property
+      if ($value){
+         $results.Add(@{Cipher=$cipher;Property=$property;RegistryKey=$key;Status='Present';Value=$value}) | Out-Null
+      }else{
+         $results.Add(@{Cipher=$cipher;Property=$property;RegistryKey=$key;Status='Missing';Value='NA'}) | Out-Null
+      } 
+   }
+   return $results  
 }
 
 ##########################
 ## MAIN FUNCTIONS BLOCK ##
 ##########################
-Export-DataPoint71 | ConvertTo-Json 
+Export-DataPoint777879 | ConvertTo-Json -Depth 100
