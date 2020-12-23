@@ -560,9 +560,41 @@ function Export-DataPoint53{
 # Internal function for the validation point 6.1
 # CIS title "Ensure FTP requests are encrypted"
 function Export-DataPoint61{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfgChannel = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.applicationHost/sites/siteDefaults/ftpServer/security/ssl' -name 'controlChannelPolicy'
+      $cfgData = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.applicationHost/sites/siteDefaults/ftpServer/security/ssl' -name 'dataChannelPolicy'
+      $properties = @{SiteName=$_.Name;ControlChannelPolicy=$cfgChannel.ToString();DataChannelPolicy=$cfgData.ToString()}
+      $results.Add($properties)
+   } | Out-Null
+   return $results    
+}
+
+# Internal function for the validation point 6.2
+# CIS title "Ensure FTP Logon attempt restrictions is enabled"
+function Export-DataPoint62{
+   # Apply the command for all defined sites
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | ForEach-Object -Process {
+      $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.ftpServer/security/authentication/denyByFailure' -name 'enabled'
+      $results.Add(@{SiteName=$_.Name;Property="denyByFailure";Enabled=$cfg.Value})
+   } | Out-Null
+   return $results     
+}
+
+#############
+# SECTION 7 #
+#############
+
+# Internal function for the validation point 7.1
+# CIS title "Ensure HSTS Header is set"
+function Export-DataPoint71{
 }
 
 ##########################
 ## MAIN FUNCTIONS BLOCK ##
 ##########################
-Export-DataPoint61 | ConvertTo-Json 
+Export-DataPoint71 | ConvertTo-Json 
