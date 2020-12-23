@@ -1,6 +1,7 @@
 - [Add support for a new app server](#Add-support-for-a-new-app-server)
 - [Add a new audit rule](#add-a-new-audit-rule)
 - [Add a new report template](#add-a-new-report-template)
+- [Extract input data for IIS](#extract-input-data-for-iis)
 
 # Add support for a new app server
 
@@ -108,15 +109,25 @@ Add a new text file in the folder [templates](templates) with this naming conven
 
 Syntax expected for the `identifier` is `[a-z0-9_]{1,20}`.
 
+# Extract input data for IIS
 
+> :white_check_mark: No sensitive data is extracted and only read operations are performed.
 
+> :warning: **It is important that the client ensure that the JSON file do not contains any sensitive data prior to send the file to XLM!**
 
+A dedicated PowerShell script was created in order to allow a client to extract the data without the help of XLM.
 
+The script is [here](references/export-iis-config.ps1) and generate a JSON file.
 
+The following paragraph describe how to use it from a PowerShell shell window.
 
+```powershell
+PS> .\export-iis-config.ps1
+[+] Gathering information: Finished!
+[+] Generate and save the JSON file...
+[+] Content saved to file LABWIN2012-IIS.json.
+[+] File SHA256 hash:
+4BA576210A4557F3F2F056EAF484E25C10B1FDAFFB6DAE14CA260810B75412F0
+```
 
-
-
-
-
-
+Once the JSON is generated, it must be provided to XLM (with its hash) and will be used as input source for the review tool.

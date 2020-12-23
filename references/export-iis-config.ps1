@@ -38,7 +38,8 @@ function Export-DataContext{
    $iisVersion = Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\InetStp\' | select setupstring
    $psVersion = Get-Host | Select-Object Version
    $dotNetVersion = [System.Runtime.InteropServices.RuntimeEnvironment]::GetSystemVersion()
-   $results.Add(@{IISVersion=$iisVersion;PowerShellVersion=$psVersion;DotNetCurrentVersion=$dotNetVersion}) | Out-Null
+   $datetime = Get-Date -Format "dd/MM/yyyy HH:mm K"
+   $results.Add(@{IISVersion=$iisVersion;PowerShellVersion=$psVersion;DotNetCurrentVersion=$dotNetVersion;ExtractionLocalDateTime=$datetime}) | Out-Null
    return $results
 }
 
@@ -710,3 +711,5 @@ Write-Host '[+] Generate and save the JSON file...'
 $filename = "$env:computername-IIS.json"
 ConvertTo-Json $results -Depth 100 -Compress | Out-File -FilePath .\$filename -Encoding utf8 
 Write-Host "[+] Content saved to file $filename."
+$hash = Get-FileHash -Algorithm SHA256 .\$filename | Select-Object -ExpandProperty Hash
+Write-Host "[+] File SHA256 hash:`n$hash"
