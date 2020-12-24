@@ -140,3 +140,13 @@ The IIS roles 'Web-Server' and 'Web-WebServer' are not installed, extraction can
 ```
 
 Once the JSON is generated, it must be provided to XLM (with its hash) and will be used as input source for the review tool.
+
+:pushpin: **Compatibility matrix**
+
+|    Windows   |  IIS |      Testing      |
+|:------------:|:----:|:-----------------:|
+| Windows 2012 | 8.5  | Manual            |
+| Windows 2016 | 10.0 | Continuous via GH |
+| Windows 2019 | 10.0 | Continuous via GH |
+
+Regarding *Continuous via GH*, see [here](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions?query=workflow%3Atest_iis_config_extraction).
