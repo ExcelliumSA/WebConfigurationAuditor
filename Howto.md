@@ -123,11 +123,20 @@ The following paragraph describe how to use it from a PowerShell shell window.
 
 ```powershell
 PS> .\export-iis-config.ps1
-[+] Gathering information: Finished!
+[+] Verify the installed roles...
+[+] Gathering information: Finished with 0 error(s).
 [+] Generate and save the JSON file...
-[+] Content saved to file LABWIN2012-IIS.json.
+[+] Content saved to file LABWIN2019-IIS.json.
 [+] File SHA256 hash:
-4BA576210A4557F3F2F056EAF484E25C10B1FDAFFB6DAE14CA260810B75412F0
+A2DF20F445F68183CA029940A2D3DFB1FE89EDDAE5B2DCF991315865306D6153
+```
+
+:warning: If IIS is not installed on the machine then the following message is displayed:
+
+```powershell
+PS> .\export-iis-config.ps1
+[+] Verify the installed roles...
+The IIS roles 'Web-Server' and 'Web-WebServer' are not installed, extraction cancelled!
 ```
 
 Once the JSON is generated, it must be provided to XLM (with its hash) and will be used as input source for the review tool.
