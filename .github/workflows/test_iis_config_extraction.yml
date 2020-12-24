@@ -7,11 +7,14 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-2016, windows-latest ]
     steps:
-      - name: Checkout
+      - name: Checkout on ${{ matrix.os }}
         uses: actions/checkout@v2
-      - name: Execute the tests suite
+      - name: Execute the tests suite on ${{ matrix.os }}
         run: .\test_iis_config_extraction.ps1
         shell: powershell
 
