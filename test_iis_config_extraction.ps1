@@ -11,8 +11,8 @@ $outFile = ".\out.txt"
 Get-WindowsFeature | Where-Object {($_.name -eq "Web-Server") -or ($_.name -eq "Web-WebServer")}
 # CASE 1
 # IIS roles are installed
-& $iisScript
-$count = (Get-Content $filename | Select-String -Pattern '"InternalFunctionsInError": []').length
+& $iisScript | Out-File -FilePath $outFile
+$count = (Get-Content $outFile | Select-String -Pattern 'Finished with 0 error').length
 Write-Host "Found: $count"
 if ($count -ne 1){
     Write-Host "Some internal functions meet an errors!"
