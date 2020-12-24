@@ -143,10 +143,16 @@ Once the JSON is generated, it must be provided to XLM (with its hash) and will 
 
 :pushpin: **Compatibility matrix**
 
-|    Windows   |  IIS |      Testing      |
-|:------------:|:----:|:-----------------:|
-| Windows 2012 | 8.5  | Manual            |
-| Windows 2016 | 10.0 | Continuous via GH |
-| Windows 2019 | 10.0 | Continuous via GH |
+> Table generated using this [site](https://www.tablesgenerator.com/markdown_tables).
+
+|    Windows   |  IIS |      Testing      |       Supported         |
+|:------------:|:----:|:-----------------:|:-----------------------:|
+| Windows 2003 | 6.0  | Not tested        | :x:                     |
+| Windows 2008 | 7.0  | Not tested        | :x:                     |
+| Windows 2008 | 7.5  | Not tested        | :x:                     |
+| Windows 2012 | 8.0  | Not tested        | :x:                     |
+| Windows 2012 | 8.5  | Manually          | :heavy_check_mark:      |
+| Windows 2016 | 10.0 | Continuous via GH | :heavy_check_mark:      |
+| Windows 2019 | 10.0 | Continuous via GH | :heavy_check_mark:      |
 
 Regarding *Continuous via GH*, see [here](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions?query=workflow%3Atest_iis_config_extraction).
