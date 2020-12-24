@@ -5,6 +5,7 @@ $iisScript = ".\references\export-iis-config.ps1"
 $filename = "$env:computername-IIS.json"
 ## CASE 1
 ## IIS roles are not installed
+Uninstall-WindowsFeature -name Web-Server -IncludeManagementTools
 & $iisScript
 if ($LASTEXITCODE -ne 1000){
     Write-Host "Return code 1000 was expected but $LASTEXITCODE was obtained!"
