@@ -11,7 +11,6 @@ $outFile = ".\out.txt"
 Get-WindowsFeature | Where-Object {($_.name -eq "Web-Server") -or ($_.name -eq "Web-WebServer")}
 # CASE 1
 # IIS roles are installed
-Install-WindowsFeature -name Web-Server -IncludeManagementTools
 & $iisScript
 $count = (Get-Content $filename | Select-String -Pattern '"InternalFunctionsInError": []').length
 Write-Host "Found: $count"
