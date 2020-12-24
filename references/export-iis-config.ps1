@@ -699,7 +699,7 @@ Write-Host "[+] Verify the installed roles..."
 $rolesCount=$(Get-WindowsFeature | Where-Object {($_. installstate -eq "Installed") -and (($_.name -eq "Web-Server") -or ($_.name -eq "Web-WebServer"))}).count
 if($rolesCount -ne 2){
    Write-Host "The IIS roles 'Web-Server' and 'Web-WebServer' are not installed, extraction cancelled!"
-   Exit 1
+   Exit 1000
 }
 # Define the list extraction functions to call
 $internalFunctions = @('Export-DataContext','Export-DataPoint11','Export-DataPoint12','Export-DataPoint13','Export-DataPoint14','Export-DataPoint15','Export-DataPoint16','Export-DataPoint17','Export-DataPoint21','Export-DataPoint22','Export-DataPoint23','Export-DataPoint24','Export-DataPoint25','Export-DataPoint26','Export-DataPoint27','Export-DataPoint28','Export-DataPoint31','Export-DataPoint32','Export-DataPoint33','Export-DataPoint34','Export-DataPoint35','Export-DataPoint36','Export-DataPoint37','Export-DataPoint3839','Export-DataPoint310','Export-DataPoint311','Export-DataPoint312','Export-DataPoint41','Export-DataPoint42','Export-DataPoint43','Export-DataPoint44','Export-DataPoint45','Export-DataPoint46','Export-DataPoint47','Export-DataPoint48','Export-DataPoint49','Export-DataPoint410','Export-DataPoint411','Export-DataPoint51','Export-DataPoint52','Export-DataPoint53','Export-DataPoint61','Export-DataPoint62','Export-DataPoint71','Export-DataPoint7273747576','Export-DataPoint777879710711','Export-DataPoint712')
