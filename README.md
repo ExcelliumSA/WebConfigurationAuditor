@@ -6,7 +6,11 @@
 
 > via [GitHub Actions](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions) and [GitHub Dependabot](https://dependabot.com/)
 
-![code_static_analysis_and_os_compatibility_tests](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/workflows/code_static_analysis_and_os_compatibility_tests/badge.svg?branch=master)  [![dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
+![code_static_analysis_and_os_compatibility_tests](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/workflows/code_static_analysis_and_os_compatibility_tests/badge.svg?branch=master)
+
+![test_iis_config_extraction](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/workflows/test_iis_config_extraction/badge.svg?branch=master)
+
+[![dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 
 ## Objective, architecture and decision
 

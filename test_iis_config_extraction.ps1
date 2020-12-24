@@ -8,6 +8,8 @@ $iisScript = ".\references\export-iis-config.ps1"
 $filename = "$env:computername-IIS.json"
 # Display the web roles installation state
 Get-WindowsFeature | Where-Object {($_.name -eq "Web-Server") -or ($_.name -eq "Web-WebServer")}
+# Display IIS version
+Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\InetStp\' | select setupstring
 # CASE 1
 # IIS roles are installed
 & $iisScript

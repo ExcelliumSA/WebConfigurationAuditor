@@ -1,4 +1,5 @@
 name: test_iis_config_extraction
+# See https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners
 on:
   push:
     branches: [ master ]
