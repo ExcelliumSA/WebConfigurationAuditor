@@ -12,6 +12,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Execute the tests suite
-        uses: Amadevus/pwsh-script@v2.0.0
-        with:
-          script: .\test_iis_config_extraction.ps1
+        run: .\test_iis_config_extraction.ps1
+        shell: powershell
+
