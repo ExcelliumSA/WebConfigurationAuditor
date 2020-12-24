@@ -39,7 +39,8 @@ function Export-DataContext{
    $psVersion = Get-Host | Select-Object Version
    $dotNetVersion = [System.Runtime.InteropServices.RuntimeEnvironment]::GetSystemVersion()
    $datetime = Get-Date -Format "dd/MM/yyyy HH:mm K"
-   $results.Add(@{IISVersion=$iisVersion;PowerShellVersion=$psVersion;DotNetCurrentVersion=$dotNetVersion;ExtractionLocalDateTime=$datetime}) | Out-Null
+   $siteCount = $(Get-Website | measure).count
+   $results.Add(@{WebSiteCount=$siteCount;IISVersion=$iisVersion;PowerShellVersion=$psVersion;DotNetCurrentVersion=$dotNetVersion;ExtractionLocalDateTime=$datetime}) | Out-Null
    return $results
 }
 
@@ -545,7 +546,7 @@ function Export-DataPoint52{
       # Get sample lines of the mot recent log to really see the fields used, only extract lines starting with "#Fields:"
       [System.Collections.ArrayList]$lines = @()
       $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.applicationHost/sites/siteDefaults/logFile' -name 'directory'
-      Get-ChildItem -Path $cfg.Value -Include *.log -Recurse -File | sort LastWriteTime | select -last 1 | Get-Content | Select-String -Pattern '#Fields:' -AllMatches | ForEach-Object -Process {
+      Get-ChildItem -Path $cfg.Value -Include *.log -Recurse -File -ErrorAction silentlycontinue | sort LastWriteTime | select -last 1 | Get-Content | Select-String -Pattern '#Fields:' -AllMatches | ForEach-Object -Process {
          $lines.Add($_.Line)
       }
       $properties["LogFieldsSamples"] = $lines
@@ -696,16 +697,26 @@ function Export-DataPoint712{
 # Define the list extraction functions to call
 $internalFunctions = @('Export-DataContext','Export-DataPoint11','Export-DataPoint12','Export-DataPoint13','Export-DataPoint14','Export-DataPoint15','Export-DataPoint16','Export-DataPoint17','Export-DataPoint21','Export-DataPoint22','Export-DataPoint23','Export-DataPoint24','Export-DataPoint25','Export-DataPoint26','Export-DataPoint27','Export-DataPoint28','Export-DataPoint31','Export-DataPoint32','Export-DataPoint33','Export-DataPoint34','Export-DataPoint35','Export-DataPoint36','Export-DataPoint37','Export-DataPoint3839','Export-DataPoint310','Export-DataPoint311','Export-DataPoint312','Export-DataPoint41','Export-DataPoint42','Export-DataPoint43','Export-DataPoint44','Export-DataPoint45','Export-DataPoint46','Export-DataPoint47','Export-DataPoint48','Export-DataPoint49','Export-DataPoint410','Export-DataPoint411','Export-DataPoint51','Export-DataPoint52','Export-DataPoint53','Export-DataPoint61','Export-DataPoint62','Export-DataPoint71','Export-DataPoint7273747576','Export-DataPoint777879710711','Export-DataPoint712')
 # Gathering information
+[System.Collections.ArrayList]$internalFunctionsInError = @()
 $results = @{}
 $internalFunctionsCount = $internalFunctions.Count
-$i = 0;
+$i = 0
+$errorCount = 0
 foreach ($internalFunction in $internalFunctions) {
    $progress = ($i / $internalFunctionsCount) * 100 -as [int]
    Write-Host -NoNewline "`r[+] Gathering information: $progress%"
-   $results[$internalFunction] = Invoke-Expression $internalFunction
+   try{
+      $results[$internalFunction] = Invoke-Expression $internalFunction
+   }
+   catch{
+      $results[$internalFunction] = $_
+      $errorCount++
+      $internalFunctionsInError.Add($internalFunction)
+   }
    $i++;
 }
-Write-Host "`r[+] Gathering information: Finished!"
+$results["InternalFunctionsInError"] = $internalFunctionsInError
+Write-Host "`r[+] Gathering information: Finished with $errorCount error(s)."
 # Generate and save the JSON file
 Write-Host '[+] Generate and save the JSON file...'
 $filename = "$env:computername-IIS.json"
