@@ -7,6 +7,7 @@ $outFile = ".\out.txt"
 # Display the web roles installation state
 Get-WindowsFeature | Where-Object {($_.name -eq "Web-Server") -or ($_.name -eq "Web-WebServer")}
 # CASE 1
+Uninstall-WindowsFeature -name Web-Server -IncludeManagementTools
 # IIS roles are not installed
 & $iisScript | Out-File -FilePath $outFile
 $count = (Get-Content $outFile | Select-String -Pattern 'are not installed, extraction cancelled!').length
