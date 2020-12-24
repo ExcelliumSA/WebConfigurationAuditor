@@ -727,7 +727,7 @@ Write-Host "`r[+] Gathering information: Finished with $errorCount error(s)."
 # Generate and save the JSON file
 Write-Host '[+] Generate and save the JSON file...'
 $filename = "$env:computername-IIS.json"
-ConvertTo-Json $results -Depth 100 -Compress | Out-File -FilePath .\$filename -Encoding utf8 
+ConvertTo-Json $results -Depth 1000 -Compress | Out-File -FilePath .\$filename -Encoding utf8 
 Write-Host "[+] Content saved to file $filename."
 $hash = Get-FileHash -Algorithm SHA256 .\$filename | Select-Object -ExpandProperty Hash
 Write-Host "[+] File SHA256 hash:`n$hash"
