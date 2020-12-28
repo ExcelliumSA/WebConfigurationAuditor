@@ -84,9 +84,20 @@ function Export-DataPoint14{
 # Internal function for the validation point 1.5
 # CIS title "Ensure 'unique application pools' is set for sites"
 function Export-DataPoint15{
-   [System.Collections.ArrayList]$results = @()
-   Get-Website | Select-Object Name, applicationPool | ForEach-Object -Process {$results.Add(@{SiteName=$_.name; ApplicationPool=$_.applicationPool})} | Out-Null
-   return $results
+   $poolCounter = @{}
+   [System.Collections.ArrayList]$poolReused = @()
+   Get-Website | Select-Object applicationPool | ForEach-Object -Process {
+      if($poolCounter.ContainsKey($_.applicationPool)){
+         $poolCounter[$_.applicationPool] = $poolCounter[$_.applicationPool] + 1
+         if(-not $poolReused.Contains($_.applicationPool)){
+            $poolReused.Add($_.applicationPool)
+         } 
+      }else{
+         $poolCounter.Add($_.applicationPool, 1)
+      }
+   } | Out-Null
+   $poolCounter.Add("PoolReused", $poolReused)
+   return $poolCounter
 }
 
 # Internal function for the validation point 1.6
