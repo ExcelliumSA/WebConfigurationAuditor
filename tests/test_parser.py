@@ -1,5 +1,5 @@
 from common.server_type import ServerType
-from parsing.parser import multi_file_reader, parse_audit_rules, parse_config_data_apache, parse_config_data_tomcat
+from parsing.parser import multi_file_reader, parse_audit_rules, parse_config_data_apache, parse_config_data_tomcat, parse_config_data_iis
 import os
 
 
@@ -11,8 +11,12 @@ OVERRIDE_RULES_FILE = "tests/data/test_parser_override_rules.json"
 APACHE_TEST_CONFIG_FILE = "tests/data/apache_test_config_all_issues.conf"
 APACHE_TEST_CONFIG_REF = "tests/data/apache_test_config_no_comments.conf"
 TEST_DIR_PATH = "tests/"
+TOMCAT_RULE_FILE = "references/tomcat.json"
 TOMCAT_TEST_CONFIG_REF = "tests/data/tomcat_test_config_no_comment.xml"
 TOMCAT_TEST_COMMENTS = "tests/data/tomcat_test_config.xml"
+IIS_RULE_FILE = "references/iis.json"
+IIS_TEST_CONFIG_FILE = "tests/data/iis_test_config.json"
+IIS_TEST_CONFIG_REF = "tests/data/iis_test_ref_config.txt"
 
 
 def test_parse_audit_rules_simple():
@@ -89,13 +93,28 @@ def test_parse_config_apache():
 
 def test_parse_config_tomcat():
     """Test the parser of config to ensure that it returns the expected values in the most simple case."""
-    audit_rules = parse_audit_rules(APACHE_RULE_FILE)
+    audit_rules = parse_audit_rules(TOMCAT_RULE_FILE)
     config = parse_config_data_tomcat(TOMCAT_TEST_COMMENTS, audit_rules)
     with open(TOMCAT_TEST_CONFIG_REF, 'r') as ref_config_file:
         ref_config = ref_config_file.read()
     assert config.server_type == ServerType.TOMCAT, "The server type doesn't match."
     assert ''.join(''.join(config.config_content.split('\n')).split(' ')) == ''.join(''.join(ref_config.split('\n')).split(' ')), "The configuration file content doesn't match."
-    assert config.config_file_name == TOMCAT_TEST_COMMENTS, "The type of server doesn't match."
+    assert config.config_file_name == TOMCAT_TEST_COMMENTS, "The configuration file name doesn't match."
+    assert config.audit_rules is not None, "Config audit rules objects is None."
+
+
+def test_parse_config_iis():
+    """Test the parser of config to ensure that it returns the expected values."""
+    audit_rules = parse_audit_rules(IIS_RULE_FILE)
+    config = parse_config_data_iis(IIS_TEST_CONFIG_FILE, audit_rules)
+    with open(IIS_TEST_CONFIG_REF, "r") as f:
+        ref_config = f.read()
+    assert config is not None, "Config object is None."
+    assert config.audit_rules is not None, "Config audit rules objects is None."
+    assert config.config_content is not None and len(config.config_content.strip(" ")) > 0, "Config content is None or empty."
+    assert config.config_content == ref_config, "Config content parsed is not equals to the one expected!"
+    assert config.server_type == ServerType.IIS, "The server type doesn't match."
+    assert config.config_file_name == IIS_TEST_CONFIG_FILE, "The configuration file name doesn't match."
 
 
 def test_list_files():

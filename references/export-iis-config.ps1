@@ -40,7 +40,8 @@ function Export-DataContext{
    $dotNetVersion = [System.Runtime.InteropServices.RuntimeEnvironment]::GetSystemVersion()
    $datetime = Get-Date -Format "dd/MM/yyyy HH:mm K"
    $siteCount = $(Get-Website | measure).count
-   $results.Add(@{WebSiteCount=$siteCount;IISVersion=$iisVersion;PowerShellVersion=$psVersion;DotNetCurrentVersion=$dotNetVersion;ExtractionLocalDateTime=$datetime}) | Out-Null
+   $systemDriveEnvVar = $Env:SystemDrive
+   $results.Add(@{WebSiteCount=$siteCount;IISVersion=$iisVersion;PowerShellVersion=$psVersion;DotNetCurrentVersion=$dotNetVersion;ExtractionLocalDateTime=$datetime;SystemDrive=$systemDriveEnvVar}) | Out-Null
    return $results
 }
 
@@ -53,7 +54,7 @@ function Export-DataContext{
 function Export-DataPoint11{
    # See https://www.jonathanmedd.net/2014/01/adding-and-removing-items-from-a-powershell-array.html
 	[System.Collections.ArrayList]$results = @()
-	Get-Website | ForEach-Object -Process {$results.Add(@{Name=$_.name; PhysicalPath=$_.physicalPath})} | Out-Null
+	Get-Website | ForEach-Object -Process {$results.Add(@{SiteName=$_.name; PhysicalPath=$_.physicalPath})} | Out-Null
 	return $results 
 }
 
@@ -83,7 +84,8 @@ function Export-DataPoint14{
 # Internal function for the validation point 1.5
 # CIS title "Ensure 'unique application pools' is set for sites"
 function Export-DataPoint15{
-   $results = Get-Website | Select-Object Name, applicationPool
+   [System.Collections.ArrayList]$results = @()
+   Get-Website | Select-Object Name, applicationPool | ForEach-Object -Process {$results.Add(@{SiteName=$_.name; ApplicationPool=$_.applicationPool})} | Out-Null
    return $results
 }
 

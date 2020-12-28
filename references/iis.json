@@ -1,0 +1,17 @@
+[
+    {
+        "rule_id": "CIS-1.1",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "<(\\s*)Connector(\\s*).*?xpoweredBy(\\s*)=(\\s*)\"true\".*?>",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "<(\\s*)Connector(\\s*).*?server(\\s*)=(\\s*)\".*?(?!Apache).*?\".*?>",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    }
+]
