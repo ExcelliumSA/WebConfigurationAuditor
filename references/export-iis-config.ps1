@@ -104,7 +104,11 @@ function Export-DataPoint15{
 # CIS title "Ensure 'application pool identity' is configured for anonymous user identity"
 function Export-DataPoint16{
    [System.Collections.ArrayList]$results = @()
-   Get-WebConfiguration system.webServer/security/authentication/anonymousAuthentication -Recurse | where {$_.enabled -eq $true} | ForEach-Object -Process {$results.Add(@{SectionPath=$_.SectionPath;PSPath=$_.PSPath;Location=$_.Location})} | Out-Null
+   Get-Website | ForEach-Object -Process { 
+	   $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
+      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.webServer/security/authentication/anonymousAuthentication' -name 'userName'
+      $results.Add(@{SiteName=$_.Name;Property='userName';Value=$cfg.Value})
+   } | Out-Null
    return $results
 }
 
