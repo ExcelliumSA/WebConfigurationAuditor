@@ -107,6 +107,8 @@ def test_parse_config_iis():
     """Test the parser of config to ensure that it returns the expected values."""
     audit_rules = parse_audit_rules(IIS_RULE_FILE)
     config = parse_config_data_iis(IIS_TEST_CONFIG_FILE, audit_rules)
+    # with open("TEST.TXT", "w") as f:
+    #     f.write(config.config_content)
     with open(IIS_TEST_CONFIG_REF, "r") as f:
         ref_config = f.read()
     assert config is not None, "Config object is None."

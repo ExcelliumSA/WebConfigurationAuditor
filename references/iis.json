@@ -4,14 +4,79 @@
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
-                "expression": "<(\\s*)Connector(\\s*).*?xpoweredBy(\\s*)=(\\s*)\"true\".*?>",
+                "expression": "Export-DataPoint11=.*('PhysicalPath':'C:).*",
                 "presence_needed": "False"
-            },
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-1.2",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
             {
-                "expression": "<(\\s*)Connector(\\s*).*?server(\\s*)=(\\s*)\".*?(?!Apache).*?\".*?>",
+                "expression": "Export-DataPoint12=.*('SSLFlags':0,'BindingInformation':'.*:\\d+:').*",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-1.3",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint13=.*(directoryBrowse\\senabled=.?true.?).*",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-1.4",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint14=.*(processModel\\sidentityType=.?ApplicationPoolIdentity.?).*",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-1.5",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint15=.*('PoolReused':\\[[\\w',\\-]+\\]).*",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-1.6",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint16=.*('Property':'userName','Value':'IUSR').*",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },            
+    {
+        "rule_id": "CIS-1.7",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "",
                 "presence_needed": "True"
             }
         ],
         "override_rules": []
     }
+
+
+
 ]
