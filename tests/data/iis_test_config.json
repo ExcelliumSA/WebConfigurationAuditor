@@ -101,11 +101,11 @@
     "Export-DataPoint51": [{
             "SiteName": "Default Web Site",
             "Property": "directory",
-            "Value": "C:\\inetpub\\logs\\LogFiles"
+            "Value": "%SystemDrive%\\inetpub\\logs\\LogFiles"
         }, {
             "SiteName": "Site2",
             "Property": "directory",
-            "Value": "C:\\inetpub\\logs\\LogFiles"
+            "Value": "%SystemDrive%\\inetpub\\logs\\LogFiles"
         }
     ],
     "Export-DataPoint712": {
@@ -116,12 +116,12 @@
     },
     "Export-DataPoint28": [{
             "SiteName": "Default Web Site",
-            "Property": "passwordFormat",
-            "Value": "SHA1"
+            "Property": "userInConfigCount",
+            "Value": 2
         }, {
             "SiteName": "Site2",
-            "Property": "passwordFormat",
-            "Value": "SHA1"
+            "Property": "userInConfigCount",
+            "Value": 0
         }
     ],
     "Export-DataPoint310": [{
@@ -136,7 +136,7 @@
     ],
     "Export-DataContext": {
         "SystemDrive": "C:",
-        "ExtractionLocalDateTime": "29/12/2020 08:37 +01:00",
+        "ExtractionLocalDateTime": "29/12/2020 10:36 +01:00",
         "WebSiteCount": 2,
         "SystemRoot": "C:\\Windows",
         "DotNetCurrentVersion": "v4.0.30319",
@@ -199,7 +199,7 @@
             "Target": "File,ETW",
             "Enabled": true,
             "Property": "Log",
-            "LogFieldsSamples": ["#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken"],
+            "LogFieldsSamples": [],
             "Format": "W3C",
             "TruncateSize": 20971520,
             "Fields": "Date,Time,ClientIP,UserName,SiteName,ComputerName,ServerIP,Method,UriStem,UriQuery,HttpStatus,Win32Status,BytesSent,BytesRecv,TimeTaken,ServerPort,UserAgent,Cookie,Referer,ProtocolVersion,Host,HttpSubStatus",
@@ -210,7 +210,7 @@
             "Target": "File,ETW",
             "Enabled": true,
             "Property": "Log",
-            "LogFieldsSamples": ["#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken"],
+            "LogFieldsSamples": [],
             "Format": "W3C",
             "TruncateSize": 20971520,
             "Fields": "Date,Time,ClientIP,UserName,SiteName,ComputerName,ServerIP,Method,UriStem,UriQuery,HttpStatus,Win32Status,BytesSent,BytesRecv,TimeTaken,ServerPort,UserAgent,Cookie,Referer,ProtocolVersion,Host,HttpSubStatus",

@@ -116,8 +116,61 @@
             }                     
         ],
         "override_rules": []
-    }  
-
-
+    },
+    {
+        "rule_id": "CIS-2.4",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint24=.*('Property':'cookieless','Value':'(?:AutoDetect|UseDeviceProfile|UseUri)')",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.5",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint25=.*('Property':'protection','Value':'(?:Encryption|Validation|None)')",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.6",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint26=.*('Property':'sslFlags','Value':False)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.7",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint27=.*('Property':'passwordFormat','Value':'Clear')",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.8",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint28=.*('Property':'userInConfigCount','Value':[1-9]+[0-9]*)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    } 
 
 ]
