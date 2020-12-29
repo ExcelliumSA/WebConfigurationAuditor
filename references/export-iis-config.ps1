@@ -41,7 +41,8 @@ function Export-DataContext{
    $datetime = Get-Date -Format "dd/MM/yyyy HH:mm K"
    $siteCount = $(Get-Website | measure).count
    $systemDriveEnvVar = $Env:SystemDrive
-   $results.Add(@{WebSiteCount=$siteCount;IISVersion=$iisVersion;PowerShellVersion=$psVersion;DotNetCurrentVersion=$dotNetVersion;ExtractionLocalDateTime=$datetime;SystemDrive=$systemDriveEnvVar}) | Out-Null
+   $systemRootEnvVar = $Env:SystemRoot
+   $results.Add(@{WebSiteCount=$siteCount;IISVersion=$iisVersion;PowerShellVersion=$psVersion;DotNetCurrentVersion=$dotNetVersion;ExtractionLocalDateTime=$datetime;SystemDrive=$systemDriveEnvVar;SystemRoot=$systemRootEnvVar}) | Out-Null
    return $results
 }
 
@@ -130,16 +131,14 @@ function Export-DataPoint17{
 # Internal function for the validation point 2.1
 # CIS title "Ensure 'global authorization rule' is set to restrict access"
 function Export-DataPoint21{
-   [System.Collections.ArrayList]$results = @()
-   Get-WebConfiguration -pspath 'IIS:\' -filter 'system.webServer/security/authorization' | ForEach-Object -Process {$results.Add(@{SectionPath=$_.SectionPath;PSPath=$_.PSPath;Location=$_.Location})} | Out-Null
+   $results = c:\windows\system32\inetsrv\appcmd list config -section:system.webserver/security/authorization
    return $results
 }
 
 # Internal function for the validation point 2.2
 # CIS title "Ensure access to sensitive site features is restricted to authenticated principals only"
 function Export-DataPoint22{
-   [System.Collections.ArrayList]$results = @()
-   Get-WebConfiguration system.webServer/security/authentication/* -Recurse | Where-Object {$_.enabled -eq $true} | ForEach-Object -Process {$results.Add(@{SectionPath=$_.SectionPath;PSPath=$_.PSPath;Location=$_.Location})} | Out-Null
+   $results = c:\windows\system32\inetsrv\appcmd list config -section:system.web/authentication
    return $results
 }
 
