@@ -136,8 +136,9 @@
     ],
     "Export-DataContext": {
         "SystemDrive": "C:",
-        "ExtractionLocalDateTime": "28/12/2020 18:14 +01:00",
+        "ExtractionLocalDateTime": "29/12/2020 08:37 +01:00",
         "WebSiteCount": 2,
+        "SystemRoot": "C:\\Windows",
         "DotNetCurrentVersion": "v4.0.30319",
         "IISVersion": {
             "SetupString": "IIS 8.5"
@@ -173,11 +174,7 @@
             "Value": false
         }
     ],
-    "Export-DataPoint21": {
-        "PSPath": "MACHINE/WEBROOT/APPHOST",
-        "SectionPath": "/system.webServer/security/authorization",
-        "Location": ""
-    },
+    "Export-DataPoint21": ["\u003csystem.webServer\u003e", "  \u003csecurity\u003e", "    \u003cauthorization\u003e", "    \u003c/authorization\u003e", "  \u003c/security\u003e", "\u003c/system.webServer\u003e"],
     "Export-DataPoint35": [{
             "SiteName": "Default Web Site",
             "Property": "enabled",
@@ -346,11 +343,7 @@
             "Value": 4096
         }
     ],
-    "Export-DataPoint22": {
-        "PSPath": "MACHINE/WEBROOT/APPHOST",
-        "SectionPath": "/system.webServer/security/authentication/anonymousAuthentication",
-        "Location": ""
-    },
+    "Export-DataPoint22": ["\u003csystem.web\u003e", "  \u003cauthentication\u003e", "    \u003cforms\u003e", "      \u003ccredentials\u003e", "      \u003c/credentials\u003e", "    \u003c/forms\u003e", "    \u003cpassport /\u003e", "  \u003c/authentication\u003e", "\u003c/system.web\u003e"],
     "Export-DataPoint53": [{
             "SiteName": "Default Web Site",
             "Property": "Log",

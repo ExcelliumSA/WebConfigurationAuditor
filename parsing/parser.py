@@ -88,7 +88,8 @@ def parse_config_data_iis(config_file_name, audit_rules):
     iis_config = json.loads(data_raw)
     # Replace references to environment variables and reload the JSON
     systemDrive = iis_config["Export-DataContext"]["SystemDrive"]
-    data_raw = data_raw.replace("%SystemDrive%", systemDrive)
+    systemRoot = iis_config["Export-DataContext"]["SystemRoot"]
+    data_raw = data_raw.replace("%SystemDrive%", systemDrive).replace("%SystemRoot%", systemRoot)
     iis_config = json.loads(data_raw)
     # If there is several site then the content will be stored in a JSON array of JSON objects
     # If there is a single site then the content will be stored in a single JSON object

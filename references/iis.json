@@ -4,7 +4,7 @@
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
-                "expression": "Export-DataPoint11=.*('PhysicalPath':'C:).*",
+                "expression": "Export-DataPoint11=.*('PhysicalPath':'C:)",
                 "presence_needed": "False"
             }
         ],
@@ -15,7 +15,7 @@
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
-                "expression": "Export-DataPoint12=.*('SSLFlags':0,'BindingInformation':'.*:\\d+:').*",
+                "expression": "Export-DataPoint12=.*('SSLFlags':0,'BindingInformation':'.*:\\d+:')",
                 "presence_needed": "False"
             }
         ],
@@ -26,7 +26,7 @@
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
-                "expression": "Export-DataPoint13=.*(directoryBrowse\\senabled=.?true.?).*",
+                "expression": "Export-DataPoint13=.*(directoryBrowse\\senabled=.?true.?)",
                 "presence_needed": "False"
             }
         ],
@@ -37,7 +37,7 @@
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
-                "expression": "Export-DataPoint14=.*(processModel\\sidentityType=.?ApplicationPoolIdentity.?).*",
+                "expression": "Export-DataPoint14=.*(processModel\\sidentityType=.?ApplicationPoolIdentity.?)",
                 "presence_needed": "True"
             }
         ],
@@ -48,7 +48,7 @@
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
-                "expression": "Export-DataPoint15=.*('PoolReused':\\[[\\w',\\-]+\\]).*",
+                "expression": "Export-DataPoint15=.*('PoolReused':\\[[\\w',\\-]+\\])",
                 "presence_needed": "False"
             }
         ],
@@ -59,7 +59,7 @@
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
-                "expression": "Export-DataPoint16=.*('Property':'userName','Value':'IUSR').*",
+                "expression": "Export-DataPoint16=.*('Property':'userName','Value':'IUSR')",
                 "presence_needed": "False"
             }
         ],
@@ -70,12 +70,53 @@
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
-                "expression": "",
-                "presence_needed": "True"
+                "expression": "Export-DataPoint17={('InstallState':1,'Name':'Web-DAV-Publishing')}",
+                "presence_needed": "False"
             }
         ],
         "override_rules": []
-    }
+    },
+    {
+        "rule_id": "CIS-2.1",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint21=.*(<remove\\s+users=.?\\*.?\\s+roles=.?.?\\s+verbs=.?.?\\s+\/>)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint21=.*(<add\\s+accessType=.?Allow.?\\s+roles=.?[\\w\\-]+.?\\s+\/>)",
+                "presence_needed": "True"
+            }            
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.2",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint22=.*(<passport\\s+\/>)",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "Export-DataPoint22=.*(<forms>[\\s;]*<credentials>[\\s;]*<\/credentials>[\\s;]*<\/forms>)",
+                "presence_needed": "False"
+            }                      
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.3",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint23=.*('Property':'requireSSL','Value':False)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    }  
 
 
 
