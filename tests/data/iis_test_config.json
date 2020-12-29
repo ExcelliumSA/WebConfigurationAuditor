@@ -117,7 +117,7 @@
     "Export-DataPoint28": [{
             "SiteName": "Default Web Site",
             "Property": "userInConfigCount",
-            "Value": 2
+            "Value": 0
         }, {
             "SiteName": "Site2",
             "Property": "userInConfigCount",
@@ -136,7 +136,7 @@
     ],
     "Export-DataContext": {
         "SystemDrive": "C:",
-        "ExtractionLocalDateTime": "29/12/2020 10:36 +01:00",
+        "ExtractionLocalDateTime": "29/12/2020 11:47 +01:00",
         "WebSiteCount": 2,
         "SystemRoot": "C:\\Windows",
         "DotNetCurrentVersion": "v4.0.30319",
@@ -178,7 +178,7 @@
     "Export-DataPoint35": [{
             "SiteName": "Default Web Site",
             "Property": "enabled",
-            "Value": true
+            "Value": false
         }, {
             "SiteName": "Site2",
             "Property": "enabled",
@@ -332,7 +332,16 @@
             "Enabled": false
         }
     ],
-    "Export-DataPoint311": {},
+    "Export-DataPoint311": [{
+            "SiteName": "Default Web Site",
+            "Property": "X-Powered-By",
+            "Action": "Removed"
+        }, {
+            "SiteName": "Site2",
+            "Property": "X-Powered-By",
+            "Action": "NotRemoved"
+        }
+    ],
     "Export-DataPoint42": [{
             "SiteName": "Default Web Site",
             "Property": "maxUrl",

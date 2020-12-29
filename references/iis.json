@@ -171,6 +171,132 @@
             }                     
         ],
         "override_rules": []
-    } 
+    },
+    {
+        "rule_id": "CIS-2.31",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint31=.*('Property':'retail','Value':False)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.32",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint32=.*('Property':'debug','Value':True)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.33",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint33=.*('Property':'mode','Value':'Off')",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.34",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint34=.*('Property':'errorMode','Value':'Detailed')",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.35",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint35=.*('Property':'enabled','Value':True)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.36",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint36=.*('Property':'mode','Value':'(?:Custom|InProc|Off|SQLServer)')",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.37",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint37=.*('Property':'httpOnlyCookies','Value':False)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.3839",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint3839=.*('ValidationAlgorithm':'(?:SHA1|SHA256|SHA512|HMACSHA256|HMACSHA512)')",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint3839=.*('DecryptionAlgorithm':'(?:Auto|AES)')",
+                "presence_needed": "True"
+            }                                  
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.310",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint310=.*('Property':'level','Value':'Full')",
+                "presence_needed": "True"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.311",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint311=.*('Property':'X-Powered-By','Action':'NotRemoved')",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.312",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint312=.*('Property':'removeServerHeader','Value':False)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    }
+    
 
 ]
