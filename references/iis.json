@@ -454,6 +454,32 @@
             }                                 
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.61",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint61=.*('ControlChannelPolicy':'(?:SslAllow|SslRequireCredentialsOnly)')",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "Export-DataPoint61=.*('DataChannelPolicy':'SslAllow')",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.62",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint62=.*('Property':'denyByFailure','Enabled':False)",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
     }
     
 
