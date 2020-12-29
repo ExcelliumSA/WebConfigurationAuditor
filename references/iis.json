@@ -480,7 +480,209 @@
             }
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.71",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint71=.*('Status':'Missing','Property':'Strict-Transport-Security')",
+                "presence_needed": "False"
+            }
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.72",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'SSL 2\\.0','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'SSL 2\\.0','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':1)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'SSL 2\\.0','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'SSL 2\\.0','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':1)",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.73",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'SSL 3\\.0','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'SSL 3\\.0','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':1)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'SSL 3\\.0','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'SSL 3\\.0','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':1)",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.74",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.0','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.0','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':1)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.0','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.0','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':1)",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.75",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.1','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.1','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':1)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.1','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.1','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':1)",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.76",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.2','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':[1-9]+[0-9]*)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.2','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Server','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.2','Property':'Enabled','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':[1-9]+[0-9]*)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint7273747576=.*('Protocol':'TLS 1\\.2','Property':'DisabledByDefault','RegistryKey':'HKLM:[\\w\\\\\\s\\.]+Client','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.77",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint777879710711=.*('Cipher':'NULL','RegistryKey':'HKLM:[\\w\\\\\\s\\./]+','Property':'Enabled','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.78",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint777879710711=.*('Cipher':'DES\\s56/56','RegistryKey':'HKLM:[\\w\\\\\\s\\./]+','Property':'Enabled','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.79",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint777879710711=.*('Cipher':'RC4\\s40/128','RegistryKey':'HKLM:[\\w\\\\\\s\\./]+','Property':'Enabled','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint777879710711=.*('Cipher':'RC4\\s56/128','RegistryKey':'HKLM:[\\w\\\\\\s\\./]+','Property':'Enabled','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint777879710711=.*('Cipher':'RC4\\s64/128','RegistryKey':'HKLM:[\\w\\\\\\s\\./]+','Property':'Enabled','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            },
+            {
+                "expression": "Export-DataPoint777879710711=.*('Cipher':'RC4\\s128/128','RegistryKey':'HKLM:[\\w\\\\\\s\\./]+','Property':'Enabled','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            }                                                           
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.710",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint777879710711=.*('Cipher':'AES\\s128/128','RegistryKey':'HKLM:[\\w\\\\\\s\\./]+','Property':'Enabled','Status':'Present','Value':0)",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.711",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint777879710711=.*('Cipher':'AES\\s256/256','RegistryKey':'HKLM:[\\w\\\\\\s\\./]+','Property':'Enabled','Status':'Present','Value':[1-9]+[0-9]*)",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.712",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint712=.*('Property':'Functions','Status':'Present','Value':'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256')",
+                "presence_needed": "True"
+            }                         
+        ],
+        "override_rules": []
     }
-    
-
 ]
