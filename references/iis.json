@@ -296,6 +296,127 @@
             }                     
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.41",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint41=.*('Property':'maxAllowedContentLength','Value':\\d+)",
+                "presence_needed": "True"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.42",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint42=.*('Property':'maxUrl','Value':\\d+)",
+                "presence_needed": "True"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.43",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint43=.*('Property':'maxQueryString','Value':\\d+)",
+                "presence_needed": "True"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.44",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint44=.*('Property':'allowHighBitCharacters','Value':True)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.45",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint45=.*('Property':'allowDoubleEscaping','Value':True)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.46",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint46=.*('Property':'HTTP-TRACE','Disabled':False)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.47",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint47=.*('Property':'allowUnlisted','Value':True)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.48",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint48=.*('Property':'accessPolicy','Value':'[\\w,]*(?:Write|Execute)[,\\w]*')",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.49",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint49=.*('Property':'notListedIsapisAllowed','Value':True)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.410",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint410=.*('Property':'notListedCgisAllowed','Value':True)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.411",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint411=.*('Property':'denyByConcurrentRequests'[,\\w\\d':]+'Enabled':False)",
+                "presence_needed": "False"
+            }                     
+        ],
+        "override_rules": []
     }
     
 
