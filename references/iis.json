@@ -417,6 +417,43 @@
             }                     
         ],
         "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.51",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint51=.*('Property':'directory','Value':'C:[\\w\\d\\-\\\\]+')",
+                "presence_needed": "False"
+            },
+            {
+                "expression": "Export-DataPoint51=.*('Property':'directory','Value':'C:.?.?inetpub.?.?logs.?.?LogFiles')",
+                "presence_needed": "False"
+            }                                 
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.52",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint52=.*('Fields':'Date,Time,ClientIP,UserName,SiteName,ComputerName,ServerIP,Method,UriStem,UriQuery,HttpStatus,Win32Status,BytesSent,BytesRecv,TimeTaken,ServerPort,UserAgent,Cookie,Referer,ProtocolVersion,Host,HttpSubStatus')",
+                "presence_needed": "True"
+            }                                 
+        ],
+        "override_rules": []
+    },
+    {
+        "rule_id": "CIS-2.53",
+        "CIS_version": "IIS-10-1.1.1",
+        "audit_expressions": [
+            {
+                "expression": "Export-DataPoint53=.*('Target':'[\\w,]*(?:ETW)[,\\w]*')",
+                "presence_needed": "True"
+            }                                 
+        ],
+        "override_rules": []
     }
     
 
