@@ -173,7 +173,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.31",
+        "rule_id": "CIS-3.1",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -184,7 +184,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.32",
+        "rule_id": "CIS-3.2",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -195,7 +195,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.33",
+        "rule_id": "CIS-3.3",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -206,7 +206,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.34",
+        "rule_id": "CIS-3.4",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -217,7 +217,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.35",
+        "rule_id": "CIS-3.5",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -228,7 +228,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.36",
+        "rule_id": "CIS-3.6",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -239,7 +239,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.37",
+        "rule_id": "CIS-3.7",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -250,7 +250,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.3839",
+        "rule_id": "CIS-3.8-3.9",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -265,7 +265,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.310",
+        "rule_id": "CIS-3.10",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -276,7 +276,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.311",
+        "rule_id": "CIS-3.11",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -287,7 +287,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.312",
+        "rule_id": "CIS-3.12",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -298,7 +298,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.41",
+        "rule_id": "CIS-4.1",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -309,7 +309,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.42",
+        "rule_id": "CIS-4.2",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -320,7 +320,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.43",
+        "rule_id": "CIS-4.3",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -331,7 +331,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.44",
+        "rule_id": "CIS-4.4",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -342,7 +342,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.45",
+        "rule_id": "CIS-4.5",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -353,7 +353,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.46",
+        "rule_id": "CIS-4.6",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -364,7 +364,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.47",
+        "rule_id": "CIS-4.7",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -375,7 +375,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.48",
+        "rule_id": "CIS-4.8",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -386,7 +386,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.49",
+        "rule_id": "CIS-4.9",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -397,7 +397,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.410",
+        "rule_id": "CIS-4.10",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -408,7 +408,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.411",
+        "rule_id": "CIS-4.11",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -419,7 +419,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.51",
+        "rule_id": "CIS-5.1",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -434,7 +434,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.52",
+        "rule_id": "CIS-5.2",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -445,7 +445,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.53",
+        "rule_id": "CIS-5.3",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -456,7 +456,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.61",
+        "rule_id": "CIS-6.1",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -471,7 +471,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.62",
+        "rule_id": "CIS-6.2",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -482,7 +482,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.71",
+        "rule_id": "CIS-7.1",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -493,7 +493,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.72",
+        "rule_id": "CIS-7.2",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -516,7 +516,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.73",
+        "rule_id": "CIS-7.3",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -539,7 +539,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.74",
+        "rule_id": "CIS-7.4",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -562,7 +562,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.75",
+        "rule_id": "CIS-7.5",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -585,7 +585,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.76",
+        "rule_id": "CIS-7.6",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -608,7 +608,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.77",
+        "rule_id": "CIS-7.7",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -619,7 +619,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.78",
+        "rule_id": "CIS-7.8",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -630,7 +630,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.79",
+        "rule_id": "CIS-7.9",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -653,7 +653,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.710",
+        "rule_id": "CIS-7.10",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -664,7 +664,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.711",
+        "rule_id": "CIS-7.11",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
@@ -675,7 +675,7 @@
         "override_rules": []
     },
     {
-        "rule_id": "CIS-2.712",
+        "rule_id": "CIS-7.12",
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {

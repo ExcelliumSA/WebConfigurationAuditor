@@ -1,0 +1,564 @@
+{
+    "Export-DataPoint44": [{
+        "SiteName": "Default Web Site",
+        "Property": "allowHighBitCharacters",
+        "Value": true
+    }, {
+        "SiteName": "Site2",
+        "Property": "allowHighBitCharacters",
+        "Value": true
+    }],
+    "Export-DataPoint31": [{
+        "SiteName": "Default Web Site",
+        "Property": "retail",
+        "Value": false
+    }, {
+        "SiteName": "Site2",
+        "Property": "retail",
+        "Value": false
+    }],
+    "Export-DataPoint43": [{
+        "SiteName": "Default Web Site",
+        "Property": "maxQueryString",
+        "Value": 2048
+    }, {
+        "SiteName": "Site2",
+        "Property": "maxQueryString",
+        "Value": 2048
+    }],
+    "Export-DataPoint777879710711": [{
+        "Cipher": "NULL",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\NULL",
+        "Property": "Enabled",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Cipher": "DES 56/56",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\DES 56/56",
+        "Property": "Enabled",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Cipher": "RC4 40/128",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\RC4 40/128",
+        "Property": "Enabled",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Cipher": "RC4 56/128",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\RC4 56/128",
+        "Property": "Enabled",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Cipher": "RC4 64/128",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\RC4 64/128",
+        "Property": "Enabled",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Cipher": "RC4 128/128",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\RC4 128/128",
+        "Property": "Enabled",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Cipher": "AES 128/128",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\AES 128/128",
+        "Property": "Enabled",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Cipher": "AES 256/256",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\AES 256/256",
+        "Property": "Enabled",
+        "Status": "Present",
+        "Value": 1
+    }],
+    "Export-DataPoint410": [{
+        "SiteName": "Default Web Site",
+        "Property": "notListedCgisAllowed",
+        "Value": true
+    }, {
+        "SiteName": "Site2",
+        "Property": "notListedCgisAllowed",
+        "Value": false
+    }],
+    "Export-DataPoint11": [{
+        "PhysicalPath": "%SystemDrive%\\inetpub\\wwwroot",
+        "SiteName": "Default Web Site"
+    }, {
+        "PhysicalPath": "C:\\inetpub\\wwwroot2",
+        "SiteName": "Site2"
+    }],
+    "Export-DataPoint13": ["\u003csystem.webServer\u003e", "  \u003cdirectoryBrowse enabled=\"true\" showFlags=\"Date, Time, Size, Extension, LongDate\" /\u003e", "\u003c/system.webServer\u003e"],
+    "Export-DataPoint51": [{
+        "SiteName": "Default Web Site",
+        "Property": "directory",
+        "Value": "C:\\LogFiles"
+    }, {
+        "SiteName": "Site2",
+        "Property": "directory",
+        "Value": "C:\\inetpub\\logs\\LogFiles"
+    }],
+    "Export-DataPoint712": {
+        "RegistryKey": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Cryptography\\Configuration\\SSL\\00010002",
+        "Property": "Functions",
+        "Status": "Present",
+        "Value": "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+    },
+    "Export-DataPoint28": [{
+        "SiteName": "Default Web Site",
+        "Property": "userInConfigCount",
+        "Value": 5
+    }, {
+        "SiteName": "Site2",
+        "Property": "userInConfigCount",
+        "Value": 0
+    }],
+    "Export-DataPoint310": [{
+        "SiteName": "Default Web Site",
+        "Property": "level",
+        "Value": "Full"
+    }, {
+        "SiteName": "Site2",
+        "Property": "level",
+        "Value": "Full"
+    }],
+    "Export-DataContext": {
+        "SystemDrive": "C:",
+        "ExtractionLocalDateTime": "29/12/2020 17:11 +01:00",
+        "WebSiteCount": 2,
+        "SystemRoot": "C:\\Windows",
+        "DotNetCurrentVersion": "v4.0.30319",
+        "IISVersion": {
+            "SetupString": "IIS 8.5"
+        },
+        "PowerShellVersion": {
+            "Version": {
+                "Major": 4,
+                "Minor": 0,
+                "Build": -1,
+                "Revision": -1,
+                "MajorRevision": -1,
+                "MinorRevision": -1
+            }
+        }
+    },
+    "Export-DataPoint23": [{
+        "SiteName": "Default Web Site",
+        "Property": "requireSSL",
+        "Value": false
+    }, {
+        "SiteName": "Site2",
+        "Property": "requireSSL",
+        "Value": false
+    }],
+    "Export-DataPoint32": [{
+        "SiteName": "Default Web Site",
+        "Property": "debug",
+        "Value": true
+    }, {
+        "SiteName": "Site2",
+        "Property": "debug",
+        "Value": false
+    }],
+    "Export-DataPoint21": ["\u003csystem.webServer\u003e", "  \u003csecurity\u003e", "    \u003cauthorization\u003e", "\u003cremove users=\"*\" roles=\"\" verbs=\"\" /\u003e\u003cadd accessType=\"Allow\" roles=\"administrators\" /\u003e    \u003c/authorization\u003e", "  \u003c/security\u003e", "\u003c/system.webServer\u003e"],
+    "Export-DataPoint35": [{
+        "SiteName": "Default Web Site",
+        "Property": "enabled",
+        "Value": true
+    }, {
+        "SiteName": "Site2",
+        "Property": "enabled",
+        "Value": false
+    }],
+    "Export-DataPoint3839": [{
+        "SiteName": "Default Web Site",
+        "DecryptionAlgorithm": "Auto",
+        "ValidationAlgorithm": "SHA1"
+    }, {
+        "SiteName": "Site2",
+        "DecryptionAlgorithm": "None",
+        "ValidationAlgorithm": "None"
+    }],
+    "Export-DataPoint52": [{
+        "Target": "File,ETW",
+        "Enabled": true,
+        "Property": "Log",
+        "LogFieldsSamples": ["#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken"],
+        "Format": "W3C",
+        "TruncateSize": 20971520,
+        "Fields": "Date,Time,ClientIP,UserName,SiteName,ComputerName,ServerIP,Method,UriStem,UriQuery,HttpStatus,Win32Status,BytesSent,BytesRecv,TimeTaken,ServerPort,UserAgent,Cookie,Referer,ProtocolVersion,Host,HttpSubStatus",
+        "RotationPeriod": "Daily",
+        "SiteName": "Default Web Site",
+        "MaxLogLineLength": 65536
+    }, {
+        "Target": "File,ETW",
+        "Enabled": true,
+        "Property": "Log",
+        "LogFieldsSamples": ["#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken"],
+        "Format": "W3C",
+        "TruncateSize": 20971520,
+        "Fields": "Date,Time,ClientIP,UserName,SiteName,ComputerName,ServerIP,Method,UriStem,UriQuery,HttpStatus,Win32Status,BytesSent,BytesRecv,TimeTaken,ServerPort,UserAgent,Cookie,Referer,ProtocolVersion,Host,HttpSubStatus",
+        "RotationPeriod": "Daily",
+        "SiteName": "Site2",
+        "MaxLogLineLength": 65536
+    }],
+    "Export-DataPoint45": [{
+        "SiteName": "Default Web Site",
+        "Property": "allowDoubleEscaping",
+        "Value": true
+    }, {
+        "SiteName": "Site2",
+        "Property": "allowDoubleEscaping",
+        "Value": false
+    }],
+    "Export-DataPoint15": {
+        "DefaultAppPool": 2,
+        "PoolReused": ["DefaultAppPool"]
+    },
+    "Export-DataPoint26": [{
+        "SiteName": "Default Web Site",
+        "Property": "sslFlags",
+        "Value": false
+    }, {
+        "SiteName": "Site2",
+        "Property": "sslFlags",
+        "Value": false
+    }],
+    "Export-DataPoint47": [{
+        "SiteName": "Default Web Site",
+        "Property": "allowUnlisted",
+        "Value": true
+    }, {
+        "SiteName": "Site2",
+        "Property": "allowUnlisted",
+        "Value": true
+    }],
+    "Export-DataPoint17": {
+        "InstallState": 1,
+        "Name": "Web-DAV-Publishing"
+    },
+    "Export-DataPoint37": [{
+        "SiteName": "Default Web Site",
+        "Property": "httpOnlyCookies",
+        "Value": false
+    }, {
+        "SiteName": "Site2",
+        "Property": "httpOnlyCookies",
+        "Value": true
+    }],
+    "Export-DataPoint12": [{
+        "Protocol": "http",
+        "SSLFlags": 0,
+        "BindingInformation": "*:80:"
+    }, {
+        "Protocol": "http",
+        "SSLFlags": 0,
+        "BindingInformation": "*:81:"
+    }],
+    "Export-DataPoint24": [{
+        "SiteName": "Default Web Site",
+        "Property": "cookieless",
+        "Value": "UseDeviceProfile"
+    }, {
+        "SiteName": "Site2",
+        "Property": "cookieless",
+        "Value": "UseDeviceProfile"
+    }],
+    "Export-DataPoint71": [{
+        "SiteName": "Default Web Site",
+        "Status": "Missing",
+        "Property": "Strict-Transport-Security",
+        "Value": "NA"
+    }, {
+        "SiteName": "Site2",
+        "Status": "Present",
+        "Property": "Strict-Transport-Security",
+        "Value": "ASP.NET"
+    }],
+    "Export-DataPoint46": [{
+        "SiteName": "Default Web Site",
+        "Property": "HTTP-TRACE",
+        "Disabled": true
+    }, {
+        "SiteName": "Site2",
+        "Property": "HTTP-TRACE",
+        "Disabled": false
+    }],
+    "InternalFunctionsInError": [],
+    "Export-DataPoint62": [{
+        "SiteName": "Default Web Site",
+        "Property": "denyByFailure",
+        "Enabled": false
+    }, {
+        "SiteName": "Site2",
+        "Property": "denyByFailure",
+        "Enabled": false
+    }],
+    "Export-DataPoint411": [{
+        "SiteName": "Default Web Site",
+        "Property": "denyByConcurrentRequests",
+        "MaxConcurrentRequests": 5,
+        "Enabled": false
+    }, {
+        "SiteName": "Site2",
+        "Property": "denyByConcurrentRequests",
+        "MaxConcurrentRequests": 5,
+        "Enabled": false
+    }],
+    "Export-DataPoint311": [{
+        "SiteName": "Default Web Site",
+        "Property": "X-Powered-By",
+        "Action": "Removed"
+    }, {
+        "SiteName": "Site2",
+        "Property": "X-Powered-By",
+        "Action": "NotRemoved"
+    }],
+    "Export-DataPoint42": [{
+        "SiteName": "Default Web Site",
+        "Property": "maxUrl",
+        "Value": 4096
+    }, {
+        "SiteName": "Site2",
+        "Property": "maxUrl",
+        "Value": 4096
+    }],
+    "Export-DataPoint22": ["\u003csystem.web\u003e", "  \u003cauthentication\u003e", "    \u003cforms\u003e", "      \u003ccredentials\u003e", "      \u003c/credentials\u003e", "    \u003c/forms\u003e", "    \u003cpassport /\u003e", "  \u003c/authentication\u003e", "\u003c/system.web\u003e"],
+    "Export-DataPoint53": [{
+        "SiteName": "Default Web Site",
+        "Property": "Log",
+        "Target": "File,ETW",
+        "Format": "W3C",
+        "Enabled": true
+    }, {
+        "SiteName": "Site2",
+        "Property": "Log",
+        "Target": "File,ETW",
+        "Format": "W3C",
+        "Enabled": true
+    }],
+    "Export-DataPoint16": [{
+        "SiteName": "Default Web Site",
+        "Property": "userName",
+        "Value": "IUSR"
+    }, {
+        "SiteName": "Site2",
+        "Property": "userName",
+        "Value": "IUSR"
+    }],
+    "Export-DataPoint34": [{
+        "SiteName": "Default Web Site",
+        "Property": "errorMode",
+        "Value": "Detailed"
+    }, {
+        "SiteName": "Site2",
+        "Property": "errorMode",
+        "Value": "DetailedLocalOnly"
+    }],
+    "Export-DataPoint312": [{
+        "SiteName": "Default Web Site",
+        "Property": "removeServerHeader",
+        "Value": false
+    }, {
+        "SiteName": "Site2",
+        "Property": "removeServerHeader",
+        "Value": false
+    }],
+    "Export-DataPoint48": [{
+        "SiteName": "Default Web Site",
+        "Property": "accessPolicy",
+        "Value": "Write,Script"
+    }, {
+        "SiteName": "Site2",
+        "Property": "accessPolicy",
+        "Value": "Read,Script"
+    }],
+    "Export-DataPoint14": ["\u003csystem.applicationHost\u003e", "  \u003capplicationPools\u003e", "    \u003capplicationPoolDefaults managedRuntimeVersion=\"v4.0\"\u003e", "      \u003cprocessModel identityType=\"ApplicationPoolIdentity\" /\u003e", "      \u003crecycling\u003e", "        \u003cperiodicRestart\u003e", "          \u003cschedule\u003e", "          \u003c/schedule\u003e", "        \u003c/periodicRestart\u003e", "      \u003c/recycling\u003e", "      \u003cfailure /\u003e", "      \u003ccpu /\u003e", "    \u003c/applicationPoolDefaults\u003e", "    \u003cadd name=\"DefaultAppPool\"\u003e", "      \u003cprocessModel /\u003e", "      \u003crecycling\u003e", "        \u003cperiodicRestart\u003e", "          \u003cschedule\u003e", "          \u003c/schedule\u003e", "        \u003c/periodicRestart\u003e", "      \u003c/recycling\u003e", "      \u003cfailure /\u003e", "      \u003ccpu /\u003e", "    \u003c/add\u003e", "    \u003cadd name=\"Default 2\"\u003e", "      \u003cprocessModel /\u003e", "      \u003crecycling\u003e", "        \u003cperiodicRestart\u003e", "          \u003cschedule\u003e", "          \u003c/schedule\u003e", "        \u003c/periodicRestart\u003e", "      \u003c/recycling\u003e", "      \u003cfailure /\u003e", "      \u003ccpu /\u003e", "    \u003c/add\u003e", "    \u003cadd name=\"Default 3\"\u003e", "      \u003cprocessModel /\u003e", "      \u003crecycling\u003e", "        \u003cperiodicRestart\u003e", "          \u003cschedule\u003e", "          \u003c/schedule\u003e", "        \u003c/periodicRestart\u003e", "      \u003c/recycling\u003e", "      \u003cfailure /\u003e", "      \u003ccpu /\u003e", "    \u003c/add\u003e", "    \u003cadd name=\"Site2\"\u003e", "      \u003cprocessModel /\u003e", "      \u003crecycling\u003e", "        \u003cperiodicRestart\u003e", "          \u003cschedule\u003e", "          \u003c/schedule\u003e", "        \u003c/periodicRestart\u003e", "      \u003c/recycling\u003e", "      \u003cfailure /\u003e", "      \u003ccpu /\u003e", "    \u003c/add\u003e", "  \u003c/applicationPools\u003e", "\u003c/system.applicationHost\u003e"],
+    "Export-DataPoint61": [{
+        "SiteName": "Default Web Site",
+        "ControlChannelPolicy": "SslAllow",
+        "DataChannelPolicy": "SslAllow"
+    }, {
+        "SiteName": "Site2",
+        "ControlChannelPolicy": "SslRequire",
+        "DataChannelPolicy": "SslRequire"
+    }],
+    "Export-DataPoint27": [{
+        "SiteName": "Default Web Site",
+        "Property": "passwordFormat",
+        "Value": "Clear"
+    }, {
+        "SiteName": "Site2",
+        "Property": "passwordFormat",
+        "Value": "SHA1"
+    }],
+    "Export-DataPoint36": [{
+        "SiteName": "Default Web Site",
+        "Property": "mode",
+        "Value": "InProc"
+    }, {
+        "SiteName": "Site2",
+        "Property": "mode",
+        "Value": "InProc"
+    }],
+    "Export-DataPoint25": [{
+        "SiteName": "Default Web Site",
+        "Property": "protection",
+        "Value": "None"
+    }, {
+        "SiteName": "Site2",
+        "Property": "protection",
+        "Value": "All"
+    }],
+    "Export-DataPoint33": [{
+        "SiteName": "Default Web Site",
+        "Property": "mode",
+        "Value": "Off"
+    }, {
+        "SiteName": "Site2",
+        "Property": "mode",
+        "Value": "RemoteOnly"
+    }],
+    "Export-DataPoint41": [{
+        "SiteName": "Default Web Site",
+        "Property": "maxAllowedContentLength",
+        "Value": 30000000
+    }, {
+        "SiteName": "Site2",
+        "Property": "maxAllowedContentLength",
+        "Value": 30000000
+    }],
+    "Export-DataPoint49": [{
+        "SiteName": "Default Web Site",
+        "Property": "notListedIsapisAllowed",
+        "Value": true
+    }, {
+        "SiteName": "Site2",
+        "Property": "notListedIsapisAllowed",
+        "Value": false
+    }],
+    "Export-DataPoint7273747576": [{
+        "Protocol": "SSL 2.0",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Protocol": "SSL 2.0",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server",
+        "Status": "Present",
+        "Value": 1
+    }, {
+        "Protocol": "SSL 2.0",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Protocol": "SSL 2.0",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client",
+        "Status": "Present",
+        "Value": 1
+    }, {
+        "Protocol": "SSL 3.0",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Protocol": "SSL 3.0",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server",
+        "Status": "Present",
+        "Value": 1
+    }, {
+        "Protocol": "SSL 3.0",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Protocol": "SSL 3.0",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client",
+        "Status": "Present",
+        "Value": 1
+    }, {
+        "Protocol": "TLS 1.0",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Protocol": "TLS 1.0",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server",
+        "Status": "Present",
+        "Value": 1
+    }, {
+        "Protocol": "TLS 1.0",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Protocol": "TLS 1.0",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client",
+        "Status": "Present",
+        "Value": 1
+    }, {
+        "Protocol": "TLS 1.1",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Protocol": "TLS 1.1",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server",
+        "Status": "Present",
+        "Value": 1
+    }, {
+        "Protocol": "TLS 1.1",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Protocol": "TLS 1.1",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client",
+        "Status": "Present",
+        "Value": 1
+    }, {
+        "Protocol": "TLS 1.2",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.2\\Server",
+        "Status": "Present",
+        "Value": 4294967295
+    }, {
+        "Protocol": "TLS 1.2",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.2\\Server",
+        "Status": "Present",
+        "Value": 0
+    }, {
+        "Protocol": "TLS 1.2",
+        "Property": "Enabled",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.2\\Client",
+        "Status": "Present",
+        "Value": 4294967295
+    }, {
+        "Protocol": "TLS 1.2",
+        "Property": "DisabledByDefault",
+        "RegistryKey": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.2\\Client",
+        "Status": "Present",
+        "Value": 0
+    }]
+}
