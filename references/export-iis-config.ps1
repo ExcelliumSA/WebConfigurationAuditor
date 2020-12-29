@@ -214,10 +214,13 @@ function Export-DataPoint28{
    [System.Collections.ArrayList]$results = @()
    Get-Website | ForEach-Object -Process {
       $cfgPath = 'MACHINE/WEBROOT/APPHOST/' + $_.Name
-      $cfg = Get-WebConfigurationProperty -pspath $cfgPath -filter 'system.web/authentication/forms/credentials' -name 'passwordFormat'
-      $results.Add(@{SiteName=$_.Name;Property='passwordFormat';Value=$cfg.ToString()})
+      $cfgFile = Get-WebConfigFile $cfgPath
+      $xml = New-Object Xml 
+      $xml.Load($cfgFile)
+      $nodes = $xml.SelectNodes('//user')
+      $results.Add(@{SiteName=$_.Name;Property='userInConfigCount';Value=$nodes.Count})
    } | Out-Null
-   return $results
+   return $results  
 }
 
 #############
