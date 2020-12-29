@@ -356,16 +356,14 @@ function Export-DataPoint311{
       $cfgFile = Get-WebConfigFile $cfgPath
       $xml = New-Object Xml 
       $xml.Load($cfgFile)
-      $node = $xml.SelectSingleNode('/configuration/system.webServer/httpProtocol/customHeaders/add[@name="X-Powered-By"]/@value')
-      if($node.Value){
-         $results.Add(@{SiteName=$_.Name;Property='X-Powered-By';Action="Add";Value=$node.Value})
+      $nodes = $xml.SelectNodes('//remove[@name="X-Powered-By"]')
+      if($nodes.Count -ne 0){
+         $results.Add(@{SiteName=$_.Name;Property='X-Powered-By';Action='Removed'})
+      }else{
+         $results.Add(@{SiteName=$_.Name;Property='X-Powered-By';Action='NotRemoved'})
       }
-      $node = $xml.SelectSingleNode('/configuration/system.webServer/httpProtocol/customHeaders/remove[@name="X-Powered-By"]')
-      if($node){
-         $results.Add(@{SiteName=$_.Name;Property='X-Powered-By';Action="Remove"})
-      }      
    } | Out-Null
-   return $results   
+   return $results  
 }
 
 # Internal function for the validation point 3.12
