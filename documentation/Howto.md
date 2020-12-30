@@ -1,3 +1,5 @@
+# TOC
+
 - [Add support for a new app server](#Add-support-for-a-new-app-server)
 - [Add a new audit rule](#add-a-new-audit-rule)
 - [Add a new report template](#add-a-new-report-template)
@@ -32,6 +34,8 @@ Ex: `parse_config_data_apache(config_file_name, audit_rules)`
 Add a new condition to this block of the [main](../main.py#L36) for the new technology added.
 
 # Add a new audit rule
+
+> A **audit rule** is based on one or several [regular expressions](https://www.rexegg.com/regex-quickstart.html).
 
 ## File information for the different supported technology
 
@@ -85,13 +89,56 @@ Run the following command line to ensure that your configuration is valid:
 $ pytest
 ```
 
-:information_source: If all unit tests pass then your new rule is correctly added.
+:white_check_mark: If all unit tests pass then your new rule is correctly added.
+
+## Rule development sandbox
+
+> This helper [site](https://www.debuggex.com/) can be used to debug a regex.
+
+The following python script can be used to test a audit rule (regex), for example, once it was created using a helper site like [regex101.com](https://regex101.com/):
+
+Script:
+
+```python
+import re, sys
+# Take regex to test as parameter
+current_regex = sys.argv[1]
+# Read the configruation against which the regex must be tested
+with open("test-configuration.txt","r") as f:
+	content = f.read()
+# Display the regex received and that will be applied
+print(f"[+] Regex:\n{current_regex}")
+# Apply the regex using the same code than the tools
+pattern = re.compile(current_regex, re.DOTALL | re.MULTILINE)
+identified = pattern.findall(content)
+# Display results found
+print("[+] findall() results:")
+print(identified)
+```
+
+Usage example:
+
+```shell
+$ python test.py "Export-DataPoint71=.*('Status':'Missing','Property':'Strict-Transport-Security')"
+[+] Regex:
+Export-DataPoint71=.*('Status':'Missing','Property':'Strict-Transport-Security')
+[+] findall() results:
+["'Status':'Missing','Property':'Strict-Transport-Security'"]         
+```
+
+Regarding [regex101.com](https://regex101.com/), take care to the following elements:
+
+![Regex101Example](Regex101Example.png)
+
+Point **1**: Set the **FLAVOR** flag to **Python**
+
+Point **2**: All **Group** matches will be captured by the tool.
 
 # Add a new report template
 
 > Template use the JINJA template engine, the syntax is available [here](https://jinja.palletsprojects.com/en/2.11.x/templates/).
 
-> Each template receive an instance of the object [ReportData](../common/report_data.py) in its context at runtime under the variable named `data` in order to give it data to render. 
+> Each template receive an instance of the object [ReportData](../common/report_data.py) in its context at runtime under the variable named `data` in order to give it data to render.
  
 > A reference to the package `os.path` under the variable named `util_file` is passed in order to allow the report to work with filename in case of need.
 
