@@ -213,4 +213,4 @@ ReportData:
 - [PyTest](https://www.guru99.com/pytest-tutorial.html) is used for the unit testing and all main processing **are** covered by a UT suite.
 - Every analysis rule is covered by a positive and negative unit test, however, the tests are factored in order to tests only rules of type of server (made the maintenance more easier).
 - Third-party dependencies are tracked by [Dependabot](https://dependabot.com/).
-- Code is analyzed with [Bandit](https://pypi.org/project/bandit/), [Flake8](https://flake8.pycqa.org/en/latest/) and [Pydocstyle](https://pypi.org/project/pydocstyle/). See this [section](Architecture#ide) for details regarding the integration of these tools into the IDE.
+- Code is analyzed with [Bandit](https://pypi.org/project/bandit/), [Flake8](https://flake8.pycqa.org/en/latest/) and [Pydocstyle](https://pypi.org/project/pydocstyle/). See this [section](Architecture.md#ide) for details regarding the integration of these tools into the IDE.
