@@ -5,7 +5,6 @@
 ## System dependencies: "jq"
 ## Python dependencies: Content of the "requirements.txt"
 ############################################################
-cd ..
 cdir=$(pwd)
 echo "[+] Current folder: $cdir"
 exit_rc=0
