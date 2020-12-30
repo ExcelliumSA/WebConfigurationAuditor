@@ -7,7 +7,7 @@ from common.server_type import ServerType
 from common.severity import Severity
 from common.utilities import print_message
 from common.report_data import ReportData
-from parsing.parser import parse_audit_rules, parse_config_data_apache, multi_file_reader
+from parsing.parser import parse_audit_rules, parse_config_data_apache, parse_config_data_iis, multi_file_reader
 from analysis.analyzer import analyze
 from reporting.reporter import generate_report
 
@@ -53,8 +53,11 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
         print_message(Severity.INFO, "Load the configuration content for each configuration files to review...")
         config_data_collection = []
         for configuration_file_to_review in configuration_files_to_review:
-            if server_type == ServerType.APACHE:
-                config_data = parse_config_data_apache(configuration_file_to_review, audit_rules)
+            if server_type in [ServerType.APACHE, ServerType.IIS]:
+                if server_type == ServerType.APACHE:
+                    config_data = parse_config_data_apache(configuration_file_to_review, audit_rules)
+                if server_type == ServerType.IIS:
+                    config_data = parse_config_data_iis(configuration_file_to_review, audit_rules)
                 content_hash = hashlib.sha256(config_data.config_content.encode("utf-8")).hexdigest()
                 print_message(Severity.DEBUG, f"SHA256 hash of the content of the config loaded '{configuration_file_to_review}': {content_hash}")
                 config_data_collection.append(config_data)
