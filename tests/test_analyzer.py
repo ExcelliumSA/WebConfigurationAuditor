@@ -125,3 +125,24 @@ def test_iis_all_audit_rules_triggering():
         assert data.config_file_name == IIS_TEST_CONFIG_FILE_TRIGGER_ALL_RULES, f"Wrong config file name, expected: {IIS_TEST_CONFIG_FILE_TRIGGER_ALL_RULES} - received: {data.config_file_name}"
         issues_found_count += len(data.issue_datas)
     assert issues_found_count == expression_count, f"Not all audit rules were triggered: {issues_found_count} triggered on {expression_count} expected!"
+
+
+def test_iis_no_audit_rules_triggering():
+    """Test case in charge of ensuring that all audit rules configured in reference file for IIS are correctly defined by applying them against a configuration that trigger none of them."""
+    # Load the reference file with all the audit rule for IIS
+    audit_rules = parse_audit_rules(IIS_RULE_FILE)
+    # Pass all expressions to "presence_needed=False" in order that all regex do not raise an issue
+    # because the test file have a content triggering no expressions at all
+    for audit_rule in audit_rules:
+        for expression in audit_rule.audit_expressions:
+            expression.presence_needed = False
+    # Load the test configuration associated to this test case
+    config_data = parse_config_data_iis(IIS_TEST_CONFIG_FILE_TRIGGER_NO_RULE, audit_rules)
+    # Create the input object with config data
+    config_data_collection = [config_data]
+    # Run the test
+    analysis_data = analyze(config_data_collection)
+    # Verify result
+    assert analysis_data is not None, "Result is None"
+    assert len(analysis_data) == 1, "The result was expected to contain a single instance of AnalysisData object !"
+    assert len(analysis_data[0].issue_datas) == 0, f"{len(analysis_data[0].issue_datas)} audit rule were triggered, it was expected that no one rule found something!"
