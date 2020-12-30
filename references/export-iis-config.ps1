@@ -714,12 +714,14 @@ function Export-DataPoint712{
 # Verify that the current user as local admin rights
 Write-Host "[+] Verify that the current user '$env:UserName' have local admin rights..."
 try{
-   # Try to list a files restricted to admin users
-   Get-ChildItem -Path C:\Users\Administrator -ErrorAction SilentlyContinue -ErrorVariable processError | Out-Null
+   # Try to create a empty file in a location restricted to admin users
+   $testFile = 'C:\Program Files\excellium.txt'
+   New-Item -Path $testFile -ItemType 'file' -ErrorAction SilentlyContinue -ErrorVariable processError | Out-Null
    # See https://devblogs.microsoft.com/scripting/handling-errors-the-powershell-way/
    if($processError){
       throw "Access Denied!"
    }
+   Remove-Item $testFile
 }
 catch{
    Write-Host "The user did not have the local admin rights, extraction cancelled!"
