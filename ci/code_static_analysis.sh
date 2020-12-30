@@ -7,6 +7,7 @@
 ############################################################
 cd ..
 cdir=$(pwd)
+echo "[+] Current folder: $cdir"
 exit_rc=0
 echo "[+] Run unit test suites..."
 pytest
