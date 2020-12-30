@@ -130,7 +130,7 @@ Regarding [regex101.com](https://regex101.com/), take care to the following elem
 
 ![Regex101Example](Regex101Example.png)
 
-Point **1**: Set the **FLAVOR** flag to **Python**
+Point **1**: Set the **FLAVOR** flag to **Python**.
 
 Point **2**: All **Group** matches will be captured by the tool.
 
