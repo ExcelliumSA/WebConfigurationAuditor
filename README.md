@@ -14,8 +14,8 @@
 
 ## Objective, architecture and decision
 
-See [here](Architecture.md).
+See [here](documentation/Architecture.md).
 
 ## HowTo procedures
 
-See [here](Howto.md).
+See [here](documentation/Howto.md).
