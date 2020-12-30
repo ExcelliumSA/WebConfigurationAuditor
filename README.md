@@ -19,3 +19,15 @@ See [here](documentation/Architecture.md).
 ## HowTo procedures
 
 See [here](documentation/Howto.md).
+
+## Execution error knowledge-base
+
+### Error during the processing: Expecting value: line 1 column 1 (char 0)
+
+The file read is encoded using **UTF8 BOM** encoding.
+
+Convert it to **UTF8** (No BOM) encoding, for example, using the following Linux shell command  ([source](https://unix.stackexchange.com/a/381231)):
+
+ ```shell
+ $ tail -c +4 withBOM.txt > withoutBOM.txt
+ ```
