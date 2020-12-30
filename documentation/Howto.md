@@ -9,27 +9,27 @@ Follow these steps.
 
 **Step 1:**
 
-Add a new audit rules JSON file in this [folder](references) and follow this [naming convention](Architecture.md#rules-configuration-convention).
+Add a new audit rules JSON file in this [folder](../references) and follow this [naming convention](Architecture.md#rules-configuration-convention).
 
 Ex: `apache.json`
 
 **Step 2:**
 
-Add the technology to this [enumeration](common/server_type.py) and use the uppercase name for the technology for the enum name of the new item (continue the integer sequence for the value of the new item).
+Add the technology to this [enumeration](../common/server_type.py) and use the uppercase name for the technology for the enum name of the new item (continue the integer sequence for the value of the new item).
 
 Ex: `APACHE`
 
 **Step 3:**
 
-Add new dedicated parsing function in [this](parsing/parser.py) module using this name and signature: `def parse_config_data_[technology_lowercase](config_file_name, audit_rules)`
+Add new dedicated parsing function in [this](../parsing/parser.py) module using this name and signature: `def parse_config_data_[technology_lowercase](config_file_name, audit_rules)`
 
 Ex: `parse_config_data_apache(config_file_name, audit_rules)`
 
-:warning: This parsing function must return a **[ConfigData](common/config_data.py)** object.
+:warning: This parsing function must return a **[ConfigData](../common/config_data.py)** object.
 
 **Step 4:**
 
-Add a new condition to this block of the [main](main.py#L36) for the new technology added.
+Add a new condition to this block of the [main](../main.py#L36) for the new technology added.
 
 # Add a new audit rule
 
@@ -37,21 +37,21 @@ Add a new condition to this block of the [main](main.py#L36) for the new technol
 
 ### Apache
 
-- **Reference audit rules**: Audit rules are defined in this [file](references/apache.json).
-- **Triggering test config**: Test configuration snippet that **trigger all the rules** are defined in this [file](tests/data/apache_test_config_all_issues.conf).
-- **No triggering test config**: Test configuration snippet that **trigger NO rules** are defined in this [file](tests/data/apache_test_config_no_issue.conf).
+- **Reference audit rules**: Audit rules are defined in this [file](../references/apache.json).
+- **Triggering test config**: Test configuration snippet that **trigger all the rules** are defined in this [file](../tests/data/apache_test_config_all_issues.conf).
+- **No triggering test config**: Test configuration snippet that **trigger NO rules** are defined in this [file](../tests/data/apache_test_config_no_issue.conf).
 
 ### Tomcat
 
-- **Reference audit rules**: Audit rules are defined in this [file](references/tomcat.json).
-- **Triggering test config**: Test configuration snippet that **trigger all the rules** are defined in this [file](tests/data/tomcat_test_config_all_issues.xml).
-- **No triggering test config**: Test configuration snippet that **trigger NO rules** are defined in this [file](tests/data/tomcat_test_config_no_issue.xml).
+- **Reference audit rules**: Audit rules are defined in this [file](../references/tomcat.json).
+- **Triggering test config**: Test configuration snippet that **trigger all the rules** are defined in this [file](../tests/data/tomcat_test_config_all_issues.xml).
+- **No triggering test config**: Test configuration snippet that **trigger NO rules** are defined in this [file](../tests/data/tomcat_test_config_no_issue.xml).
 
 ### IIS
 
-- **Reference audit rules**: Audit rules are defined in this [file](references/iis.json).
-- **Triggering test config**: Test configuration snippet that **trigger all the rules** are defined in this [file](tests/data/iis_test_config_all_issues.json).
-- **No triggering test config**: Test configuration snippet that **trigger NO rules** are defined in this [file](tests/data/iis_test_config_no_issue.json).
+- **Reference audit rules**: Audit rules are defined in this [file](../references/iis.json).
+- **Triggering test config**: Test configuration snippet that **trigger all the rules** are defined in this [file](../tests/data/iis_test_config_all_issues.json).
+- **No triggering test config**: Test configuration snippet that **trigger NO rules** are defined in this [file](../tests/data/iis_test_config_no_issue.json).
 
 ## Procedure
 
@@ -91,7 +91,7 @@ $ pytest
 
 > Template use the JINJA template engine, the syntax is available [here](https://jinja.palletsprojects.com/en/2.11.x/templates/).
 
-> Each template receive an instance of the object [ReportData](common/report_data.py) in its context at runtime under the variable named `data` in order to give it data to render. 
+> Each template receive an instance of the object [ReportData](../common/report_data.py) in its context at runtime under the variable named `data` in order to give it data to render. 
  
 > A reference to the package `os.path` under the variable named `util_file` is passed in order to allow the report to work with filename in case of need.
 
@@ -101,9 +101,9 @@ $ pytest
 
 :warning: A template must not depend on any external resources (like online one in case of HTML report for example) because it must allow the client to open it from a network isolated from Internet. Due to this, all needed resource must be embedded in the template itself.
 
-:information_source: Report [example](templates/template_html.txt).
+:information_source: Report [example](../templates/template_html.txt).
 
-Add a new text file in the folder [templates](templates) with this naming convention `template_[identifier].txt` where `identifier` is a word that indicate the format and a qualifier for the type of report.
+Add a new text file in the folder [templates](../templates) with this naming convention `template_[identifier].txt` where `identifier` is a word that indicate the format and a qualifier for the type of report.
 
 Syntax expected for the `identifier` is `[a-z0-9_]{1,20}`.
 
@@ -115,7 +115,7 @@ Syntax expected for the `identifier` is `[a-z0-9_]{1,20}`.
 
 A dedicated PowerShell script was created in order to allow a client to extract the data without the help of XLM.
 
-The script is [here](references/export-iis-config.ps1) and generate a JSON file.
+The script is [here](../references/export-iis-config.ps1) and generate a JSON file.
 
 The following paragraph describe how to use it from a PowerShell shell window.
 
