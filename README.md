@@ -22,7 +22,7 @@ See [here](documentation/Howto.md).
 
 ## Execution error knowledge-base
 
-### Error during the processing: Expecting value: line 1 column 1 (char 0)
+### Expecting value: line 1 column 1 (char 0)
 
 The file read is encoded using **UTF8 BOM** encoding.
 
