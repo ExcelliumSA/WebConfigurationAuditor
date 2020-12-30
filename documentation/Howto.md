@@ -160,6 +160,8 @@ Syntax expected for the `identifier` is `[a-z0-9_]{1,20}`.
 
 > :warning: **It is important that the client ensure that the JSON file do not contains any sensitive data prior to send the file to XLM!**
 
+> :warning: The script must be executed with a user having local admin rights.
+
 A dedicated PowerShell script was created in order to allow a client to extract the data without the help of XLM.
 
 The script is [here](../references/export-iis-config.ps1) and generate a JSON file.
@@ -168,6 +170,7 @@ The following paragraph describe how to use it from a PowerShell shell window.
 
 ```powershell
 PS> .\export-iis-config.ps1
+[+] Verify that the current user 'XLM' have local admin rights...
 [+] Verify the installed roles...
 [+] Gathering information: Finished with 0 error(s).
 [+] Generate and save the JSON file...
@@ -176,10 +179,19 @@ PS> .\export-iis-config.ps1
 A2DF20F445F68183CA029940A2D3DFB1FE89EDDAE5B2DCF991315865306D6153
 ```
 
+:warning: If the current did not have the local admin rights then the following message is displayed:
+
+```powershell
+PS> .\export-iis-config.ps1
+[+] Verify that the current user 'XLM' have local admin rights...
+The user did not have the local admin rights, extraction cancelled!
+```
+
 :warning: If IIS is not installed on the machine then the following message is displayed:
 
 ```powershell
 PS> .\export-iis-config.ps1
+[+] Verify that the current user 'XLM' as local admin rights...
 [+] Verify the installed roles...
 The IIS roles 'Web-Server' and 'Web-WebServer' are not installed, extraction cancelled!
 ```

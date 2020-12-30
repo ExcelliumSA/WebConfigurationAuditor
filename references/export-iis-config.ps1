@@ -711,6 +711,20 @@ function Export-DataPoint712{
 ##########################
 ## MAIN FUNCTIONS BLOCK ##
 ##########################
+# Verify that the current user as local admin rights
+Write-Host "[+] Verify that the current user '$env:UserName' have local admin rights..."
+try{
+   # Try to list a files restricted to admin users
+   Get-ChildItem -Path C:\Users\Administrator -ErrorAction SilentlyContinue -ErrorVariable processError | Out-Null
+   # See https://devblogs.microsoft.com/scripting/handling-errors-the-powershell-way/
+   if($processError){
+      throw "Access Denied!"
+   }
+}
+catch{
+   Write-Host "The user did not have the local admin rights, extraction cancelled!"
+   Exit 2000
+}
 # Verify that the machine have the IIS roles installed
 Write-Host "[+] Verify the installed roles..."
 $rolesCount=$(Get-WindowsFeature | Where-Object {($_. installstate -eq "Installed") -and (($_.name -eq "Web-Server") -or ($_.name -eq "Web-WebServer"))}).count
@@ -744,7 +758,7 @@ Write-Host "`r[+] Gathering information: Finished with $errorCount error(s)."
 # Generate and save the JSON file
 Write-Host '[+] Generate and save the JSON file...'
 $filename = "$env:computername-IIS.json"
-ConvertTo-Json $results -Depth 100 -Compress | Out-File -FilePath .\$filename -Encoding utf8 
+ConvertTo-Json $results -Depth 100 -Compress | Out-File -FilePath .\$filename -Encoding ASCII 
 Write-Host "[+] Content saved to file $filename."
 $hash = Get-FileHash -Algorithm SHA256 .\$filename | Select-Object -ExpandProperty Hash
 Write-Host "[+] File SHA256 hash:`n$hash"
