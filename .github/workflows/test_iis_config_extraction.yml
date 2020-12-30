@@ -16,6 +16,6 @@ jobs:
       - name: Checkout on ${{ matrix.os }}
         uses: actions/checkout@v2
       - name: Execute the tests suite on ${{ matrix.os }}
-        run: .\test_iis_config_extraction.ps1
+        run: .\ci\test_iis_config_extraction.ps1
         shell: powershell
 

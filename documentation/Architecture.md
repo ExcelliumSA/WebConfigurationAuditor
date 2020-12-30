@@ -38,6 +38,7 @@ The tools has for objective to perform a fully automated secure configuration re
 PROJECT_ROOT
 ├───.vscode
 ├───analysis
+├───ci
 ├───common
 ├───documentation
 ├───parsing
@@ -47,17 +48,23 @@ PROJECT_ROOT
 ├───tests
 ```
 
-- **.vscode**: Folder containing the internal stuff used by VSCode to handle the project.
+:construction: Python project related content:
+
 - **analysis**: Package containing all Python code related to the analysis of the configuration file provided.
 - **common**: Package containing all Python code shared by all the project.
 - **parsing**: Package containing all Python code related to the parsing of the the references audit rules and the configuration file provided.
-- **documentation**: Folder containing all the projects documentation files (markdown, images, etc).
 - **references**: Folder containing the audit rules files for every technology supported.
 - **reporting**: Package containing all Python code related to the generation of the report.
 - **templates**: Report template file using the JINJA syntax to define the available reports.
 - **tests**: Package containing all Python code related to the unit testing of the project.
 
-The tool entry point is the `main.py` file:
+:memo: Documentation, CI, IDE related content:
+
+- **.vscode**: Folder containing the internal stuff used by [VSCode](Architecture.md#ide) to handle the project.
+- **ci**: Folder containing all the Continuous Integration files used by [GitHub actions workflows](../.github/workflows).
+- **documentation**: Folder containing all the projects documentation files (markdown, images, etc).
+
+:dart: The tool entry point is the `main.py` file:
 
 ```bash
 python main.py --help
@@ -65,7 +72,7 @@ python main.py --help
 
 # Debug mode
 
-By default the tool do not print the debug level message. 
+By default the tool do not print the debug level message.
 
 To enable the debug mode then set a environement variable named `DEBUG` to any value prior to call the tool:
 

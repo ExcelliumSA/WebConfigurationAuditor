@@ -5,6 +5,7 @@
 ## System dependencies: "jq"
 ## Python dependencies: Content of the "requirements.txt"
 ############################################################
+cd ..
 cdir=$(pwd)
 exit_rc=0
 echo "[+] Run unit test suites..."

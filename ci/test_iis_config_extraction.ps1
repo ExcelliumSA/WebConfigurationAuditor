@@ -4,7 +4,7 @@
 # NOTE:
 # Case where IIS roles are not installed cannot be tested because roles cannot be removed 
 # and IIS roles are installed by default on runnners
-$iisScript = ".\references\export-iis-config.ps1"
+$iisScript = "..\references\export-iis-config.ps1"
 $filename = "$env:computername-IIS.json"
 # Display the web roles installation state
 Get-WindowsFeature | Where-Object {($_.name -eq "Web-Server") -or ($_.name -eq "Web-WebServer")}
