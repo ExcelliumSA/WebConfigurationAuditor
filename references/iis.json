@@ -96,13 +96,9 @@
         "CIS_version": "IIS-10-1.1.1",
         "audit_expressions": [
             {
-                "expression": "Export-DataPoint22=.*(<passport\\s+\/>)",
+                "expression": "Export-DataPoint22=.*(<authentication\\s?\/>|<authentication\\smode=.?None.?|<forms>|<forms\\s?/>|<anonymousAuthentication\\s?/>|<anonymousAuthentication\\senabled=.?true.?|<(?:digestAuthentication|basicAuthentication|clientCertificateMappingAuthentication|windowsAuthentication)\\senabled=.?false.?)",
                 "presence_needed": "False"
-            },
-            {
-                "expression": "Export-DataPoint22=.*(<forms>[\\s;]*<credentials>[\\s;]*<\/credentials>[\\s;]*<\/forms>)",
-                "presence_needed": "False"
-            }                      
+            }                     
         ],
         "override_rules": []
     },

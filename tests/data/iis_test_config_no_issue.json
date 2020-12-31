@@ -326,7 +326,7 @@
         "Property": "maxUrl",
         "Value": "x"
     }],
-    "Export-DataPoint22": ["\u003csystem.web\u003e", "  \u003cauthentication\u003e", "    \u003cforms\u003e", "      \u003ccredentialsX\u003e", "      xxxx\u003c/credentials\u003e", "    \u003c/forms\u003e", "    \u003cpasseport /\u003e", "  \u003c/authentication\u003e", "\u003c/system.web\u003e"],
+    "Export-DataPoint22": ["\u003csystem.web\u003e", "  \u003cauthentication\u003e", "    \u003cforms name='MyAppCookieName'\u003e", "      \u003ccredentials\u003e", "      xxxx\u003c/credentials\u003e", "    \u003c/forms\u003e", "    \u003cpasseport /\u003e", "  \u003c/authentication\u003e", "\u003c/system.web\u003e"],
     "Export-DataPoint53": [{
         "SiteName": "Default Web Site",
         "Property": "Log",
