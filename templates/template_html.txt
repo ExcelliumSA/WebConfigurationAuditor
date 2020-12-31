@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline'">-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline' 'unsafe-eval'">
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
 <meta charset="utf-8">
@@ -8046,7 +8046,7 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css
     <h3>Server type was {{ analysis_data.server_type.name }}.</h3>
     <h3>{{ analysis_data.issue_datas|length }} issues found on {{ check_total_count }} points validated.</h3>
 
-    <table data-toggle="table" data-search="true" data-show-columns="true" data-sortable="true" data-pagination="true">
+    <table data-toggle="table" data-search="true" data-show-columns="true" data-sortable="true" data-pagination="false">
         <thead>
             <tr>
                 <th data-sortable="true" data-field="RuleID" data-title-tooltip="Rule identifier in the CIS referential used">Rule ID</th>
