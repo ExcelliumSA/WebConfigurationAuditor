@@ -72,7 +72,7 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
         print_message(Severity.INFO, f"Generate the report to the file '{report_output_file}'...")
         report_data = ReportData(audit_rules, analysis_data_collection)
         report_content = generate_report(report_data, report_template_file)
-        with open(report_output_file, "w") as f:
+        with open(report_output_file, "w", encoding="UTF-8") as f:
             f.write(report_content)
         print_message(Severity.INFO, "Report created.")
         delay = round(time.time() - start_time, 2)

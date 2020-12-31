@@ -18,7 +18,7 @@
                         <rule_id>{{ issue_data.rule_id }}</rule_id>
                         <CIS_version>{{ issue_data.CIS_version }}</CIS_version>
                         <status>failed</status>
-                        <details><![CDATA[{{ issue_data.details }}]]></details>
+                        <details><![CDATA[{{ issue_data.details.split("DEBUG-REGEX:")[0] }}]]></details>
                     </rule>
                     {% endfor %}
                     {% for point in success_validation_points %}

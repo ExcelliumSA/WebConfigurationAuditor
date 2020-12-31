@@ -21,7 +21,7 @@
                             "rule_id": "{{ issue_data.rule_id }}",
                             "CIS_version": "{{ issue_data.CIS_version }}",
                             "status": "failed",
-                            "details": "{{ issue_data.details.replace("\"","'") }}"
+                            "details": "{{ issue_data.details.split("DEBUG-REGEX:")[0].replace("\"","'") }}"
                         }{% if not loop.last %},{% endif %}
                     {%- endfor -%}
                     {%- if failed_validation_points_count > 0 and success_validation_points_count > 0 -%},{%- endif -%}

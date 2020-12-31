@@ -20,7 +20,7 @@ def generate_report(report_data, template_file):
 
     # Load the template, generate the report and return it
     template_content = ""
-    with open(template_file, "r") as t:
+    with open(template_file, "r", encoding="UTF-8") as t:
         template_content = t.read()
     report_content = Template(template_content).render(data=report_data, util_file=os.path, util_date=datetime.datetime.now())
     return report_content

@@ -5,7 +5,7 @@ configuration_file;rule_id;CIS_version;status;details
 {%- for analysis_data in data.analysis_data_collection %}
 {%- set success_validation_points = data.audit_rules_passed[analysis_data.config_file_name] -%} 
 {% for issue_data in analysis_data.issue_datas %}
-"{{ util_file.basename(analysis_data.config_file_name) }}";"{{ issue_data.rule_id }}";"{{ issue_data.CIS_version }}";"failed";"{{ issue_data.details.replace("\"","'") }}"
+"{{ util_file.basename(analysis_data.config_file_name) }}";"{{ issue_data.rule_id }}";"{{ issue_data.CIS_version }}";"failed";"{{ issue_data.details.split("DEBUG-REGEX:")[0].replace("\"","'") }}"
 {%- endfor -%}
 {%- for point in success_validation_points %}
 "{{ util_file.basename(analysis_data.config_file_name) }}";"{{ point.rule_id }}";"{{ point.CIS_version }}";"passed";""

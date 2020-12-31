@@ -20,8 +20,8 @@ def analyze(config_data_collection):
 
     # Apply processing
     analysis_results = []
-    issue_msg_template_matched = "Rule '%s' has found the following insecure configuration: %s."
-    issue_msg_template_not_matched = "Rule '%s' has not found the expected recommended secure configuration."
+    issue_msg_template_matched = "Rule '%s' found the following insecure configuration: %s."
+    issue_msg_template_not_matched = "Rule '%s' did not find the expected recommended secure configuration. DEBUG-REGEX:%s"
     debug_msg_template = "Test rule '%s' with the regex '%s' has %s matched."
     current_rule_identifier = ""
     current_regex = ""
@@ -47,7 +47,7 @@ def analyze(config_data_collection):
                         issues_identified.append(issue)
                     elif len(identified) == 0 and expression.presence_needed:
                         print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
-                        issue = IssueData(issue_msg_template_not_matched % (current_rule_identifier), current_rule_identifier, audit_rule.CIS_version)
+                        issue = IssueData(issue_msg_template_not_matched % (current_rule_identifier, current_regex), current_rule_identifier, audit_rule.CIS_version)
                         issues_identified.append(issue)
                     elif len(identified) == 0:
                         print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
