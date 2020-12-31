@@ -200,7 +200,7 @@ Chart generation functions
                 <td>{{ issue_data.rule_id }} </td>
                 <td>{{ issue_data.CIS_version }} </td>
                 <td class="failed">&#10006;</td>
-                <td>{{ issue_data.details }} </td>
+                <td>{{ issue_data.details|e }} </td>
             </tr>
             {% endfor %}
 
