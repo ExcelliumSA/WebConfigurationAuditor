@@ -5,6 +5,7 @@ from common.analysis_data import AnalysisData
 from common.issue_data import IssueData
 from common.utilities import print_message
 from common.severity import Severity
+from termcolor import colored
 
 
 def analyze(config_data_collection):
@@ -33,6 +34,7 @@ def analyze(config_data_collection):
             print_message(Severity.INFO, f"Begin analysis of the file '{os.path.basename(config_data.config_file_name)}' using {len(config_data.audit_rules)} rules.")
             content_hash = hashlib.sha256(config_data.config_content.encode("utf-8")).hexdigest()
             print_message(Severity.DEBUG, f"SHA256 hash of the content of the config analyzed: {content_hash}")
+            whitespaces_regex = pattern = re.compile(r'\s+')
             for audit_rule in config_data.audit_rules:
                 current_rule_identifier = audit_rule.rule_id
                 for expression in audit_rule.audit_expressions:
@@ -43,18 +45,20 @@ def analyze(config_data_collection):
                     else:
                         blocks = [config_data.config_content]
                     for block in blocks:
+                        if re.sub(whitespaces_regex, '', block) == "":  # Remove empty blocks
+                            continue
                         current_regex = expression.expression
                         pattern = re.compile(current_regex, re.DOTALL | re.MULTILINE)
                         identified = pattern.findall(block)
                         identified = list(dict.fromkeys(identified))  # Remove duplicate elements found
                         identified.sort()  # Sort elements found to enhance the output details
                         if len(identified) > 0 and not expression.presence_needed:
-                            print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
-                            issue = IssueData(issue_msg_template_matched % (current_rule_identifier, identified), current_rule_identifier, audit_rule.CIS_version)
+                            print_message(Severity.DEBUG, colored("[issue] ", "cyan") + debug_msg_template % (current_rule_identifier, current_regex, ""))
+                            issue = IssueData(issue_msg_template_matched % (current_rule_identifier, identified), current_rule_identifier, audit_rule.CIS_version, (block if expression.block else None))
                             issues_identified.append(issue)
                         elif len(identified) == 0 and expression.presence_needed:
-                            print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
-                            issue = IssueData(issue_msg_template_not_matched % (current_rule_identifier, current_regex), current_rule_identifier, audit_rule.CIS_version)
+                            print_message(Severity.DEBUG, colored("[issue] ", "cyan") + debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
+                            issue = IssueData(issue_msg_template_not_matched % (current_rule_identifier, current_regex), current_rule_identifier, audit_rule.CIS_version, (block if expression.block else None))
                             issues_identified.append(issue)
                         elif len(identified) == 0:
                             print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))

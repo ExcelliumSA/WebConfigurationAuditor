@@ -44,7 +44,10 @@ def main(folder_to_process, server_type, report_template_file, report_output_fil
         print_message(Severity.INFO, f"{len(audit_rules)} rules loaded.")
 
         print_message(Severity.INFO, "Gather the list of configuration files to review...")
-        configuration_files_to_review = multi_file_reader(folder_to_process)
+        if os.path.isfile(folder_to_process):  # Gives the possibility to only test one file
+            configuration_files_to_review = [folder_to_process]
+        else:
+            configuration_files_to_review = multi_file_reader(folder_to_process)
         for configuration_file_to_review in configuration_files_to_review:
             content_hash = compute_file_content_hash(configuration_file_to_review)
             print_message(Severity.DEBUG, f"SHA256 hash of the content of the config file identified '{configuration_file_to_review}': {content_hash}")

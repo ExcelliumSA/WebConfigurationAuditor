@@ -1,7 +1,7 @@
 class IssueData:
     """Represents the information of a found issue."""
 
-    def __init__(self, details, rule_id, CIS_version):
+    def __init__(self, details, rule_id, CIS_version, block):
         """Constructor.
 
         :param details: A short description of the issue.
@@ -11,3 +11,4 @@ class IssueData:
         self.details = details
         self.rule_id = rule_id
         self.CIS_version = CIS_version
+        self.block = block

@@ -124,6 +124,7 @@ def test_list_files():
     files_test = multi_file_reader(TEST_DIR_PATH)
     reference = []
     for subdir, dirs, files in os.walk(TEST_DIR_PATH):
+        dirs = dirs
         for file in files:
             reference.append(os.path.abspath(os.path.join(subdir, file)))
     files_test.sort()
