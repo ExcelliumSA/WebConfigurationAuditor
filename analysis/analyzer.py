@@ -36,23 +36,30 @@ def analyze(config_data_collection):
             for audit_rule in config_data.audit_rules:
                 current_rule_identifier = audit_rule.rule_id
                 for expression in audit_rule.audit_expressions:
-                    current_regex = expression.expression
-                    pattern = re.compile(current_regex, re.DOTALL | re.MULTILINE)
-                    identified = pattern.findall(config_data.config_content)
-                    identified = list(dict.fromkeys(identified))  # Remove duplicate elements found
-                    identified.sort()  # Sort elements found to enhance the output details
-                    if len(identified) > 0 and not expression.presence_needed:
-                        print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
-                        issue = IssueData(issue_msg_template_matched % (current_rule_identifier, identified), current_rule_identifier, audit_rule.CIS_version)
-                        issues_identified.append(issue)
-                    elif len(identified) == 0 and expression.presence_needed:
-                        print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
-                        issue = IssueData(issue_msg_template_not_matched % (current_rule_identifier, current_regex), current_rule_identifier, audit_rule.CIS_version)
-                        issues_identified.append(issue)
-                    elif len(identified) == 0:
-                        print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
+                    if expression.block:
+                        block_regex = expression.block
+                        block_pattern = re.compile(block_regex, re.DOTALL | re.MULTILINE)
+                        blocks = block_pattern.findall(config_data.config_content)
                     else:
-                        print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
+                        blocks = [config_data.config_content]
+                    for block in blocks:
+                        current_regex = expression.expression
+                        pattern = re.compile(current_regex, re.DOTALL | re.MULTILINE)
+                        identified = pattern.findall(block)
+                        identified = list(dict.fromkeys(identified))  # Remove duplicate elements found
+                        identified.sort()  # Sort elements found to enhance the output details
+                        if len(identified) > 0 and not expression.presence_needed:
+                            print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
+                            issue = IssueData(issue_msg_template_matched % (current_rule_identifier, identified), current_rule_identifier, audit_rule.CIS_version)
+                            issues_identified.append(issue)
+                        elif len(identified) == 0 and expression.presence_needed:
+                            print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
+                            issue = IssueData(issue_msg_template_not_matched % (current_rule_identifier, current_regex), current_rule_identifier, audit_rule.CIS_version)
+                            issues_identified.append(issue)
+                        elif len(identified) == 0:
+                            print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, "NOT"))
+                        else:
+                            print_message(Severity.DEBUG, debug_msg_template % (current_rule_identifier, current_regex, ""))
             print_message(Severity.INFO, f"Analysis of the file '{os.path.basename(config_data.config_file_name)}' ended with {error_count} error(s).")
         except Exception as e:
             error_count += 1
