@@ -21,8 +21,6 @@ def test_apache_all_audit_rules_triggering():
     audit_rules = parse_audit_rules(APACHE_RULE_FILE)
     # count the total number of expressions
     expression_count = 0
-    for audit_rule in audit_rules:
-        expression_count += len(audit_rule.audit_expressions)
     # Load the test configuration associated to this test case
     config_data = parse_config_data_apache(APACHE_TEST_CONFIG_FILE_TRIGGER_ALL_RULES, audit_rules)
     # Create the input object with config data
@@ -36,8 +34,12 @@ def test_apache_all_audit_rules_triggering():
     for data in analysis_data:
         assert data.server_type == ServerType.APACHE, f"Wrong server type, expected: {ServerType.APACHE} - received: {data.server_type}"
         assert data.config_file_name == APACHE_TEST_CONFIG_FILE_TRIGGER_ALL_RULES, f"Wrong config file name, expected: {APACHE_TEST_CONFIG_FILE_TRIGGER_ALL_RULES} - received: {data.config_file_name}"
-        issues_found_count += len(data.issue_datas)
-    assert issues_found_count >= expression_count, f"Not all audit rules were triggered: {issues_found_count} triggered on {expression_count} expected!" # FIXME: need to find a better way to test that all rules have been triggered
+
+        previous_rule_id = None
+        for issue_data in data.issue_datas:
+            issues_found_count += (1 if previous_rule_id != issue_data.rule_id else 0)
+            previous_rule_id = issue_data.rule_id  # Not the best test but at least it ensure that all rule_id fires
+    assert issues_found_count == len(audit_rules), f"Not all audit rules were triggered: {issues_found_count} triggered on {expression_count} expected!"
 
 
 def test_apache_no_audit_rules_triggering():
