@@ -113,6 +113,7 @@ Rules for each type of server are stored in JSON files which are named `nameOfTh
         "rule_id": "CIS-ID" ,
         "CIS_version": "x.x",
         "audit_expressions": [{
+                        "block":"BLOCK_REGEX",
                         "expression":"*RULE_REGEX*",
                         "presence_needed": "True|False"
                         },
@@ -135,6 +136,8 @@ The member **rule_id** have the following value `CIS-PointIdentifierInReferentia
 The member **CIS_Version** have the following value `uppercase(TechnologyName)-TechnologyVersion-CISDocumentVersion`.
 
 *Example:* The document of the CIS is named `CIS_Apache_HTTP_Server_2.4_Benchmark_v1.5.0.pdf` so the member **CIS_Version** will be `APACHE-2.4-1.5.0`.
+
+The member **block** is optionnal and is used to define a multiline block of config. The **expression** must be matched (or not depending on the **presence_needed** field) on each block matched by the ***block** regular expression.
 
 The member **presence_needed** is used to specify if the audit expression (regex) is expected to find something or not:
 
