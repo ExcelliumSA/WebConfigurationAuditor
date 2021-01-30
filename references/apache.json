@@ -107,11 +107,11 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "^User(\\s+)(?!root).*?$",
+                "expression": "^User\\s+(?!root).*?$",
                 "presence_needed": "True"
             },
             {
-                "expression": "^Group(\\s+)(?!root).*?$",
+                "expression": "^Group\\s+(?!root).*?$",
                 "presence_needed": "True"
             }
         ],
@@ -122,11 +122,13 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "<Directory>.*?(\\s*)Require(\\s+)all denied$.*?</Directory>",
+                "block": "<Directory>.*?</Directory>",
+                "expression": "Require\\s+all\\s+denied\\s*$",
                 "presence_needed": "True"
             },
             {
-                "expression": "<Directory>.*?(\\s*)(Allow|Deny)(\\s+).*?</Directory>",
+                "block": "<Directory>.*?</Directory>",
+                "expression": "(Allow|Deny)\\s+",
                 "presence_needed": "False"
             }
         ],
@@ -137,19 +139,23 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "<Directory(\\s*).*?>.*?(\\s*)Require(\\s+).*?$.*?</Directory>",
+                "block": "<Directory\\s+.+?>.*?</Directory>",
+                "expression": "Require\\s+.*?$",
                 "presence_needed": "True"
             },
             {
-                "expression": "<Directory(\\s*).*?>.*?(\\s*)(Allow|Deny)(\\s+).*?</Directory>",
+                "block": "<Directory\\s+.+?>.*?</Directory>",
+                "expression": "(Allow|Deny)\\s+",
                 "presence_needed": "False"
             },
             {
-                "expression": "<Location(\\s*).*?>.*?(\\s*)Require(\\s+).*?$.*?</Location>",
+                "block": "<Location\\s+.+?>.*?</Location>",
+                "expression": "Require\\s+.*?$",
                 "presence_needed": "True"
             },
             {
-                "expression": "<Location(\\s*).*?>.*?(\\s*)(Allow|Deny)(\\s+).*?</Location>",
+                "block": "<Location\\s+.+?>.*?</Location>",
+                "expression": "(Allow|Deny)\\s+",
                 "presence_needed": "False"
             }
         ],
@@ -160,15 +166,17 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "<Directory(\\s*)/>.*?(\\s*)AllowOverride(\\s+)None.*?</Directory>",
+                "block": "<Directory\\s+/>.*?</Directory>",
+                "expression": "AllowOverride\\s+None\\s*$",
                 "presence_needed": "True"
             },
             {
-                "expression": "<Directory(\\s*)/>.*?(\\s*)AllowOverride(\\s+)(?!None).*?</Directory>",
+                "block": "<Directory\\s+/>.*?</Directory>",
+                "expression": "AllowOverride\\s+(?!None)",
                 "presence_needed": "False"
             },
             {
-                "expression": "<Directory(\\s*)/>.*?(\\s*)AllowOverrideList.*?</Directory>",
+                "expression": "AllowOverrideList",
                 "presence_needed": "False"
             }
         ],
@@ -178,10 +186,6 @@
         "rule_id": "CIS-4.4",
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
-            {
-                "expression": "AllowOverride(\\s+)None",
-                "presence_needed": "True"
-            },
             {
                 "expression": "AllowOverride(\\s+)(?!None)",
                 "presence_needed": "False"
@@ -198,11 +202,13 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "<Directory(\\s*)/>.*?(\\s*)Options(\\s+)None.*?</Directory>",
+                "block": "<Directory\\s+/>.*?</Directory>",
+                "expression": "Options\\s+None\\s*$",
                 "presence_needed": "True"
             },
             {
-                "expression": "<Directory(\\s*)/>.*?(\\s*)Options(\\s+)(?!None).*?</Directory>",
+                "block": "<Directory\\s+/>.*?</Directory>",
+                "expression": "Options\\s+(?!None)",
                 "presence_needed": "False"
             }
         ],
@@ -213,11 +219,13 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "<Directory(\\s*).*?>.*?(\\s*)Options(\\s+)None.*?</Directory>",
+                "block": "<Directory\\s+.*?>.*?</Directory>",
+                "expression": "Options\\s+(None|Multiviews)\\s*$",
                 "presence_needed": "True"
             },
             {
-                "expression": "<Directory(\\s*).*?>.*?(\\s*)Options(\\s+)(?!None).*?</Directory>",
+                "block": "<Directory\\s+.*?>.*?</Directory>",
+                "expression": "Options\\s+(?!(None|Multiviews))\\s*$",
                 "presence_needed": "False"
             }
         ],
@@ -228,7 +236,8 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "<Directory.*?>.*?(\\s*)Options(\\s|[A-Za-z0-9])*Includes.*?</Directory>",
+                "block": "<Directory\\s+.*?>.*?</Directory>",
+                "expression": "Options(\\s|[A-Za-z0-9])*Includes",
                 "presence_needed": "False"
             }
         ],
@@ -239,7 +248,7 @@
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "TraceEnable(\\s+)off",
+                "expression": "TraceEnable\\s+off\\s*$",
                 "presence_needed": "True"
             }
         ],
@@ -261,11 +270,22 @@
         "override_rules": []
     },
     {
+        "rule_id": "CIS-5.10",
+        "CIS_version": "APACHE-2.4-1.5.0",
+        "audit_expressions": [
+            {
+                "expression": "<FilesMatch\\s+\"\\^\\\\.ht\">$\\s*Require\\s+all\\s+denied\\s*\n</FilesMatch>",
+                "presence_needed": "True"
+            }
+        ],
+        "override_rules": []
+    },
+    {
         "rule_id": "CIS-5.11",
         "CIS_version": "APACHE-2.4-1.5.0",
         "audit_expressions": [
             {
-                "expression": "<FilesMatch \"\\^\\.\\*\\$\">(\\s*)\n(\\s*)(Require(\\s+)all(\\s+)denied|Deny(\\s+)from(\\s+)All)(\\s*)\n</FilesMatch>",
+                "expression": "<FilesMatch \"\\^\\.\\*\\$\">\\s*\n\\s*(Require\\s+all\\s+denied|Deny\\s+from\\s+All)\\s*\n</FilesMatch>",
                 "presence_needed": "True"
             }
         ],

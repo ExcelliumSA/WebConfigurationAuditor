@@ -14,8 +14,13 @@ def parse_audit_rules(rule_file_name):
     :param rule_file_name: The name of the file to open to get the JSON.
     :return: A list of AuditRule objects created from the given file.
     """
-    with open(rule_file_name, "r") as rule_file:
-        content = rule_file.read()
+    try:
+        with open(rule_file_name, "r") as rule_file:
+            content = rule_file.read()
+    except FileNotFoundError:
+        print(f"File {rule_file_name}: Not found")
+        raise FileNotFoundError
+
     json_rules_list = json.loads(content)
     rules_list = []
     for json_rule in json_rules_list:

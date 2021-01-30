@@ -8085,6 +8085,7 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css
                 <th data-sortable="true" data-field="CheckState" data-align="center" data-title-tooltip="Indicate if the CIS validation point succeed or not">Pass/Fail</td>
                 <th data-sortable="true" data-field="CheckResult" data-title-tooltip="Validation result">Check result</th>
                 <th data-sortable="true" data-field="Regex" data-title-tooltip="Regular expression used to apply the validation according to CIS information" data-visible="false">Regex</th>
+                <th data-sortable="true" data-field="Block" data-title-tooltip="Block in which the regex is searched" data-visible="false">Block</th>
             </tr>
         </thead>
         
@@ -8096,6 +8097,7 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css
                 <td class="failed">&#10006;</td>
                 <td>{{ issue_data.details.split("DEBUG-REGEX:")[0]|e }} </td>
                 <td>{{ issue_data.details.split("DEBUG-REGEX:")[1]|e }} </td>
+				<td>{{ (html_escape(issue_data.block) if issue_data.block else issue_data.block) }} </td>
             </tr>
             {% endfor %}
 
@@ -8104,6 +8106,7 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css
                 <td>{{ point.rule_id }} </td>
                 <td>{{ point.CIS_version }} </td>
                 <td class="passed">&#10004;</td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
