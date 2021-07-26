@@ -32,7 +32,7 @@ The tools has for objective to perform a fully automated secure configuration re
 
 - Python 3.7+.
 - Configuration files of the target to analyse.
-- Windows, Linux or MAC machine: Compatibility tested via the [audit CI job](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions).
+- Windows, Linux or MAC machine: Compatibility tested via the [audit CI job](https://github.com/ExcelliumSA/WebConfigurationAuditor/actions).
 
 # Folder layout
 
