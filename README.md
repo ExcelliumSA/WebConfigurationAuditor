@@ -1,6 +1,6 @@
 # WCA
 
-**W**eb **C**onfiguration **A**uditor.
+**W**eb **C**onfiguration **A**uditor: Perform a fully automated secure configuration review using the CIS referential.
 
 ## Code base analysis via Continuous Integration
 
