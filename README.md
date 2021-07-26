@@ -1,6 +1,6 @@
-# WSSCRAT
+# WCA
 
-**W**eb **S**erver **S**ecure **C**onfiguration **R**eview **A**utomation **T**ool.
+**W**eb **C**onfiguration **A**uditor.
 
 ## Code base analysis via Continuous Integration
 
