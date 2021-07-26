@@ -212,4 +212,4 @@ Once the JSON is generated, it must be provided to XLM (with its hash) and will 
 | 2016         | 10.0 | Continuous via GH | :heavy_check_mark:      |
 | 2019         | 10.0 | Continuous via GH | :heavy_check_mark:      |
 
-Regarding *Continuous via GH*, see [here](https://github.com/ExcelliumSA/WebServerSecureConfigurationReviewAutomationTool/actions?query=workflow%3Atest_iis_config_extraction).
+Regarding *Continuous via GH*, see [here](https://github.com/ExcelliumSA/WebConfigurationAuditor/actions?query=workflow%3Atest_iis_config_extraction).
