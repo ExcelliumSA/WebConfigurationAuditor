@@ -88,7 +88,7 @@ $ export DEBUG=1
 
 # Release policy
 
-Project released under [GNU GPL v3](../LICENCE) license.
+Project released under [GNU GPL v3](../LICENSE) license.
 
 # Global convention
 
