@@ -88,10 +88,7 @@ $ export DEBUG=1
 
 # Release policy
 
-:triangular_flag_on_post: Need to be validated by our TL and the top management.
-
-- Project and content related will not be published and will stay a full IP of Excellium Luxembourg SA due to the time/money invested by XLM on this project.
-- The reason is that we have not found any free or open source tool doing this job and the commercial tool from the CIS do not support the elements covered by the tool, therefore, it will allow us to deliver the associated WP more faster and then obtain an advantage against our competitor.
+Project released under [GNU GPL v3](LICENCE) license.
 
 # Global convention
 
