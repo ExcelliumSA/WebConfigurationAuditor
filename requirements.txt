@@ -1,4 +1,4 @@
-Jinja2==3.0.1
+Jinja2==3.0.2
 pytest==6.2.5
 pytest-timeout==1.4.2
 termcolor==1.1.0 
