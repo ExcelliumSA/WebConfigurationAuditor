@@ -3,5 +3,5 @@ pytest==7.1.1
 pytest-timeout==2.1.0
 termcolor==1.1.0 
 flake8==4.0.1 
-pydocstyle==6.1.1 
+pydocstyle==6.2.3 
 bandit==1.7.4 
